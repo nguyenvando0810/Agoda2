@@ -6,20 +6,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HeaderComponent from "./components/header/header.component.vue";
-import ResultHotel from "./components/result-hotel/result-hotel.component.vue";
+import { Component, Vue } from 'vue-property-decorator';
+
+import HeaderComponent from './components/header/header.component.vue';
+
+import ResultHotel from './components/result-hotel/result-hotel.component.vue';
 
 @Component({
   components: {
     HeaderComponent,
-    ResultHotel
-  }
+    ResultHotel,
+  },
 })
 export default class App extends Vue {}
 </script>
 
-<style lang="scss">
+<style lang='scss'>
 #app {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;

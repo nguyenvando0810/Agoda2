@@ -91,11 +91,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import "./header.component.scss";
+import { Component, Vue } from 'vue-property-decorator';
+import './header.component.scss';
 
 @Component({
-  components: {}
+  components: {},
 })
 @Component
 export default class HeaderComponent extends Vue {}

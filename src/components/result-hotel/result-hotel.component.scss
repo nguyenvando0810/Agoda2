@@ -81,6 +81,7 @@
       img {
         height: 182px;
         width: 100%;
+        margin-bottom: 1px;
       }
     }
 
@@ -88,6 +89,7 @@
       width: 49px;
       height: 40px;
       float: left;
+      background-size: cover;
       margin-right: 1px;
       margin-bottom: 1px;
 
@@ -281,9 +283,11 @@
             font-size: 14px;
             line-height: 12px;
             color: #333;
+            font-weight: 600;
           }
 
           span:last-child {
+            font-weight: 700;
             font-size: 12px;
             color: #777;
           }
