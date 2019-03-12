@@ -3,28 +3,13 @@
     <div class="container">
       <ul class="nav nav-tabs result-hotel__tabs" id="myTab" role="tablist">
         <li class="nav-item result-hotel__tabs-item">
-          <a
-            class="nav-link result-hotel__tabs-link active"
-            id="all-tab"
-            data-toggle="tab"
-            href="#all"
-          >Mọi lựa chọn</a>
+          <a class="nav-link result-hotel__tabs-link active" id="all-tab" data-toggle="tab" href="#all">Mọi lựa chọn</a>
         </li>
         <li class="nav-item result-hotel__tabs-item">
-          <a
-            class="nav-link result-hotel__tabs-link"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#profile"
-          >Khách sạn</a>
+          <a class="nav-link result-hotel__tabs-link" id="profile-tab" data-toggle="tab" href="#profile">Khách sạn</a>
         </li>
         <li class="nav-item result-hotel__tabs-item">
-          <a
-            class="nav-link result-hotel__tabs-link"
-            id="contact-tab"
-            data-toggle="tab"
-            href="#contact"
-          >
+          <a class="nav-link result-hotel__tabs-link" id="contact-tab" data-toggle="tab" href="#contact">
             <i aria-hidden="true" class="fa fa-modx"></i> agoda home
           </a>
         </li>
@@ -42,22 +27,16 @@
                   <div class="result-hotel__content-image">
                     <img :src="item.MainPhotoUrl" class="img-fluid" alt="Hanoi Merci Hotel">
                     <div class="result-hotel__content-thumnail-list">
-                      <div
-                        class="result-hotel__content-thumnail-item"
-                        v-for="img in item.galleryContainerProps.mainImages"
-                        :key="img.id"
-                        :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"
-                      ></div>
+                      <div class="result-hotel__content-thumnail-item" v-for="img in item.galleryContainerProps.mainImages"
+                        :key="img.id" :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"></div>
                     </div>
                   </div>
                   <div class="result-hotel__content-detail">
                     <h2 class="result-hotel__content-detail__name-hotel">{{item.HotelDisplayName}}</h2>
                     <div class="result-hotel__content-detail__location">
                       <div class="result-hotel__content-detail__location">
-                        <span
-                          class="badge badge-primary result-hotel__content-detail__location-badge"
-                        >agoda Homes</span>
-                        <span class="result-hotel__content-detail__location-apartment">Chung cư</span>
+                        <span class="badge badge-primary result-hotel__content-detail__location-badge">agoda Homes</span>
+                        <span class="result-hotel__content-detail__location-apartment" v-if="item.AccommodationType">{{item.AccommodationType}}</span>
                       </div>
                       <div class="result-hotel__content-detail__stars">
                         <span>
@@ -80,25 +59,19 @@
                       <span v-if="item.IsFreeCancellation">Hủy miễn phí</span>
                       <span v-if="item.IsBNPLDuringYourStay">Thanh toán tại nơi ở</span>
                     </div>
-                    <div
-                      class="result-hotel__content-detail__card"
-                      v-if="item.IsNoCreditCardRequired"
-                    >
+                    <div class="result-hotel__content-detail__card" v-if="item.IsNoCreditCardRequired">
                       <i class="fa fa-credit-card" aria-hidden="true"></i>
                       <span>Không cần thẻ tín dụng</span>
                     </div>
-                    <div
-                      class="result-hotel__content-detail__guest-recommnended"
-                      v-if="item.guestRecommended"
-                    >
+                    <div class="result-hotel__content-detail__guest-recommnended" v-if="item.guestRecommended">
                       <i class="fa fa-users" aria-hidden="true"></i>
                       <span>{{item.guestRecommended.text}}</span>
                     </div>
+                    <div class="result-hotel__content-detail__price-difference">
+                      <span v-if="item.PriceDifferenceViewModel">{{item.PriceDifferenceViewModel.DisplayText}}</span>
+                    </div>
                     <div class="result-hotel__content-detail__selling">
-                      <span
-                        class="badge badge-primary result-hotel__content-detail__selling-badge"
-                        v-if="item.BestSellerText"
-                      >{{item.BestSellerText}}</span>
+                      <span class="badge badge-primary result-hotel__content-detail__selling-badge" v-if="item.BestSellerText">{{item.BestSellerText}}</span>
                       <span v-for="urgencyMessage in item.urgencyMessages" :key="urgencyMessage.id">
                         <span v-if="urgencyMessage.text">
                           {{urgencyMessage.text}}
@@ -106,10 +79,11 @@
                         </span>
                       </span>
                     </div>
-                    <div class="result-hotel__content-detail__discount">
-                      <span class="result-hotel__content-detail__discount-text">WEEKENDSALE</span>
-                      <span>Đã dùng coupon - GIẢM &nbsp;</span>
-                      <span>112.208 ₫</span>
+                    <div class="result-hotel__content-detail__discount" v-if="item.PricePopupViewModel">
+                      <span class="result-hotel__content-detail__discount-text" v-if="item.PricePopupViewModel.CouponViewModel.CouponPromoCode">{{item.PricePopupViewModel.CouponViewModel.CouponPromoCode}}</span>
+                      <span v-if="item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency">Đã dùng
+                        coupon - GIẢM &nbsp;
+                        {{item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency}}</span>
                     </div>
                   </div>
                   <div class="result-hotel__content-price">
@@ -119,31 +93,25 @@
                         <br>
                         <span v-if="item.NumberOfReview">{{item.NumberOfReview}} nhận xét</span>
                       </div>
-                      <div
-                        class="result-hotel__content-price__review-score"
-                        v-if="item.ReviewScore"
-                      >
+                      <div class="result-hotel__content-price__review-score" v-if="item.ReviewScore">
                         <img src="../../assets/message-icon.png" alt>
                         <span>{{item.ReviewScore}}</span>
                       </div>
                     </div>
-                    <div
-                      class="result-hotel__content-price__ribbon"
-                      v-if="item.LimitedRoomsDiscountMessage"
-                    >{{item.LimitedRoomsDiscountMessage}}</div>
-                    <div
-                      class="result-hotel__content-price__discount"
-                      v-if="item.PricePromotionDiscount"
-                    >
+                    <div class="result-hotel__content-price__ribbon" v-if="item.LimitedRoomsDiscountMessage">{{item.LimitedRoomsDiscountMessage}}</div>
+                    <div class="result-hotel__content-price__discount" v-if="item.PricePromotionDiscount">
                       <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;
                       <span v-html="item.PricePromotionDiscount"></span>
                     </div>
                     <div class="result-hotel__content-price__room-rate">
-                      <p>Giá mỗi đêm rẻ nhất từ</p>
-                      <div class="old-price">100.000</div>
-                      <div class="new-price">500.000 ₫</div>
+                      <div v-if="item.PriceDetail">
+                        <p>{{item.PriceDetail.PriceViewText}}</p>
+                        <div class="old-price" v-if="item.PriceDetail.CrossOutRateExclusive !==0">{{item.PriceDetail.CrossOutRateExclusive}}</div>
+                        <div class="new-price">{{item.PriceDetail.DefaultPrice}} {{item.Currency}}</div>
+                      </div>
+                      <div v-else class="no-room">Chúng tôi không còn phòng trống</div>
                     </div>
-                    <div class="result-hotel__content-price__benefit">
+                    <div class="result-hotel__content-price__benefit" v-if="item.IsFreeCancellation">
                       <p>Hủy miễn phí</p>
                     </div>
                   </div>
@@ -160,23 +128,26 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
-import "./result-hotel.component.scss";
-import axios from "axios";
+  import {
+    Component,
+    Vue
+  } from "vue-property-decorator";
+  import "./result-hotel.component.scss";
+  import axios from "axios";
 
-@Component
-export default class ResultHotel extends Vue {
-  public hotels: any = {};
+  @Component
+  export default class ResultHotel extends Vue {
+    public hotels: any = {};
 
-  public created() {
-    this.getData();
+    public created() {
+      this.getData();
+    }
+
+    public async getData() {
+      const response = await axios.get("https://demo0535107.mockable.io/agoda");
+      this.hotels = response.data.ResultList;
+    }
   }
-
-  public async getData() {
-    const response = await axios.get("https://demo0535107.mockable.io/agoda");
-    this.hotels = response.data.ResultList;
-  }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
