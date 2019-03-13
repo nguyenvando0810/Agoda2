@@ -1,22 +1,22 @@
 <template>
   <div id="app">
     <HeaderComponent></HeaderComponent>
-    <ResultHotel></ResultHotel>
+    <TabComponent></TabComponent>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import HeaderComponent from './components/header/header.component.vue';
+import HeaderComponent from "./components/header/header.component.vue";
 
-import ResultHotel from './components/result-hotel/result-hotel.component.vue';
+import TabComponent from "./components/tab/tab.component.vue";
 
 @Component({
   components: {
     HeaderComponent,
-    ResultHotel,
-  },
+    TabComponent
+  }
 })
 export default class App extends Vue {}
 </script>
