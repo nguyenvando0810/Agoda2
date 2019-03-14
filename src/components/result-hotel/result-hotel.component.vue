@@ -1,175 +1,203 @@
 <template>
   <div class="result-hotel">
-    <div class="result-hotel__wrapper">
-      <div class="result-hotel__wrapper-map">
-        <img src="../../assets/bkg-map-entry.svg" class="img-fluid" alt>
-      </div>
-      <div class="result-hotel__wrapper-content">
-        <a
-          class="result-hotel__wrapper-link"
-          v-for="item in dataDisplay"
-          :key="item.id"
-          :href="item.HotelUrl"
-          target="_blank"
-        >
-          <span class="result-hotel__suggest">Gợi ý cho bạn</span>
-          <div class="result-hotel__content">
-            <div class="result-hotel__content-image">
-              <img :src="item.MainPhotoUrl" class="img-fluid" alt="Hanoi Merci Hotel">
+    <div class="container">
+      <div class="result-hotel__wrapper">
+        <div class="result-hotel__wrapper-map">
+          <img src="../../assets/bkg-map-entry.svg" class="img-fluid" alt>
+        </div>
+        <div class="result-hotel__wrapper-content">
+          <div class="sort-list">
+            <ul class="nav nav-tabs sort-list__default" id="myTab" role="tablist">
+              <li class="nav-item sort-list__default-item">Sắp xếp theo</li>
+              <li class="nav-item sort-list__default-item">
+                <a
+                  class="nav-link sort-list__default-link active"
+                  id="hotel-tab"
+                  data-toggle="tab"
+                >Gợi ý</a>
+              </li>
+              <li class="nav-item sort-list__default-item">
+                <a
+                  class="nav-link sort-list__default-link"
+                  id="agoda-tab"
+                  data-toggle="tab"
+                >Giá thấp nhất</a>
+              </li>
+              <li class="nav-item sort-list__default-item">
+                <a
+                  class="nav-link sort-list__default-link"
+                  id="agoda-tab"
+                  data-toggle="tab"
+                >Nhận xét hàng đầu</a>
+              </li>
+            </ul>
+          </div>
+          <a
+            class="result-hotel__wrapper-link"
+            v-for="item in dataDisplay"
+            :key="item.id"
+            :href="item.HotelUrl"
+            target="_blank"
+          >
+            <span class="result-hotel__suggest">Gợi ý cho bạn</span>
+            <div class="result-hotel__content">
+              <div class="result-hotel__content-image">
+                <img :src="item.MainPhotoUrl" class="img-fluid" alt="Hanoi Merci Hotel">
 
-              <div class="result-hotel__content-thumnail-list">
+                <div class="result-hotel__content-thumnail-list">
+                  <div
+                    class="result-hotel__content-thumnail-item"
+                    v-for="img in item.galleryContainerProps.mainImages"
+                    :key="img.id"
+                    :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="result-hotel__content-detail">
                 <div
-                  class="result-hotel__content-thumnail-item"
-                  v-for="img in item.galleryContainerProps.mainImages"
-                  :key="img.id"
-                  :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"
-                ></div>
-              </div>
-            </div>
-
-            <div class="result-hotel__content-detail">
-              <div
-                class="result-hotel__content-detail__top-money"
-                v-if="item.TopValueForMoneyViewModel"
-              >
-                <span>{{item.TopValueForMoneyViewModel.TopValueText}}</span>
-              </div>
-
-              <h2 class="result-hotel__content-detail__name-hotel">{{item.HotelDisplayName}}</h2>
-
-              <div class="result-hotel__content-detail__location">
-                <div class="result-hotel__content-detail__location">
-                  <span
-                    class="badge badge-primary result-hotel__content-detail__location-badge"
-                    v-if="item.AgodaHomesText"
-                  >{{item.AgodaHomesText}}</span>
-                  <span
-                    class="result-hotel__content-detail__location-apartment"
-                    v-if="item.AccommodationType"
-                  >{{item.AccommodationType}}</span>
+                  class="result-hotel__content-detail__top-money"
+                  v-if="item.TopValueForMoneyViewModel"
+                >
+                  <span>{{item.TopValueForMoneyViewModel.TopValueText}}</span>
                 </div>
 
-                <div class="result-hotel__content-detail__stars">
-                  <span v-if="item.StarRating">
-                    <span v-html="getStars(item)"></span>
-                    <span v-if="item.StarRating % 1 !== 0">
-                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                <h2 class="result-hotel__content-detail__name-hotel">{{item.HotelDisplayName}}</h2>
+
+                <div class="result-hotel__content-detail__location">
+                  <div class="result-hotel__content-detail__location">
+                    <span
+                      class="badge badge-primary result-hotel__content-detail__location-badge"
+                      v-if="item.AgodaHomesText"
+                    >{{item.AgodaHomesText}}</span>
+                    <span
+                      class="result-hotel__content-detail__location-apartment"
+                      v-if="item.AccommodationType"
+                    >{{item.AccommodationType}}</span>
+                  </div>
+
+                  <div class="result-hotel__content-detail__stars">
+                    <span v-if="item.StarRating">
+                      <span v-html="getStars(item)"></span>
+                      <span v-if="item.StarRating % 1 !== 0">
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      </span>
+                    </span>
+                    
+                    <span
+                      v-if="item.LocationFullText"
+                      class="result-hotel__content-detail__stars-location"
+                    >
+                      <i class="fa fa-street-view" aria-hidden="true"></i>
+                      {{item.LocationFullText}}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="result-hotel__content-detail__rate" v-if="item.LocationHighlight">
+                  <span>{{item.LocationHighlight}}</span>
+                </div>
+
+                <div class="result-hotel__content-detail__service">
+                  <span v-if="item.IsBreakfastIncluded">Ăn sáng</span>
+                  <span v-if="item.IsFreeCancellation">Hủy miễn phí</span>
+                  <span v-if="item.IsBNPLDuringYourStay">Thanh toán tại nơi ở</span>
+                </div>
+
+                <div class="result-hotel__content-detail__card" v-if="item.IsNoCreditCardRequired">
+                  <i class="fa fa-credit-card" aria-hidden="true"></i>
+                  <span>Không cần thẻ tín dụng</span>
+                </div>
+
+                <div
+                  class="result-hotel__content-detail__guest-recommnended"
+                  v-if="item.guestRecommended"
+                >
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                  <span>{{item.guestRecommended.text}}</span>
+                </div>
+
+                <div
+                  class="result-hotel__content-detail__top-location"
+                  v-if="item.TopLocationForMoneyViewModel"
+                >
+                  <span>{{item.TopLocationForMoneyViewModel.TopLocationText}}</span>
+                </div>
+
+                <div class="result-hotel__content-detail__selling">
+                  <span
+                    class="badge badge-primary result-hotel__content-detail__selling-badge"
+                    v-if="item.BestSellerText"
+                  >{{item.BestSellerText}}</span>
+                  <span v-for="urgencyMessage in item.urgencyMessages" :key="urgencyMessage.id">
+                    <span v-if="urgencyMessage.text">
+                      {{urgencyMessage.text}}
+                      <br>
                     </span>
                   </span>
-                  
+                </div>
+
+                <div class="result-hotel__content-detail__discount" v-if="item.PricePopupViewModel">
                   <span
-                    v-if="item.LocationFullText"
-                    class="result-hotel__content-detail__stars-location"
+                    class="result-hotel__content-detail__discount-text"
+                    v-if="item.PricePopupViewModel.CouponViewModel.CouponPromoCode"
+                  >{{item.PricePopupViewModel.CouponViewModel.CouponPromoCode}}</span>
+                  <span
+                    v-if="item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency"
                   >
-                    <i class="fa fa-street-view" aria-hidden="true"></i>
-                    {{item.LocationFullText}}
+                    Đã dùng
+                    coupon - GIẢM &nbsp;
+                    {{item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency}}
                   </span>
                 </div>
               </div>
-
-              <div class="result-hotel__content-detail__rate" v-if="item.LocationHighlight">
-                <span>{{item.LocationHighlight}}</span>
-              </div>
-
-              <div class="result-hotel__content-detail__service">
-                <span v-if="item.IsBreakfastIncluded">Ăn sáng</span>
-                <span v-if="item.IsFreeCancellation">Hủy miễn phí</span>
-                <span v-if="item.IsBNPLDuringYourStay">Thanh toán tại nơi ở</span>
-              </div>
-
-              <div class="result-hotel__content-detail__card" v-if="item.IsNoCreditCardRequired">
-                <i class="fa fa-credit-card" aria-hidden="true"></i>
-                <span>Không cần thẻ tín dụng</span>
-              </div>
-
-              <div
-                class="result-hotel__content-detail__guest-recommnended"
-                v-if="item.guestRecommended"
-              >
-                <i class="fa fa-users" aria-hidden="true"></i>
-                <span>{{item.guestRecommended.text}}</span>
-              </div>
-
-              <div
-                class="result-hotel__content-detail__top-location"
-                v-if="item.TopLocationForMoneyViewModel"
-              >
-                <span>{{item.TopLocationForMoneyViewModel.TopLocationText}}</span>
-              </div>
-
-              <div class="result-hotel__content-detail__selling">
-                <span
-                  class="badge badge-primary result-hotel__content-detail__selling-badge"
-                  v-if="item.BestSellerText"
-                >{{item.BestSellerText}}</span>
-                <span v-for="urgencyMessage in item.urgencyMessages" :key="urgencyMessage.id">
-                  <span v-if="urgencyMessage.text">
-                    {{urgencyMessage.text}}
+              <div class="result-hotel__content-price">
+                <div class="result-hotel__content-price__review">
+                  <div class="result-hotel__content-price__review-text">
+                    <span v-if="item.ReviewText">{{item.ReviewText}}</span>
                     <br>
-                  </span>
-                </span>
-              </div>
+                    <span v-if="item.NumberOfReview">{{item.NumberOfReviewLocale}} nhận xét</span>
+                  </div>
 
-              <div class="result-hotel__content-detail__discount" v-if="item.PricePopupViewModel">
-                <span
-                  class="result-hotel__content-detail__discount-text"
-                  v-if="item.PricePopupViewModel.CouponViewModel.CouponPromoCode"
-                >{{item.PricePopupViewModel.CouponViewModel.CouponPromoCode}}</span>
-                <span
-                  v-if="item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency"
-                >
-                  Đã dùng
-                  coupon - GIẢM &nbsp;
-                  {{item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency}}
-                </span>
-              </div>
-            </div>
-            <div class="result-hotel__content-price">
-              <div class="result-hotel__content-price__review">
-                <div class="result-hotel__content-price__review-text">
-                  <span v-if="item.ReviewText">{{item.ReviewText}}</span>
-                  <br>
-                  <span v-if="item.NumberOfReview">{{item.NumberOfReviewLocale}} nhận xét</span>
+                  <div class="result-hotel__content-price__review-score" v-if="item.ReviewScore">
+                    <span>{{item.ReviewScore}}</span>
+                  </div>
                 </div>
 
-                <div class="result-hotel__content-price__review-score" v-if="item.ReviewScore">
-                  <span>{{item.ReviewScore}}</span>
+                <div
+                  class="result-hotel__content-price__ribbon"
+                  v-if="item.LimitedRoomsDiscountMessage"
+                >{{item.LimitedRoomsDiscountMessage}}</div>
+
+                <div
+                  class="result-hotel__content-price__remain"
+                  v-if="item.RemainingRoomsUrgencyMessage"
+                >{{item.RemainingRoomsUrgencyMessage}}</div>
+
+                <div class="result-hotel__content-price__discount" v-if="item.PromotionDiscount">
+                  <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;
+                  <span>Giá giảm {{item.PromotionDiscount}}%</span>
+                </div>
+
+                <div class="result-hotel__content-price__room-rate">
+                  <p v-if="item.PriceDetail">{{item.PriceDetail.PriceViewText}}</p>
+                  <div
+                    class="old-price"
+                    v-if="item.PricePopupViewModel"
+                  >{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</div>
+                  <div class="new-price" v-if="item.PricePopupViewModel">
+                    {{item.PricePopupViewModel.formattedRoomPerNightAmount}}
+                    ₫
+                  </div>
+                </div>
+
+                <div class="result-hotel__content-price__benefit" v-if="item.IsFreeCancellation">
+                  <p>Hủy miễn phí</p>
                 </div>
               </div>
-
-              <div
-                class="result-hotel__content-price__ribbon"
-                v-if="item.LimitedRoomsDiscountMessage"
-              >{{item.LimitedRoomsDiscountMessage}}</div>
-
-              <div
-                class="result-hotel__content-price__remain"
-                v-if="item.RemainingRoomsUrgencyMessage"
-              >{{item.RemainingRoomsUrgencyMessage}}</div>
-
-              <div class="result-hotel__content-price__discount" v-if="item.PromotionDiscount">
-                <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;
-                <span>Giá giảm {{item.PromotionDiscount}}%</span>
-              </div>
-
-              <div class="result-hotel__content-price__room-rate">
-                <p v-if="item.PriceDetail">{{item.PriceDetail.PriceViewText}}</p>
-                <div
-                  class="old-price"
-                  v-if="item.PricePopupViewModel"
-                >{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</div>
-                <div
-                  class="new-price"
-                  v-if="item.PricePopupViewModel"
-                >{{item.PricePopupViewModel.formattedRoomPerNightAmount}} ₫</div>
-              </div>
-
-              <div class="result-hotel__content-price__benefit" v-if="item.IsFreeCancellation">
-                <p>Hủy miễn phí</p>
-              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -207,8 +235,20 @@ export default class ResultHotelComponent extends Vue {
       }
       return true;
     });
-    console.log(this.dataDisplay);
   }
+
+  // sortData(condition: any) {
+  //   if (condition === "price") {
+  //     this.dataDisplay = this.dataDisplay.sort((a, b) => {
+  //       // if (a.PricePopupViewModel || b.PricePopupViewModel) {
+  //         let x = parseInt(a.PricePopupViewModel.formattedRoomPerNightAmount);
+  //         let y = parseInt(b.PricePopupViewModel.formattedRoomPerNightAmount);
+  //         return x - y;
+  //       // }
+  //       // return true;
+  //     });
+  //   }
+  // }
 
   public getStars(item: any) {
     let html = "";

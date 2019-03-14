@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <HeaderComponent></HeaderComponent>
-    <TabComponent></TabComponent>
+    <FilterListComponent></FilterListComponent>
+    <!-- <SortListComponent></SortListComponent> -->
+    <ResultHotelComponent></ResultHotelComponent>
   </div>
 </template>
 
@@ -10,12 +12,18 @@ import { Component, Vue } from "vue-property-decorator";
 
 import HeaderComponent from "./components/header/header.component.vue";
 
-import TabComponent from "./components/tab/tab.component.vue";
+import ResultHotelComponent from "./components/result-hotel/result-hotel.component.vue";
+
+import FilterListComponent from "./components/filter-list/filter-list.component.vue";
+
+// import SortListComponent from "./components/sort-list/sort-list.component.vue";
 
 @Component({
   components: {
     HeaderComponent,
-    TabComponent
+    FilterListComponent,
+    ResultHotelComponent,
+    // SortListComponent
   }
 })
 export default class App extends Vue {}
