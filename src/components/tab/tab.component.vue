@@ -50,7 +50,7 @@
   })
   export default class TabComponent extends Vue {
     clickTab(currentTab:any) {
-      EventBus.$emit('tabHotel', currentTab);
+      EventBus.$emit('currentTab', currentTab);
     }
   }
 </script>
