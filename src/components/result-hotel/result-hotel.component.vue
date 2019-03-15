@@ -204,33 +204,33 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop } from "vue-property-decorator";
-import "./result-hotel.component.scss";
-import axios from "axios";
-import { EventBus } from "@/eventBus";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import './result-hotel.component.scss';
+import axios from 'axios';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class ResultHotelComponent extends Vue {
   public dataAll: any[] = [];
   public dataDisplay: any[] = [];
-  public tabName: String = "tabAll";
+  public tabName: String = 'tabAll';
 
   public created() {
     this.getData();
 
-    EventBus.$on("currentTab", (currentTab: any) => {
+    EventBus.$on('currentTab', (currentTab: any) => {
       this.tabName = currentTab;
       this.getDataTab(this.tabName);
     });
   }
 
-  getDataTab(condition: any) {
+  public getDataTab(condition: any) {
     this.dataDisplay = this.dataAll.filter((item: any) => {
-      if (condition === "tabHotel") {
-        return item.AccommodationType === "Khách sạn";
-      } else if (condition === "tabAgoda") {
-        return item.AgodaHomesText === "Agoda Homes";
-      } else if (condition === "tabAll") {
+      if (condition === 'tabHotel') {
+        return item.AccommodationType === 'Khách sạn';
+      } else if (condition === 'tabAgoda') {
+        return item.AgodaHomesText === 'Agoda Homes';
+      } else if (condition === 'tabAll') {
         return true;
       }
       return true;
@@ -251,7 +251,7 @@ export default class ResultHotelComponent extends Vue {
   // }
 
   public getStars(item: any) {
-    let html = "";
+    let html = '';
     for (let j = 0; j < Math.floor(item.StarRating); j++) {
       html += `<i class="fa fa-star" aria-hidden="true"></i>`;
     }
@@ -259,7 +259,7 @@ export default class ResultHotelComponent extends Vue {
   }
 
   public async getData() {
-    const response = await axios.get("https://demo0535107.mockable.io/agoda");
+    const response = await axios.get('https://demo0535107.mockable.io/agoda');
     this.dataAll = response.data.ResultList;
     this.dataDisplay = this.dataAll;
   }

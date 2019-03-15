@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
-import HeaderComponent from "./components/header/header.component.vue";
+import HeaderComponent from './components/header/header.component.vue';
 
-import ResultHotelComponent from "./components/result-hotel/result-hotel.component.vue";
+import ResultHotelComponent from './components/result-hotel/result-hotel.component.vue';
 
-import FilterListComponent from "./components/filter-list/filter-list.component.vue";
+import FilterListComponent from './components/filter-list/filter-list.component.vue';
 
 // import SortListComponent from "./components/sort-list/sort-list.component.vue";
 
@@ -24,7 +24,7 @@ import FilterListComponent from "./components/filter-list/filter-list.component.
     FilterListComponent,
     ResultHotelComponent,
     // SortListComponent
-  }
+  },
 })
 export default class App extends Vue {}
 </script>
