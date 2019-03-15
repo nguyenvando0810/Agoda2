@@ -33,24 +33,24 @@
   </div>
 </template>
 <script lang='ts'>
-  import {
-    Component,
-    Vue
-  } from "vue-property-decorator";
-  import ResultHotelComponent from "../result-hotel/result-hotel.component.vue";
-  import "./tab.component.scss";
-  import {
-    EventBus
-  } from "@/eventBus";
+import {
+  Component,
+  Vue,
+} from 'vue-property-decorator';
+import ResultHotelComponent from '../result-hotel/result-hotel.component.vue';
+import './tab.component.scss';
+import {
+  EventBus,
+} from '@/eventBus';
 
-  @Component({
-    components: {
-      ResultHotelComponent
-    }
-  })
-  export default class TabComponent extends Vue {
-    clickTab(currentTab:any) {
-      EventBus.$emit('currentTab', currentTab);
-    }
+@Component({
+  components: {
+    ResultHotelComponent,
+  },
+})
+export default class TabComponent extends Vue {
+  public clickTab(currentTab: any) {
+    EventBus.$emit('currentTab', currentTab);
   }
+}
 </script>

@@ -1,30 +1,34 @@
 <template>
   <div id="app">
     <HeaderComponent></HeaderComponent>
-    <FilterListComponent></FilterListComponent>
-    <!-- <SortListComponent></SortListComponent> -->
-    <ResultHotelComponent></ResultHotelComponent>
+    <div class="container">
+      <FilterListComponent></FilterListComponent>
+      <!-- <SortListComponent></SortListComponent> -->
+      <HotelWrapperComponent></HotelWrapperComponent>
+      <!-- <ResultHotelComponent></ResultHotelComponent> -->
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import HeaderComponent from './components/header/header.component.vue';
+import HeaderComponent from "./components/header/header.component.vue";
 
-import ResultHotelComponent from './components/result-hotel/result-hotel.component.vue';
+// import ResultHotelComponent from './components/result-hotel/result-hotel.component.vue';
 
-import FilterListComponent from './components/filter-list/filter-list.component.vue';
+import FilterListComponent from "./components/filter-list/filter-list.component.vue";
 
-// import SortListComponent from "./components/sort-list/sort-list.component.vue";
+import HotelWrapperComponent from "./components/hotel-wrapper/hotel-wrapper.component.vue";
 
 @Component({
   components: {
     HeaderComponent,
     FilterListComponent,
-    ResultHotelComponent,
+    // ResultHotelComponent,
+    HotelWrapperComponent
     // SortListComponent
-  },
+  }
 })
 export default class App extends Vue {}
 </script>
