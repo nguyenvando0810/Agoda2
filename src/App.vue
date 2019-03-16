@@ -2,32 +2,21 @@
   <div id="app">
     <HeaderComponent></HeaderComponent>
     <div class="container">
-      <FilterListComponent></FilterListComponent>
-      <!-- <SortListComponent></SortListComponent> -->
-      <HotelWrapperComponent></HotelWrapperComponent>
-      <!-- <ResultHotelComponent></ResultHotelComponent> -->
+      <router-view></router-view>
     </div>
+    <footerComponent></footerComponent>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-
 import HeaderComponent from "./components/header/header.component.vue";
-
-// import ResultHotelComponent from './components/result-hotel/result-hotel.component.vue';
-
-import FilterListComponent from "./components/filter-list/filter-list.component.vue";
-
-import HotelWrapperComponent from "./components/hotel-wrapper/hotel-wrapper.component.vue";
+import footerComponent from "./components/footer/footer.component.vue";
 
 @Component({
   components: {
     HeaderComponent,
-    FilterListComponent,
-    // ResultHotelComponent,
-    HotelWrapperComponent
-    // SortListComponent
+    footerComponent
   }
 })
 export default class App extends Vue {}

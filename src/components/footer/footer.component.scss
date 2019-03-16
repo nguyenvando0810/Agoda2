@@ -1,0 +1,59 @@
+.footer {
+  padding: 50px 0 10px 0;
+  background: #333;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  &-coppyright {
+    text-align: center;
+    color: #999;
+
+    p {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+  }
+
+  &-brands {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+    margin-bottom: 50px;
+  }
+
+  &-code {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 250px;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c3e50;
+}

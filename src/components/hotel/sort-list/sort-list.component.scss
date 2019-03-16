@@ -2,6 +2,7 @@
   height: 50px;
   border: 1px solid #dddfe2;
   margin-bottom: 10px;
+  margin-top: 30px;
 
   &__default {
     border-bottom: none;
@@ -20,6 +21,7 @@
         font-weight: 700;
         text-transform: uppercase;
         border-right: 1px solid #dddfe2;
+        cursor: default;
       }
 
       &:last-child {
@@ -27,7 +29,7 @@
       }
     }
 
-    &-link {
+    &-link.nav-link {
       padding: 15px 10px;
       border: none;
       font-size: 12px;
@@ -43,7 +45,7 @@
       }
     }
 
-    .active {
+    & .nav-link.active {
       border: none;
       color: #fff;
       background-color: #5392f9;

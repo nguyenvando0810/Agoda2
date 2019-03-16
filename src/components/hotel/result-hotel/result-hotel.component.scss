@@ -22,11 +22,10 @@
     display: inline-block;
   }
 
-  &__thumnail-item {
+  &__thumnail-items {
     width: 49px;
     height: 40px;
     float: left;
-    background-size: cover;
     margin-right: 1px;
     margin-bottom: 1px;
 
@@ -36,6 +35,12 @@
 
     &:nth-child(10) {
       margin-right: 0;
+    }
+
+    .item {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
     }
   }
 
@@ -266,8 +271,7 @@
   &__price {
     width: calc(52% - 249px);
     text-align: right;
-    padding-right: 10px;
-    padding-top: 20px;
+    padding: 20px 10px 20px 0;
 
     &__review {
       display: flex;
@@ -293,7 +297,7 @@
 
       &-score {
         width: 40%;
-        background-image: url('../../assets/message-icon.png');
+        background-image: url('../../../assets/message-icon.png');
         position: relative;
         background-size: 100% 100%;
         background-repeat: no-repeat;

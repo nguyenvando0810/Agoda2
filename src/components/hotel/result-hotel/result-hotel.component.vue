@@ -8,8 +8,10 @@
             <img :src="item.MainPhotoUrl" class="img-fluid" alt="Hanoi Merci Hotel">
 
             <div class="result-hotel__thumnail-list">
-              <div class="result-hotel__thumnail-item" v-if="index < 10" v-for="(img, index) in item.galleryContainerProps.mainImages"
-                :key="img.index" :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"></div>
+              <div class="result-hotel__thumnail-items" v-for="(img, index) in item.galleryContainerProps.mainImages"
+                :key="img.id">
+                <div class="item" :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }" v-if="index<10"></div>
+              </div>
             </div>
           </div>
 
