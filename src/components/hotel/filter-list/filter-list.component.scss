@@ -23,7 +23,7 @@
         }
 
         span {
-          color: #32a923;
+          color: $green;
           display: block;
           font-size: 12px;
 
@@ -39,23 +39,23 @@
       padding: 15px 20px;
       font-size: 15px;
       font-weight: 700;
-      color: #2a2a2e;
+      color:$gray-dark;
 
       &.nav-link {
         border-radius: 0;
 
         &:hover {
-          color: #75a8f9;
+          color: $blue-light-hover;
           border-color: transparent;
         }
       }
 
       .nav-tabs &.active {
-        border-top: 5px solid #5392f9;
-        background: #fff;
-        color: #5392f9;
-        border-left: 1px solid #dddfe2;
-        border-right: 1px solid #5392f9;
+        border-top: 5px solid $blue-light;
+        background: $white;
+        color: $blue-light;
+        border-left: 1px solid $gray-light;
+        border-right: 1px solid $blue-light;
       }
     }
   }
