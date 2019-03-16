@@ -13,9 +13,9 @@
   }
 
   &__suggest {
-    border-color: $blue-dark;
-    background-color: $blue-dark;
-    color: $white;
+    border-color: #24457c;
+    background-color: #24457c;
+    color: #fff;
     border-radius: 6px 6px 0 0;
     font-size: 14px;
     padding: 5px 15px;
@@ -45,7 +45,7 @@
   }
 
   &__content {
-    border: 1px solid $blue-dark;
+    border: 1px solid #24457c;
     display: flex;
     margin-bottom: 20px;
   }
@@ -63,18 +63,18 @@
   &__detail {
     width: 48%;
     padding: 20px;
-    border-right: 1px solid $gray-border-color;
+    border-right: 1px solid #dddfe2;
 
     &__top-money {
       span {
         font-size: 12px;
         padding: 3px 7px;
-        background-color: $orange;
+        background-color: #f05700;
         border-radius: 2px;
         font-weight: 700;
         margin-bottom: 5px;
         display: inline-block;
-        color: $white;
+        color: #FFFFFF;
       }
     }
 
@@ -84,7 +84,7 @@
       font-weight: 700;
 
       &:hover {
-        color: $blue-light2;
+        color: #00adff;
         text-decoration: underline;
       }
     }
@@ -95,7 +95,7 @@
       &-badge {
         padding: 5px 10px;
         font-weight: 400;
-        background: linear-gradient(90deg, $pink, $pink-light);
+        background: linear-gradient(90deg, #ff567d, #fe9a8b);
         margin-right: 6px;
         font-size: 12px;
         font-weight: 700;
@@ -106,7 +106,7 @@
         font-weight: 700;
 
         &:hover {
-          color: $blue-light;
+          color: #5392f9;
         }
       }
     }
@@ -114,7 +114,7 @@
     &__stars {
 
       &-location {
-        color: $blue-light;
+        color: #488bf8;
         font-size: 12px;
         font-weight: 700;
         margin-left: 10px;
@@ -129,13 +129,13 @@
       }
 
       .fa-star {
-        color: $pink;
+        color: #ff567d;
         margin-right: 2px;
         font-size: 14px;
       }
 
       .fa-star-half-o {
-        color: $pink;
+        color: #ff567d;
         font-size: 14px;
       }
     }
@@ -158,11 +158,11 @@
       span {
         font-size: 12px;
         padding: 3px 7px;
-        border: 1px solid $green;
+        border: 1px solid #32a923;
         border-radius: 2px;
         font-weight: 700;
         margin-right: 5px;
-        color: $green;
+        color: #32a923;
       }
     }
 
@@ -172,11 +172,11 @@
       span {
         font-size: 12px;
         padding: 3px 7px;
-        border: 1px solid $green;
+        border: 1px solid #32a923;
         border-radius: 2px;
         font-weight: 700;
         margin-right: 5px;
-        color: $green;
+        color: #32a923;
       }
     }
 
@@ -201,7 +201,7 @@
 
       font-size: 12px;
       font-weight: 700;
-      color: $violet-dark;
+      color: #8660c7;
     }
 
     &__top-location {
@@ -210,10 +210,10 @@
       span {
         font-size: 11px;
         padding: 3px 7px;
-        border: 1px solid $violet-light;
+        border: 1px solid #6d68f3;
         border-radius: 2px;
         font-weight: 700;
-        color: $violet-light;
+        color: #6d68f3;
       }
 
     }
@@ -222,7 +222,7 @@
       margin-bottom: 15px;
 
       span:last-child {
-        color: $red-light;
+        color: #e12d2d;
         font-size: 13px;
       }
 
@@ -230,7 +230,7 @@
         padding: 5px 10px;
         border-radius: 2px;
         font-weight: 400;
-        background: $red-light;
+        background: #e12d2d;
         margin-right: 6px;
         font-size: 10px;
         font-weight: 700;
@@ -240,25 +240,25 @@
     &__discount {
       font-size: 12px;
       font-weight: 700;
-      color: $green-dark;
+      color: #28871c;
 
       &-text {
         padding: 2px 16px 2px 8px;
         margin-right: 3px;
-        border: 1px dashed $green-dark;
+        border: 1px dashed #28871c;
         border-right: none;
-        background-color: $green-light;
+        background-color: #d8eed5;
         position: relative;
 
         &:after {
           display: inline-block;
           content: "";
-          background-color: $white;
+          background-color: #fff;
           height: 11px;
           width: 11px;
           position: absolute;
           top: 4px;
-          border: 1px dashed $green-dark;
+          border: 1px dashed #28871c;
           right: -4px;
           border-right: none;
           border-top: none;
@@ -284,14 +284,14 @@
           font-size: 14px;
           line-height: 15px;
           display: inline-block;
-          color: $gray-dark;
+          color: #333;
           font-weight: 600;
         }
 
         span:last-child {
           font-weight: 700;
           font-size: 12px;
-          color: $gray;
+          color: #777;
         }
       }
 
@@ -305,7 +305,7 @@
         height: 50px;
 
         span {
-          color: $white;
+          color: #FFFFFF;
           font-weight: 700;
           font-size: 20px;
           position: absolute;
@@ -316,12 +316,12 @@
     }
 
     &__ribbon {
-      background: $red-light;
+      background: #e12d2d;
       padding: 4px 6px;
       text-align: center;
       font-size: 12px;
       font-weight: 700;
-      color: $white;
+      color: #fff;
       border-radius: 2px;
       display: inline-block;
       margin-right: -20px;
@@ -329,9 +329,9 @@
     }
 
     &__remain {
-      background: $orange-light;
+      background: #f9d8d8;
       padding: 4px 6px;
-      color: $red-light;
+      color: #e12d2d;
       text-align: center;
       font-size: 12px;
       font-weight: 700;
@@ -341,7 +341,7 @@
     }
 
     &__discount {
-      background: $green-light;
+      background: #d8eed5;
       display: inline-block;
       width: 80%;
       font-size: 10px;
@@ -349,7 +349,7 @@
       font-weight: 700;
       text-align: center;
       margin-right: -20px;
-      color: $green-dark;
+      color: #28871c;
       padding: 4px 10px;
       border-radius: 2px;
     }
@@ -359,12 +359,12 @@
 
       p {
         font-size: 10px;
-        color: $gray-background;
+        color: #737373;
         margin-bottom: 5px;
       }
 
       .old-price {
-        color: $gray-background;
+        color: #737373;
         font-size: 22px;
         line-height: 22px;
         font-weight: 700;
@@ -378,27 +378,27 @@
           top: 50%;
           width: 50%;
           transform: rotate(-10deg);
-          border-top: 1px solid $gray-background;
+          border-top: 1px solid #737373;
         }
       }
 
       .new-price {
-        color: $dark;
+        color: #000;
         font-size: 22px;
         line-height: 22px;
         font-weight: 700;
-        color: $red-light;
+        color: #e12d2d;
       }
 
       .no-room {
-        color: $pink-dark;
+        color: #ff274f;
         text-align: right;
         font-size: 13px;
       }
     }
 
     &__benefit {
-      color: $green-dark;
+      color: #28871c;
       font-size: 11px;
       font-weight: 700;
     }
