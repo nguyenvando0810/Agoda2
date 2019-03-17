@@ -1,16 +1,29 @@
 <template>
   <div class="result-hotel">
     <div class="result-hotel__wrapper">
-      <a class="result-hotel__wrapper-link" v-for="item in dataDisplay" :key="item.id" :href="item.HotelUrl" target="_blank">
+      <a
+        class="result-hotel__wrapper-link"
+        v-for="item in dataDisplay"
+        :key="item.id"
+        :href="item.HotelUrl"
+        target="_blank"
+      >
         <span class="result-hotel__suggest">Gợi ý cho bạn</span>
         <div class="result-hotel__content">
           <div class="result-hotel__image">
             <img :src="item.MainPhotoUrl" class="img-fluid" alt="Hanoi Merci Hotel">
 
             <div class="result-hotel__thumnail-list">
-              <div class="result-hotel__thumnail-items" v-for="(img, index) in item.galleryContainerProps.mainImages"
-                :key="img.id">
-                <div class="item" :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }" v-if="index<10"></div>
+              <div
+                class="result-hotel__thumnail-items"
+                v-for="(img, index) in item.galleryContainerProps.mainImages"
+                :key="img.id"
+              >
+                <div
+                  class="item"
+                  :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"
+                  v-if="index<10"
+                ></div>
               </div>
             </div>
           </div>
@@ -24,8 +37,14 @@
 
             <div class="result-hotel__detail__location">
               <div class="result-hotel__detail__location">
-                <span class="badge badge-primary result-hotel__detail__location-badge" v-if="item.AgodaHomesText">{{item.AgodaHomesText}}</span>
-                <span class="result-hotel__detail__location-apartment" v-if="item.AccommodationType">{{item.AccommodationType}}</span>
+                <span
+                  class="badge badge-primary result-hotel__detail__location-badge"
+                  v-if="item.AgodaHomesText"
+                >{{item.AgodaHomesText}}</span>
+                <span
+                  class="result-hotel__detail__location-apartment"
+                  v-if="item.AccommodationType"
+                >{{item.AccommodationType}}</span>
               </div>
 
               <div class="result-hotel__detail__stars">
@@ -35,7 +54,7 @@
                     <i class="fa fa-star-half-o" aria-hidden="true"></i>
                   </span>
                 </span>
-
+                
                 <span v-if="item.LocationFullText" class="result-hotel__detail__stars-location">
                   <i class="fa fa-street-view" aria-hidden="true"></i>
                   {{item.LocationFullText}}
@@ -63,12 +82,18 @@
               <span>{{item.guestRecommended.text}}</span>
             </div>
 
-            <div class="result-hotel__detail__top-location" v-if="item.TopLocationForMoneyViewModel">
+            <div
+              class="result-hotel__detail__top-location"
+              v-if="item.TopLocationForMoneyViewModel"
+            >
               <span>{{item.TopLocationForMoneyViewModel.TopLocationText}}</span>
             </div>
 
             <div class="result-hotel__detail__selling">
-              <span class="badge badge-primary result-hotel__detail__selling-badge" v-if="item.BestSellerText">{{item.BestSellerText}}</span>
+              <span
+                class="badge badge-primary result-hotel__detail__selling-badge"
+                v-if="item.BestSellerText"
+              >{{item.BestSellerText}}</span>
               <span v-for="urgencyMessage in item.urgencyMessages" :key="urgencyMessage.id">
                 <span v-if="urgencyMessage.text">
                   {{urgencyMessage.text}}
@@ -78,8 +103,13 @@
             </div>
 
             <div class="result-hotel__detail__discount" v-if="item.PricePopupViewModel">
-              <span class="result-hotel__detail__discount-text" v-if="item.PricePopupViewModel.CouponViewModel.CouponPromoCode">{{item.PricePopupViewModel.CouponViewModel.CouponPromoCode}}</span>
-              <span v-if="item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency">
+              <span
+                class="result-hotel__detail__discount-text"
+                v-if="item.PricePopupViewModel.CouponViewModel.CouponPromoCode"
+              >{{item.PricePopupViewModel.CouponViewModel.CouponPromoCode}}</span>
+              <span
+                v-if="item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency"
+              >
                 Đã dùng
                 coupon - GIẢM &nbsp;
                 {{item.PricePopupViewModel.CouponViewModel.formattedCouponAmountWithCurrency}}
@@ -100,9 +130,15 @@
               </div>
             </div>
 
-            <div class="result-hotel__price__ribbon" v-if="item.LimitedRoomsDiscountMessage">{{item.LimitedRoomsDiscountMessage}}</div>
+            <div
+              class="result-hotel__price__ribbon"
+              v-if="item.LimitedRoomsDiscountMessage"
+            >{{item.LimitedRoomsDiscountMessage}}</div>
 
-            <div class="result-hotel__price__remain" v-if="item.RemainingRoomsUrgencyMessage">{{item.RemainingRoomsUrgencyMessage}}</div>
+            <div
+              class="result-hotel__price__remain"
+              v-if="item.RemainingRoomsUrgencyMessage"
+            >{{item.RemainingRoomsUrgencyMessage}}</div>
 
             <div class="result-hotel__price__discount" v-if="item.PromotionDiscount">
               <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;
@@ -111,8 +147,11 @@
 
             <div class="result-hotel__price__room-rate">
               <p v-if="item.PriceDetail">{{item.PriceDetail.PriceViewText}}</p>
-              <div class="old-price" v-if="item.PricePopupViewModel">{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</div>
-              <div class="new-price" v-if="item.PricePopupViewModel">
+              <div
+                class="old-price"
+                v-if="item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice"
+              >{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</div>
+              <div class="new-price" v-if="item.PricePopupViewModel.formattedRoomPerNightAmount">
                 {{item.PricePopupViewModel.formattedRoomPerNightAmount}}
                 ₫
               </div>
@@ -129,47 +168,91 @@
 </template>
 
 <script lang='ts'>
-import {
-  Component,
-  Vue,
-  Prop
-} from 'vue-property-decorator';
-import './result-hotel.component.scss';
-import axios from 'axios';
-import {
-  EventBus
-} from '@/eventBus';
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import "./result-hotel.component.scss";
+import axios from "axios";
+import { EventBus } from "@/eventBus";
 
 @Component
 export default class ResultHotelComponent extends Vue {
   public dataAll: any[] = [];
   public dataDisplay: any[] = [];
-  public tabName: String = 'tabAll';
+  tabName: string = "";
 
-  public created() {
+  created() {
     this.getData();
 
-    EventBus.$on('currentTab', (currentTab: any) => {
-      this.tabName = currentTab;
-      this.getDataTab(this.tabName);
+    EventBus.$on("currentTab", (currentTab: any) => {
+      this.dataDisplay = this.getDataTab(currentTab);
+    });
+
+    EventBus.$on("sortCondition", (sortCondition: any) => {
+      this.sortData(sortCondition);
+    });
+
+    EventBus.$on("searchValue", (searchValue: any) => {
+      this.dataDisplay = this.getDataSearch(searchValue);
+    });
+
+    EventBus.$on("isBreakfast", (isBreakfast: any) => {
+      this.dataDisplay = this.getDataBreakfast(isBreakfast);
+      console.log(this.dataDisplay);
     });
   }
 
-  public getDataTab(condition: any) {
-    this.dataDisplay = this.dataAll.filter((item: any) => {
-      if (condition === 'tabHotel') {
-        return item.AccommodationType === 'Khách sạn';
-      } else if (condition === 'tabAgoda') {
-        return item.AgodaHomesText === 'Agoda Homes';
-      } else if (condition === 'tabAll') {
-        return true;
-      }
-      return true;
+  public getDataSearch(valueSearch: any) {
+    return this.dataAll.filter(data => {
+      if (valueSearch) {
+        return data.HotelDisplayName.toLowerCase().includes(
+          valueSearch.toLowerCase()
+        );
+      } else return this.dataAll;
     });
+  }
+
+  public getDataBreakfast(isBreakfast: any) {
+    return this.dataAll.filter((breakfast: any) => {
+      if (isBreakfast === true) {
+        return breakfast.IsBreakfastIncluded === true;
+      } else return this.dataAll;
+    });
+  }
+
+  public getDataTab(currentTab: any) {
+    if (currentTab === "tabAll") return this.dataAll;
+
+    return this.dataAll.filter((item: any) => {
+      if (currentTab === "tabHotel") {
+        return item.AccommodationType === "Khách sạn";
+      }
+      if (currentTab === "tabAgoda") {
+        return item.AgodaHomesText === "Agoda Homes";
+      }
+    });
+  }
+
+  public sortData(currentSort: any) {
+    if (currentSort === "suggestions") {
+      return this.dataDisplay;
+    }
+
+    if (currentSort === "priceLow") {
+      return this.dataDisplay.sort((a, b) => {
+        return (
+          a.PricePopupViewModel.roomPricePerNightAmount -
+          b.PricePopupViewModel.roomPricePerNightAmount
+        );
+      });
+    }
+    if (currentSort === "recomment") {
+      return this.dataDisplay.sort((a, b) => {
+        return b.ReviewScore - a.ReviewScore;
+      });
+    }
   }
 
   public getStars(item: any) {
-    let html = '';
+    let html = "";
     for (let j = 0; j < Math.floor(item.StarRating); j++) {
       html += `<i class="fa fa-star" aria-hidden="true"></i>`;
     }
@@ -177,7 +260,7 @@ export default class ResultHotelComponent extends Vue {
   }
 
   public async getData() {
-    const response = await axios.get('https://demo0535107.mockable.io/agoda');
+    const response = await axios.get("https://demo0535107.mockable.io/agoda");
     this.dataAll = response.data.ResultList;
     this.dataDisplay = this.dataAll;
   }

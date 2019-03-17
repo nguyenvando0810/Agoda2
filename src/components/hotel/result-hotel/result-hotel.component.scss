@@ -1,6 +1,6 @@
 .result-hotel {
   &__wrapper {
-    margin-top: 30px;
+    margin-top: 20px;
 
     &-link {
       color: #3c3c3c;
@@ -401,6 +401,16 @@
       color: #28871c;
       font-size: 11px;
       font-weight: 700;
+    }
+  }
+
+  @media (min-width: 992px) and (max-width:1200px) {
+    &__detail {
+      width: 38%;
+    }
+
+    &__price {
+      width: calc(62% - 249px);
     }
   }
 }
