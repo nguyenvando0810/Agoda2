@@ -3,21 +3,21 @@
     margin-top: 20px;
 
     &-link {
-      color: #3c3c3c;
+      color: $secondary-dark;
 
       &:hover {
-        color: #3c3c3c;
+        color: $secondary-dark;
         text-decoration: none;
       }
     }
   }
 
   &__suggest {
-    border-color: #24457c;
-    background-color: #24457c;
-    color: #fff;
+    border-color: $blue-dark;
+    background-color: $blue-dark;
+    color: $white;
     border-radius: 6px 6px 0 0;
-    font-size: 14px;
+    font-size: $font-medium;
     padding: 5px 15px;
     display: inline-block;
   }
@@ -45,7 +45,7 @@
   }
 
   &__content {
-    border: 1px solid #24457c;
+    border: 1px solid $blue-dark;
     display: flex;
     margin-bottom: 20px;
   }
@@ -63,50 +63,50 @@
   &__detail {
     width: 48%;
     padding: 20px;
-    border-right: 1px solid #dddfe2;
+    border-right: 1px solid $gray-border-color;
 
     &__top-money {
       span {
-        font-size: 12px;
+        font-size: $font-small;
         padding: 3px 7px;
-        background-color: #f05700;
+        background-color: $orange;
         border-radius: 2px;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         margin-bottom: 5px;
         display: inline-block;
-        color: #FFFFFF;
+        color: $white;
       }
     }
 
     &__name-hotel {
-      font-size: 16px;
+      font-size: $font-medium-big;
       line-height: 1;
-      font-weight: 700;
+      font-weight: $font-weight-bold;
 
       &:hover {
-        color: #00adff;
+        color: $blue-light2;
         text-decoration: underline;
       }
     }
 
     &__location {
-      font-size: 14px;
+      font-size: $font-medium;
 
       &-badge {
         padding: 5px 10px;
-        font-weight: 400;
-        background: linear-gradient(90deg, #ff567d, #fe9a8b);
+        font-weight: $font-weight-medium;
+        background: linear-gradient(90deg, $pink, $pink-light);
         margin-right: 6px;
-        font-size: 12px;
-        font-weight: 700;
+        font-size: $font-small;
+        font-weight: $font-weight-bold;
       }
 
       &-apartment {
-        font-size: 12px;
-        font-weight: 700;
+        font-size: $font-small;
+        font-weight: $font-weight-bold;
 
         &:hover {
-          color: #5392f9;
+          color: $blue-light;
         }
       }
     }
@@ -114,9 +114,9 @@
     &__stars {
 
       &-location {
-        color: #488bf8;
-        font-size: 12px;
-        font-weight: 700;
+        color: $blue-light;
+        font-size: $font-small;
+        font-weight: $font-weight-bold;
         margin-left: 10px;
 
         &:hover {
@@ -124,19 +124,19 @@
         }
 
         .fa-street-view {
-          font-size: 14px;
+          font-size: $font-medium;
         }
       }
 
       .fa-star {
-        color: #ff567d;
+        color: $pink;
         margin-right: 2px;
-        font-size: 14px;
+        font-size: $font-medium;
       }
 
       .fa-star-half-o {
-        color: #ff567d;
-        font-size: 14px;
+        color: $pink;
+        font-size: $font-medium;
       }
     }
 
@@ -144,11 +144,11 @@
       margin-bottom: 5px;
 
       span {
-        font-size: 12px;
+        font-size: $font-small;
         padding: 3px 7px;
         border: 1px solid;
         border-radius: 2px;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
       }
     }
 
@@ -156,13 +156,13 @@
       margin-bottom: 5px;
 
       span {
-        font-size: 12px;
+        font-size: $font-small;
         padding: 3px 7px;
-        border: 1px solid #32a923;
+        border: 1px solid $green;
         border-radius: 2px;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         margin-right: 5px;
-        color: #32a923;
+        color: $green;
       }
     }
 
@@ -170,23 +170,23 @@
       margin-bottom: 5px;
 
       span {
-        font-size: 12px;
+        font-size: $font-small;
         padding: 3px 7px;
-        border: 1px solid #32a923;
+        border: 1px solid $green;
         border-radius: 2px;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         margin-right: 5px;
-        color: #32a923;
+        color: $green;
       }
     }
 
     &__card {
       margin-bottom: 5px;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: $font-small;
+      font-weight: $font-weight-bold;
 
       .fa-credit-card {
-        font-size: 16px;
+        font-size: $font-medium-big;
         margin-right: 5px;
       }
     }
@@ -196,12 +196,12 @@
 
       .fa-users {
         margin-right: 5px;
-        font-size: 16px;
+        font-size: $font-medium-big;
       }
 
-      font-size: 12px;
-      font-weight: 700;
-      color: #8660c7;
+      font-size: $font-small;
+      font-weight:$font-weight-bold;
+      color: $violet-dark;
     }
 
     &__top-location {
@@ -210,55 +210,54 @@
       span {
         font-size: 11px;
         padding: 3px 7px;
-        border: 1px solid #6d68f3;
+        border: 1px solid $violet-light;
         border-radius: 2px;
-        font-weight: 700;
-        color: #6d68f3;
+        font-weight: $font-weight-bold;
+        color: $violet-light;
       }
-
     }
 
     &__selling {
       margin-bottom: 15px;
 
       span:last-child {
-        color: #e12d2d;
+        color: $red-light;
         font-size: 13px;
       }
 
       &-badge {
         padding: 5px 10px;
         border-radius: 2px;
-        font-weight: 400;
-        background: #e12d2d;
+        font-weight: $font-weight-medium;
+        background: $red-light;
         margin-right: 6px;
-        font-size: 10px;
-        font-weight: 700;
+        font-size: $font-tiny;
+        font-weight: $font-weight-bold;
       }
     }
 
     &__discount {
-      font-size: 12px;
-      font-weight: 700;
-      color: #28871c;
+      font-size: $font-small;
+      font-weight: $font-weight-bold;
+      color: $green-dark;
 
       &-text {
         padding: 2px 16px 2px 8px;
         margin-right: 3px;
-        border: 1px dashed #28871c;
+        border: 1px dashed $green-dark;
         border-right: none;
-        background-color: #d8eed5;
+        background-color: $green-light;
         position: relative;
 
         &:after {
           display: inline-block;
           content: "";
-          background-color: #fff;
+          background-color: $white;
           height: 11px;
           width: 11px;
           position: absolute;
           top: 4px;
-          border: 1px dashed #28871c;
+          border: 1px dashed $green-dark;
           right: -4px;
           border-right: none;
           border-top: none;
@@ -281,17 +280,17 @@
         width: 60%;
 
         span:first-child {
-          font-size: 14px;
+          font-size: $font-medium;
           line-height: 15px;
           display: inline-block;
-          color: #333;
+          color: $gray-dark;
           font-weight: 600;
         }
 
         span:last-child {
-          font-weight: 700;
-          font-size: 12px;
-          color: #777;
+          font-weight: $font-weight-bold;
+          font-size: $font-small;
+          color: $gray;
         }
       }
 
@@ -305,8 +304,8 @@
         height: 50px;
 
         span {
-          color: #FFFFFF;
-          font-weight: 700;
+          color: $white;
+          font-weight: $font-weight-bold;
           font-size: 20px;
           position: absolute;
           top: 50%;
@@ -316,12 +315,12 @@
     }
 
     &__ribbon {
-      background: #e12d2d;
+      background: $red-light;
       padding: 4px 6px;
       text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: #fff;
+      font-size: $font-small;
+      font-weight: $font-weight-bold;
+      color: $white;
       border-radius: 2px;
       display: inline-block;
       margin-right: -20px;
@@ -329,27 +328,27 @@
     }
 
     &__remain {
-      background: #f9d8d8;
+      background: $orange-light;
       padding: 4px 6px;
-      color: #e12d2d;
+      color: $red-light;
       text-align: center;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: $font-small;
+      font-weight: $font-weight-bold;
       border-radius: 2px;
       display: inline-block;
       margin-right: -20px;
     }
 
     &__discount {
-      background: #d8eed5;
+      background: $green-light;
       display: inline-block;
       width: 80%;
-      font-size: 10px;
+      font-size: $font-tiny;
       line-height: 12px;
-      font-weight: 700;
+      font-weight: $font-weight-bold;
       text-align: center;
       margin-right: -20px;
-      color: #28871c;
+      color: $green-dark;
       padding: 4px 10px;
       border-radius: 2px;
     }
@@ -358,16 +357,16 @@
       margin-top: 10px;
 
       p {
-        font-size: 10px;
-        color: #737373;
+        font-size: $font-tiny;
+        color: $gray-background;
         margin-bottom: 5px;
       }
 
       .old-price {
-        color: #737373;
+        color: $gray-background;
         font-size: 22px;
         line-height: 22px;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         position: relative;
         margin-bottom: 5px;
 
@@ -378,29 +377,29 @@
           top: 50%;
           width: 50%;
           transform: rotate(-10deg);
-          border-top: 1px solid #737373;
+          border-top: 1px solid $gray-background;
         }
       }
 
       .new-price {
-        color: #000;
+        color: $dark;
         font-size: 22px;
         line-height: 22px;
-        font-weight: 700;
-        color: #e12d2d;
+        font-weight: $font-weight-bold;
+        color: $red-light;
       }
 
       .no-room {
-        color: #ff274f;
+        color: $pink-dark;
         text-align: right;
         font-size: 13px;
       }
     }
 
     &__benefit {
-      color: #28871c;
+      color: $green-dark;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: $font-weight-bold;
     }
   }
 

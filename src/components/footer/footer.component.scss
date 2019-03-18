@@ -1,6 +1,6 @@
 .footer {
   padding: 50px 0 10px 0;
-  background: #333;
+  background:$gray-dark;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -9,7 +9,7 @@
 
   &-coppyright {
     text-align: center;
-    color: #999;
+    color: $gray;
 
     p {
       font-size: 13px;
@@ -27,7 +27,7 @@
   &-code {
     text-align: center;
     font-size: 13px;
-    color: #999;
+    color: $gray;
 
     p {
       margin-bottom: 0;

@@ -1,0 +1,62 @@
+.filter-tab {
+  margin-top: 30px;
+
+  &__default {
+    position: relative;
+
+    &-item {
+      text-align: center;
+      cursor: pointer;
+
+      &:first-child {
+        margin-left: 10px;
+      }
+
+      &:last-child {
+        position: absolute;
+        right: 0;
+        text-align: center;
+
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+
+        span {
+          color: $green;
+          display: block;
+          font-size: $font-small;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    &-link {
+      width: 220px;
+      padding: 15px 20px;
+      font-size: 15px;
+      font-weight: $font-weight-bold;
+      color: $gray-dark;
+
+      &.nav-link {
+        border-radius: 0;
+
+        &:hover {
+          color: $blue-light-hover !important;
+          border-color: transparent;
+        }
+      }
+
+      .nav-tabs &.active {
+        border-top: 5px solid $blue-light;
+        background: $white;
+        color: $blue-light;
+        border-left: 1px solid $gray-light;
+        border-right: 1px solid $blue-light;
+      }
+    }
+  }
+}

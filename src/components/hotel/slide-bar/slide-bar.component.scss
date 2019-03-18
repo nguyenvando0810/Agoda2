@@ -4,7 +4,7 @@
     background-image: url('../../../assets/bkg-map-entry.svg');
     background-size: cover;
     position: relative;
-    border: 1px solid #d7d7db;
+    border: 1px solid $gray-map;
     border-bottom: none;
     border-radius: 3px;
 
@@ -18,11 +18,11 @@
 
     &-caption {
       text-align: center;
-      font-size: 16px;
+      font-size: $font-medium-big;
       display: block;
-      font-weight: 700;
+      font-weight: $font-weight-bold;
       width: 100%;
-      color: #3c3c3c;
+      color: $secondary-dark;
       position: absolute;
       bottom: calc(50% - 40px);
       text-transform: uppercase;
@@ -30,7 +30,7 @@
       cursor: pointer;
 
       &:hover {
-        color: #5392f9;
+        color: $blue;
       }
     }
   }
@@ -38,29 +38,29 @@
   &__overflow {
     display: flex;
     padding: 10px;
-    background-color: #f4f8fe;
+    background-color: $gray-light-bg;
     margin-bottom: 10px;
 
     &-icon {
       width: 20%;
 
       .fa-users {
-        font-size: 18px;
-        color: #fff;
+        font-size: $font-icon;
+        color: $white;
         padding: 10px;
         border-radius: 50%;
-        background: #5392f9;
+        background: $blue;
       }
     }
 
     &-text {
       padding-left: 10px;
-      font-size: 12px;
+      font-size: $font-small;
       margin-bottom: 0;
 
       span {
-        color: #5392f9;
-        font-weight: 700;
+        color: $blue;
+        font-weight: $font-weight-bold;
       }
     }
   }
@@ -69,31 +69,57 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: #f3f9f2;
+    background-color: $secondary-bg;
     margin-bottom: 10px;
+
+    &:hover {
+      label {
+        color: $blue-light-boder;
+      }
+
+      input[type="checkbox"]+label {
+        border: 1px solid $blue-light-boder;
+      }
+    }
 
     &-icon {
       width: 20%;
       cursor: pointer;
 
       .fa-coffee {
-        font-size: 18px;
-        color: #fff;
+        font-size: $font-icon;
+        color: $white;
         padding: 10px;
         border-radius: 50%;
-        background: #32a923;
+        background: $green;
       }
     }
 
     &-text {
       width: 70%;
-      font-size: 12px;
+      font-size: $font-small;
       margin-bottom: 0;
       cursor: pointer;
+    }
 
-      &:hover {
-        color: #5392f9;
-      }
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    input[type="checkbox"]+label {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      border: 1px solid $secondary-border;
+      cursor: pointer;
+      margin-bottom: 0;
+      border-radius: 2px;
+    }
+
+    input[type="checkbox"]:checked+label {
+      background: url('../../../assets/tick.png') top no-repeat;
+      background-size: cover;
     }
   }
 
@@ -101,8 +127,52 @@
     margin-top: 30px;
 
     &-header {
-      font-size: 13px;
-      font-weight: 700;
+      font-size: $font-medium-small;
+      font-weight: $font-weight-bold;
+    }
+
+    &-list {
+      padding-bottom: 10px;
+      border-bottom: 1px solid $secondary-border;
+    }
+
+    &-item {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 3px;
+
+        &:after {
+          background-image: linear-gradient(180deg, transparent, hsla(0, 0%, 67%, 0), rgba(0, 0, 0, .8));
+        }
+      }
+
+      &:hover {
+        box-shadow: 2px 4px 6px 1px rgba(0, 0, 0, .2);
+      }
+    }
+
+    &-content {
+      padding-left: 10px;
+
+      h4 {
+        font-size: $font-small;
+        margin: 5px 0;
+        font-weight: $font-weight-bold;
+        color: $blue-light
+      }
+
+      p {
+        font-size: 11px;
+        margin-bottom: 1px;
+        color: $dark;
+      }
     }
   }
 }

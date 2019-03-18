@@ -1,49 +1,35 @@
 <template>
   <div class="filter-list">
-    <ul class="nav nav-tabs filter-list__default" id="myTab" role="tablist">
-      <li class="nav-item filter-list__default-item">
-        <a
-          class="nav-link filter-list__default-link active"
-          id="all-tab"
-          data-toggle="tab"
-          @click="clickTab('tabAll')"
-        >Mọi lựa chọn</a>
-      </li>
-      <li class="nav-item filter-list__default-item">
-        <a
-          class="nav-link filter-list__default-link"
-          id="hotel-tab"
-          data-toggle="tab"
-          @click="clickTab('tabHotel')"
-        >Khách sạn</a>
-      </li>
-      <li class="nav-item filter-list__default-item">
-        <a
-          class="nav-link filter-list__default-link"
-          id="agoda-tab"
-          data-toggle="tab"
-          @click="clickTab('tabAgoda')"
-        >
-          <i aria-hidden="true" class="fa fa-modx"></i>
-          agoda home
-        </a>
-      </li>
-      <li class="nav-item filter-list__default-item">
-        <img src="../../../assets/guarantee.png" alt>
-        <span>Agoda Đảm Bảo Giá</span>
-      </li>
-    </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="filter-list__content"></div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control filter-list__input"
+              v-model="searchValue"
+              @keyup.enter="sendData"
+              placeholder="Từ khóa hay tên khách sạn "
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import "./filter-list.component.scss";
 import { EventBus } from "@/eventBus";
 
 @Component
 export default class FilterListComponent extends Vue {
-  public clickTab(currentTab: string) {
-    EventBus.$emit("currentTab", currentTab);
+  searchValue: any = "";
+  sendData() {
+    EventBus.$emit("searchValue", this.searchValue);
   }
 }
 </script>

@@ -54,7 +54,7 @@
                     <i class="fa fa-star-half-o" aria-hidden="true"></i>
                   </span>
                 </span>
-                
+
                 <span v-if="item.LocationFullText" class="result-hotel__detail__stars-location">
                   <i class="fa fa-street-view" aria-hidden="true"></i>
                   {{item.LocationFullText}}
