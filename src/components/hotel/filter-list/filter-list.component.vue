@@ -5,27 +5,229 @@
         <div class="col-sm-9">
           <div class="filter-list__content">
             <span>Chọn lọc</span>
-            <b-dropdown id="ddown1" class="filter-list__content-drop">
+            <b-dropdown class="filter-list__content-button">
               <template slot="button-content">
-                <i class="fa fa-empire" aria-hidden="true"></i>
+                <i class="fa fa-snowflake-o" aria-hidden="true"></i> &nbsp;
                 <span>Phổ biến</span>
               </template>
-              <h4>Chọn lọc phổ biến ở Hà Nội</h4>
-              <b-dropdown-item>1n</b-dropdown-item>
-              <b-dropdown-item>2n</b-dropdown-item>
+              <h4 class="filter-list__heading">Chọn lọc phổ biến ở Hà Nội</h4>
+              <div class="filter-list__item">
+                <input type="checkbox" id="phoco">
+                <label for="phoco">
+                  <span></span>Khu phố cổ
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="hoankiem">
+                <label for="hoankiem">
+                  <span></span>Khu Quận Hoàn Kiếm
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="pay">
+                <label for="pay">
+                  <span></span>Thanh toán tại nơi ở
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="hotel">
+                <label for="hotel">
+                  <span></span>Nhà khách / Nhà nghỉ B&B
+                </label>
+              </div>
+            </b-dropdown>
+
+            <!-- filter price -->
+            <b-dropdown class="filter-list__content-button">
+              <template slot="button-content">
+                <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;
+                <span>Giá</span>
+              </template>
+              <h4 class="filter-list__heading">Giá phòng (1 đêm)</h4>
+              <div class="filter-list__item">
+                <input type="checkbox" id="price1">
+                <label for="price1">
+                  <span></span>0 ₫ - 920.000 ₫ (17)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="price2">
+                <label for="price2">
+                  <span></span>920.000 ₫ - 1.800.000 ₫ (77)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="price3">
+                <label for="price3">
+                  <span></span>1.800.000 ₫ - 2.700.000 ₫ (31)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="price4">
+                <label for="price4">
+                  <span></span>2.700.000 ₫ - 3.700.000 ₫ (10)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="price5">
+                <label for="price5">
+                  <span></span>3.700.000 ₫ + (5)
+                </label>
+              </div>
+            </b-dropdown>
+
+            <!-- filter price -->
+            <b-dropdown class="filter-list__content-button">
+              <template slot="button-content">
+                <i class="fa fa-star" aria-hidden="true"></i> &nbsp;
+                <span>Xếp hạng sao</span>
+              </template>
+              <h4 class="filter-list__heading">Xếp hạng sao</h4>
+              <div class="filter-list__item">
+                <input type="checkbox" id="start5">
+                <label for="start5">
+                  <span></span>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="start4">
+                <label for="start4">
+                  <span></span>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="start3">
+                <label for="start3">
+                  <span></span>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="start2">
+                <label for="start2">
+                  <span></span>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="start1">
+                <label for="start1">
+                  <span></span>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </label>
+              </div>
+            </b-dropdown>
+
+            <!-- filter area -->
+            <b-dropdown class="filter-list__content-button">
+              <template slot="button-content">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
+                <span>Khu vực</span>
+              </template>
+              <h4 class="filter-list__heading">Khu vực</h4>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area1">
+                <label for="area1">
+                  <span></span>Phố Cổ (34)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area2">
+                <label for="area2">
+                  <span></span>Quận Hoàn Kiếm (67)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area3">
+                <label for="area3">
+                  <span></span>Quận Ba Đình (45)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area4">
+                <label for="area4">
+                  <span></span>Quận Cầu Giấy (24)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area5">
+                <label for="area5">
+                  <span></span>Quận Tây Hồ (27)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area6">
+                <label for="area6">
+                  <span></span>Quận Hai Bà Trưng (16)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area7">
+                <label for="area7">
+                  <span></span>My Dinh (10)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area8">
+                <label for="area8">
+                  <span></span>Quận Bắc Từ Liêm (30)
+                </label>
+              </div>
+            </b-dropdown>
+
+            <!-- filter Đô Đô -->
+            <b-dropdown class="filter-list__content-button">
+              <template slot="button-content">
+                <span>Thêm</span>
+              </template>
+              <h4 class="filter-list__heading">Đánh giá của khách</h4>
+              <div class="filter-list__item">
+                <input type="checkbox" id="do1">
+                <label for="do1">
+                  <span></span>Vị trí thuận tiện (1)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="do2">
+                <label for="do2">
+                  <span></span>hồ bơi (196)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="do3">
+                <label for="do3">
+                  <span></span>phù hợp cho gia đình/trẻ em (105)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="do4">
+                <label for="do4">
+                  <span></span>cho phép vật nuôi (10)
+                </label>
+              </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="do5">
+                <label for="do5">
+                  <span></span>Biệt thự nghỉ dưỡng (2)
+                </label>
+              </div>
             </b-dropdown>
           </div>
         </div>
         <div class="col-sm-3">
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control filter-list__input"
-              v-model="searchValue"
-              @keyup.enter="sendData"
-              placeholder="Từ khóa hay tên khách sạn "
-            >
-          </div>
+          <SearchListComponent></SearchListComponent>
         </div>
       </div>
     </div>
@@ -35,12 +237,10 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import "./filter-list.component.scss";
 import { EventBus } from "@/eventBus";
+import SearchListComponent from "../search-list/search-list.component.vue";
 
-@Component
-export default class FilterListComponent extends Vue {
-  searchValue: any = "";
-  sendData() {
-    EventBus.$emit("searchValue", this.searchValue);
-  }
-}
+@Component({
+  components: { SearchListComponent }
+})
+export default class FilterListComponent extends Vue {}
 </script>

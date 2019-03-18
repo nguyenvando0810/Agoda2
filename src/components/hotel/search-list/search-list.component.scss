@@ -1,0 +1,19 @@
+.search-list {
+
+  .form-group {
+    text-align: right;
+    margin-bottom: 0;
+  }
+
+  &__input {
+    display: inline-block;
+    border-radius: 20px;
+    background-image: url('../../../assets/search.png');
+    background-repeat: no-repeat;
+    background-position: 5%;
+    padding-left: 50px;
+    color: $gray-dark;
+    border-color: $gray-background;
+    font-size: $font-small;
+  }
+}

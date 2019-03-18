@@ -51,7 +51,7 @@
                 <span v-if="item.StarRating">
                   <span v-html="getStars(item)"></span>
                   <span v-if="item.StarRating % 1 !== 0">
-                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-half" aria-hidden="true"></i>
                   </span>
                 </span>
                 
@@ -175,81 +175,78 @@ import { EventBus } from "@/eventBus";
 
 @Component
 export default class ResultHotelComponent extends Vue {
-  public dataAll: any[] = [];
-  public dataDisplay: any[] = [];
+  // public dataAll: any[] = [];
+  // public dataDisplay: any[] = [];
   tabName: string = "";
+  @Prop({ type: Array }) dataDisplay: any;
 
   created() {
-    this.getData();
-
-    EventBus.$on("currentTab", (currentTab: any) => {
-      this.dataDisplay = this.getDataTab(currentTab);
-    });
-
-    EventBus.$on("sortCondition", (sortCondition: any) => {
-      this.sortData(sortCondition);
-    });
-
-    EventBus.$on("searchValue", (searchValue: any) => {
-      this.dataDisplay = this.getDataSearch(searchValue);
-    });
-
-    EventBus.$on("isBreakfast", (isBreakfast: any) => {
-      this.dataDisplay = this.getDataBreakfast(isBreakfast);
-      console.log(this.dataDisplay);
-    });
+    // this.getData();
+    // EventBus.$on("currentTab", (currentTab: any) => {
+    //   this.dataDisplay = this.getDataTab(currentTab);
+    // });
+    // EventBus.$on("sortCondition", (sortCondition: any) => {
+    //   this.sortData(sortCondition);
+    // });
+    // EventBus.$on("searchValue", (searchValue: any) => {
+    //   this.dataDisplay = this.getDataSearch(searchValue);
+    // });
+    // EventBus.$on("isBreakfast", (isBreakfast: any) => {
+    //   this.dataDisplay = this.getDataBreakfast(isBreakfast);
+    //   console.log(this.dataDisplay);
+    // });
   }
 
-  public getDataSearch(valueSearch: any) {
-    return this.dataAll.filter(data => {
-      if (valueSearch) {
-        return data.HotelDisplayName.toLowerCase().includes(
-          valueSearch.toLowerCase()
-        );
-      } else return this.dataAll;
-    });
-  }
+  // public getDataSearch(valueSearch: any) {
+  //   return this.dataAll.filter(data => {
+  //     if (valueSearch) {
+  //       return data.HotelDisplayName.toLowerCase().includes(
+  //         valueSearch.toLowerCase()
+  //       );
+  //     } else return this.dataAll;
+  //   });
+  // }
 
-  public getDataBreakfast(isBreakfast: any) {
-    return this.dataAll.filter((breakfast: any) => {
-      if (isBreakfast === true) {
-        return breakfast.IsBreakfastIncluded === true;
-      } else return this.dataAll;
-    });
-  }
+  // public getDataBreakfast(isBreakfast: any) {
+  //   return this.dataAll.filter((breakfast: any) => {
+  //     if (isBreakfast === true) {
+  //       return breakfast.IsBreakfastIncluded === true;
+  //     } else return this.dataAll;
+  //   });
+  // }
 
-  public getDataTab(currentTab: any) {
-    if (currentTab === "tabAll") return this.dataAll;
+  // public getDataTab(currentTab: any) {
+  //   if (currentTab === "tabAll") return this.dataAll;
 
-    return this.dataAll.filter((item: any) => {
-      if (currentTab === "tabHotel") {
-        return item.AccommodationType === "Khách sạn";
-      }
-      if (currentTab === "tabAgoda") {
-        return item.AgodaHomesText === "Agoda Homes";
-      }
-    });
-  }
+  //   return this.dataAll.filter((item: any) => {
+  //     if (currentTab === "tabHotel") {
+  //       return item.AccommodationType === "Khách sạn";
+  //     }
+  //     if (currentTab === "tabAgoda") {
+  //       return item.AgodaHomesText === "Agoda Homes";
+  //     }
+  //   });
+  // }
 
-  public sortData(currentSort: any) {
-    if (currentSort === "suggestions") {
-      return this.dataDisplay;
-    }
+  // public sortData(currentSort: any) {
+  //   if (currentSort === "suggestions") {
+  //     return this.dataDisplay;
+  //   }
 
-    if (currentSort === "priceLow") {
-      return this.dataDisplay.sort((a, b) => {
-        return (
-          a.PricePopupViewModel.roomPricePerNightAmount -
-          b.PricePopupViewModel.roomPricePerNightAmount
-        );
-      });
-    }
-    if (currentSort === "recomment") {
-      return this.dataDisplay.sort((a, b) => {
-        return b.ReviewScore - a.ReviewScore;
-      });
-    }
-  }
+  //   if (currentSort === "priceLow") {
+  //     return this.dataDisplay.sort((a, b) => {
+  //       return (
+  //         a.PricePopupViewModel.roomPricePerNightAmount -
+  //         b.PricePopupViewModel.roomPricePerNightAmount
+  //       );
+  //     });
+  //   }
+  //   if (currentSort === "recomment") {
+  //     return this.dataDisplay.sort((a, b) => {
+  //       return b.ReviewScore - a.ReviewScore;
+  //     });
+  //   }
+  // }
 
   public getStars(item: any) {
     let html = "";
@@ -259,12 +256,10 @@ export default class ResultHotelComponent extends Vue {
     return html;
   }
 
-  public async getData() {
-    const response = await axios.get("https://demo0535107.mockable.io/agoda");
-    this.dataAll = response.data.ResultList;
-    this.dataDisplay = this.dataAll;
-  }
+  // public async getData() {
+  //   const response = await axios.get("https://demo0535107.mockable.io/agoda");
+  //   this.dataAll = response.data.ResultList;
+  //   this.dataDisplay = this.dataAll;
+  // }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
