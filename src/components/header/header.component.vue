@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <nav
-      class="navbar navbar-expand-sm navbar-dark header__navbar"
+      class="navbar navbar-expand-sm header__navbar"
       style="background-color: #FFFFFF;"
     >
       <a class="navbar-brand" href="#">
@@ -38,7 +38,7 @@
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown-toggle nav-link__customs"
               href="#"
               id="dropdownId"
               data-toggle="dropdown"
@@ -71,6 +71,9 @@
         </ul>
       </div>
     </nav>
+
+
+
     <div class="header-funnel">
       <div class="container">
         <div class="header-funnel__content">

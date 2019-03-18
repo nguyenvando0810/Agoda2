@@ -30,6 +30,12 @@
           &:focus {
             color: $blue-light;
           }
+
+          &__customs {
+            &::after {
+              content: none;
+            }
+          }
         }
 
         & .header__currency {
