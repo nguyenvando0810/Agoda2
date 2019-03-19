@@ -3,7 +3,7 @@
     <ul class="nav nav-tabs sort-list__default" id="myTab" role="tablist">
       <li class="nav-item sort-list__default-item">Sắp xếp theo</li>
       <li class="nav-item sort-list__default-item">
-        <a class="nav-link sort-list__default-link active" data-toggle="tab">Gợi ý</a>
+        <a class="nav-link sort-list__default-link active" data-toggle="tab"  @click="clickSort('suggestions')">Gợi ý</a>
       </li>
       <li class="nav-item sort-list__default-item">
         <a
@@ -32,6 +32,7 @@ export default class SortListComponent extends Vue {
   public clickSort(sortCondition: any) {
     EventBus.$emit('sortCondition', sortCondition);
   }
+
   public created() {
     EventBus.$on('currentTab', (currentTab: any) => {
       const arrClass = document.getElementsByClassName('sort-list__default-link');

@@ -54,7 +54,7 @@
                     <i class="fa fa-star-half" aria-hidden="true"></i>
                   </span>
                 </span>
-                
+
                 <span v-if="item.LocationFullText" class="result-hotel__detail__stars-location">
                   <i class="fa fa-street-view" aria-hidden="true"></i>
                   {{item.LocationFullText}}
@@ -155,10 +155,9 @@
               <div class="new-price" v-if="item.PricePopupViewModel.formattedRoomPerNightAmount">
                <span> {{item.PricePopupViewModel.formattedRoomPerNightAmount}}</span>₫
               </div>
-            </div>
 
-            <div class="result-hotel__price__benefit" v-if="item.IsFreeCancellation">
-              <p>Hủy miễn phí</p>
+              <div class="benefit" v-if="item.IsFreeCancellation">Hủy miễn phí !
+              </div>
             </div>
           </div>
         </div>
@@ -175,78 +174,7 @@ import { EventBus } from '@/eventBus';
 
 @Component
 export default class ResultHotelComponent extends Vue {
-  // public dataAll: any[] = [];
-  // public dataDisplay: any[] = [];
-  public tabName: string = '';
   @Prop({ type: Array }) public dataDisplay: any;
-
-  public created() {
-    // this.getData();
-    // EventBus.$on("currentTab", (currentTab: any) => {
-    //   this.dataDisplay = this.getDataTab(currentTab);
-    // });
-    // EventBus.$on("sortCondition", (sortCondition: any) => {
-    //   this.sortData(sortCondition);
-    // });
-    // EventBus.$on("searchValue", (searchValue: any) => {
-    //   this.dataDisplay = this.getDataSearch(searchValue);
-    // });
-    // EventBus.$on("isBreakfast", (isBreakfast: any) => {
-    //   this.dataDisplay = this.getDataBreakfast(isBreakfast);
-    //   console.log(this.dataDisplay);
-    // });
-  }
-
-  // public getDataSearch(valueSearch: any) {
-  //   return this.dataAll.filter(data => {
-  //     if (valueSearch) {
-  //       return data.HotelDisplayName.toLowerCase().includes(
-  //         valueSearch.toLowerCase()
-  //       );
-  //     } else return this.dataAll;
-  //   });
-  // }
-
-  // public getDataBreakfast(isBreakfast: any) {
-  //   return this.dataAll.filter((breakfast: any) => {
-  //     if (isBreakfast === true) {
-  //       return breakfast.IsBreakfastIncluded === true;
-  //     } else return this.dataAll;
-  //   });
-  // }
-
-  // public getDataTab(currentTab: any) {
-  //   if (currentTab === "tabAll") return this.dataAll;
-
-  //   return this.dataAll.filter((item: any) => {
-  //     if (currentTab === "tabHotel") {
-  //       return item.AccommodationType === "Khách sạn";
-  //     }
-  //     if (currentTab === "tabAgoda") {
-  //       return item.AgodaHomesText === "Agoda Homes";
-  //     }
-  //   });
-  // }
-
-  // public sortData(currentSort: any) {
-  //   if (currentSort === "suggestions") {
-  //     return this.dataDisplay;
-  //   }
-
-  //   if (currentSort === "priceLow") {
-  //     return this.dataDisplay.sort((a, b) => {
-  //       return (
-  //         a.PricePopupViewModel.roomPricePerNightAmount -
-  //         b.PricePopupViewModel.roomPricePerNightAmount
-  //       );
-  //     });
-  //   }
-  //   if (currentSort === "recomment") {
-  //     return this.dataDisplay.sort((a, b) => {
-  //       return b.ReviewScore - a.ReviewScore;
-  //     });
-  //   }
-  // }
 
   public getStars(item: any) {
     let html = '';
@@ -255,11 +183,5 @@ export default class ResultHotelComponent extends Vue {
     }
     return html;
   }
-
-  // public async getData() {
-  //   const response = await axios.get("https://demo0535107.mockable.io/agoda");
-  //   this.dataAll = response.data.ResultList;
-  //   this.dataDisplay = this.dataAll;
-  // }
 }
 </script>

@@ -76,7 +76,7 @@
               </div>
             </b-dropdown>
 
-            <!-- filter price -->
+            <!-- filter Star -->
             <b-dropdown class="filter-list__content-button">
               <template slot="button-content">
                 <i class="fa fa-star" aria-hidden="true"></i> &nbsp;
@@ -84,7 +84,7 @@
               </template>
               <h4 class="filter-list__heading">Xếp hạng sao</h4>
               <div class="filter-list__item">
-                <input type="checkbox" id="start5">
+                <input type="checkbox" id="start5" value="5" v-model="conditionStar">
                 <label for="start5">
                   <span></span>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -95,7 +95,7 @@
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="start4">
+                <input type="checkbox" id="start4" value="4" v-model="conditionStar">
                 <label for="start4">
                   <span></span>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -105,7 +105,7 @@
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="start3">
+                <input type="checkbox" id="start3" value="3" v-model="conditionStar">
                 <label for="start3">
                   <span></span>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -114,7 +114,7 @@
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="start2">
+                <input type="checkbox" id="start2" value="2" v-model="conditionStar">
                 <label for="start2">
                   <span></span>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -122,7 +122,7 @@
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="start1">
+                <input type="checkbox" id="start1" value="1" v-model="conditionStar">
                 <label for="start1">
                   <span></span>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -138,49 +138,49 @@
               </template>
               <h4 class="filter-list__heading">Khu vực</h4>
               <div class="filter-list__item">
-                <input type="checkbox" id="area1">
+                <input type="checkbox" id="area1" value="phoco" v-model="conditionArea">
                 <label for="area1">
                   <span></span>Phố Cổ (34)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area2">
+                <input type="checkbox" id="area2" value="hoankiem" v-model="conditionArea">
                 <label for="area2">
                   <span></span>Quận Hoàn Kiếm (67)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area3">
+                <input type="checkbox" id="area3" value="badinh" v-model="conditionArea">
                 <label for="area3">
                   <span></span>Quận Ba Đình (45)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area4">
+                <input type="checkbox" id="area4" value="caugiay" v-model="conditionArea">
                 <label for="area4">
                   <span></span>Quận Cầu Giấy (24)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area5">
+                <input type="checkbox" id="area5" value="tayho" v-model="conditionArea">
                 <label for="area5">
                   <span></span>Quận Tây Hồ (27)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area6">
+                <input type="checkbox" id="area6" value="2batung" v-model="conditionArea">
                 <label for="area6">
                   <span></span>Quận Hai Bà Trưng (16)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area7">
+                <input type="checkbox" id="area7" value="midinh" v-model="conditionArea">
                 <label for="area7">
-                  <span></span>My Dinh (10)
+                  <span></span>Mĩ Đình (10)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area8">
+                <input type="checkbox" id="area8" value="tuliem" v-model="conditionArea">
                 <label for="area8">
                   <span></span>Quận Bắc Từ Liêm (30)
                 </label>
@@ -234,13 +234,30 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from 'vue-property-decorator';
-import './filter-list.component.scss';
-import { EventBus } from '@/eventBus';
-import SearchListComponent from '../search-list/search-list.component.vue';
+import { Component, Vue, Watch } from "vue-property-decorator";
+import "./filter-list.component.scss";
+import { EventBus } from "@/eventBus";
+import SearchListComponent from "../search-list/search-list.component.vue";
 
 @Component({
-  components: { SearchListComponent },
+  components: { SearchListComponent }
 })
-export default class FilterListComponent extends Vue {}
+export default class FilterListComponent extends Vue {
+  conditionStar: Array<any> = [];
+  conditionArea: Array<any> = [];
+
+  @Watch("conditionStar")
+  checkChangeStar() {
+    const converConditiontStar: Array<any> = [];
+    for (let i = 0; i < this.conditionStar.length; i++) {
+      converConditiontStar.push(parseInt(this.conditionStar[i]));
+    }
+    EventBus.$emit("conditionStar", converConditiontStar);
+  }
+
+  @Watch("conditionArea")
+  checkArea() {
+    EventBus.$emit("conditionArea", this.conditionArea);
+  }
+}
 </script>

@@ -271,11 +271,11 @@
     width: calc(52% - 249px);
     text-align: right;
     padding: 20px 10px 20px 0;
-    // position: relative;
+    position: relative;
 
     &__review {
       display: flex;
-      margin-bottom: 90px;
+      margin-bottom: 50px;
 
       &-text {
         width: 60%;
@@ -356,9 +356,9 @@
 
     &__room-rate {
       margin-top: 10px;
-      // position: absolute;
-      // bottom: 10px;
-      // right: 20px;
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
 
       p {
         font-size: $font-tiny;
@@ -401,12 +401,13 @@
         text-align: right;
         font-size: $font-medium-small;
       }
-    }
 
-    &__benefit {
-      color: $green-dark;
-      font-size: $font-small;
-      font-weight: $font-weight-bold;
+      .benefit {
+        font-size: $font-small;
+        font-weight: $font-weight-bold;
+        color: $green-dark;
+        margin-top: 5px;
+      }
     }
   }
 
