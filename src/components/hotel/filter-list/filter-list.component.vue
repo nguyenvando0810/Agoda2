@@ -138,51 +138,39 @@
               </template>
               <h4 class="filter-list__heading">Khu vực</h4>
               <div class="filter-list__item">
-                <input type="checkbox" id="area1" value="phoco" v-model="conditionArea">
+                <input type="checkbox" id="area1" value="481521" v-model="conditionArea">
                 <label for="area1">
                   <span></span>Phố Cổ (34)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area2" value="hoankiem" v-model="conditionArea">
+                <input type="checkbox" id="area2" value="62215" v-model="conditionArea">
                 <label for="area2">
                   <span></span>Quận Hoàn Kiếm (67)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area3" value="badinh" v-model="conditionArea">
-                <label for="area3">
-                  <span></span>Quận Ba Đình (45)
-                </label>
-              </div>
-              <div class="filter-list__item">
-                <input type="checkbox" id="area4" value="caugiay" v-model="conditionArea">
+                <input type="checkbox" id="area4" value="94745" v-model="conditionArea">
                 <label for="area4">
                   <span></span>Quận Cầu Giấy (24)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area5" value="tayho" v-model="conditionArea">
+                <input type="checkbox" id="area5" value="57582" v-model="conditionArea">
                 <label for="area5">
                   <span></span>Quận Tây Hồ (27)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area6" value="2batung" v-model="conditionArea">
+                <input type="checkbox" id="area6" value="481529" v-model="conditionArea">
                 <label for="area6">
                   <span></span>Quận Hai Bà Trưng (16)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="area7" value="midinh" v-model="conditionArea">
+                <input type="checkbox" id="area7" value="57583" v-model="conditionArea">
                 <label for="area7">
-                  <span></span>Mĩ Đình (10)
-                </label>
-              </div>
-              <div class="filter-list__item">
-                <input type="checkbox" id="area8" value="tuliem" v-model="conditionArea">
-                <label for="area8">
-                  <span></span>Quận Bắc Từ Liêm (30)
+                  <span></span>Quận Đống Đa (20)
                 </label>
               </div>
             </b-dropdown>
@@ -252,12 +240,18 @@ export default class FilterListComponent extends Vue {
     for (let i = 0; i < this.conditionStar.length; i++) {
       converConditiontStar.push(parseInt(this.conditionStar[i]));
     }
+
     EventBus.$emit("conditionStar", converConditiontStar);
   }
 
   @Watch("conditionArea")
   checkArea() {
-    EventBus.$emit("conditionArea", this.conditionArea);
+    const convertConditionArea: Array<any> = [];
+    this.conditionArea.forEach((item: any) => {
+      convertConditionArea.push(parseInt(item));
+    });
+
+    EventBus.$emit("conditionArea", convertConditionArea);
   }
 }
 </script>

@@ -38,10 +38,10 @@ import { EventBus } from "@/eventBus";
   }
 })
 export default class HotelComponent extends Vue {
-  public originData: any = {};
+  public allData: any = {};
   public dataDisplay: any[] = [];
   public dataSort: Array<any> = [];
-  // public conditionFilter: Array<any> = [];
+  public conditionFilter: object = {};
 
   public created() {
     this.getData();
@@ -64,46 +64,64 @@ export default class HotelComponent extends Vue {
 
     EventBus.$on("conditionStar", this.filterData);
 
-    EventBus.$on("conditionArea", (conditionArea: any) => {
-      console.log(conditionArea);
-    });
+    EventBus.$on("conditionArea", this.filterData);
   }
 
   filterData(condition: any) {
     function checkFilter(this: any, elment: any) {
-      return this.filterStar(condition, elment.StarRating);
+      return (
+        this.filterStar(condition, elment.StarRating) &&
+        this.filterArea(condition, elment.AreaId)
+      );
     }
 
-    this.dataDisplay = this.originData.ResultList.filter(checkFilter.bind(this));
+    this.dataDisplay = this.allData.ResultList.filter(checkFilter.bind(this));
   }
 
   filterStar(conditionStar: any, star: any) {
-    for (var item of conditionStar) {
-      if (item == Math.round(star)) {
-        console.log("log ra 1 cais gi day");
+    if (!conditionStar || !conditionStar.length) {
+      return true;
+    }
+
+    for (let i = 0; i < conditionStar.length; i++) {
+      if (conditionStar[i] === Math.round(star)) {
         return true;
       }
-      return false;
     }
-    return true;
+    return false;
+  }
+
+  filterArea(conditionArea: any, areaId: number) {
+    console.log(conditionArea, areaId);
+
+    if (!conditionArea || !conditionArea.length) {
+      return true;
+    }
+
+    for (let i = 0; i < conditionArea.length; i++) {
+      if (conditionArea[i] === areaId) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public getDataSearch(valueSearch: any) {
-    return this.originData.ResultList.filter((data: any) => {
+    return this.allData.ResultList.filter((data: any) => {
       if (valueSearch) {
         return data.HotelDisplayName.toLowerCase().includes(
           valueSearch.toLowerCase()
         );
       } else {
-        return this.originData.ResultList;
+        return this.allData.ResultList;
       }
     });
   }
 
   public getDataTab(currentTab: any) {
-    if (currentTab === "tabAll") return this.originData.ResultList;
+    if (currentTab === "tabAll") return this.allData.ResultList;
 
-    return this.originData.ResultList.filter((item: any) => {
+    return this.allData.ResultList.filter((item: any) => {
       if (currentTab === "tabHotel") {
         return item.AccommodationType === "Khách sạn";
       }
@@ -114,11 +132,11 @@ export default class HotelComponent extends Vue {
   }
 
   public getDataBreakfast(isBreakfast: any) {
-    return this.originData.ResultList.filter((breakfast: any) => {
+    return this.allData.ResultList.filter((breakfast: any) => {
       if (isBreakfast === true) {
         return breakfast.IsBreakfastIncluded === true;
       } else {
-        return this.originData.ResultList;
+        return this.allData.ResultList;
       }
     });
   }
@@ -140,8 +158,8 @@ export default class HotelComponent extends Vue {
 
   public async getData() {
     const response = await axios.get("https://demo0535107.mockable.io/agoda");
-    this.originData = response.data;
-    this.dataDisplay = this.originData.ResultList;
+    this.allData = response.data;
+    this.dataDisplay = this.allData.ResultList;
   }
 }
 </script>
