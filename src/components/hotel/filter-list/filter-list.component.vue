@@ -234,13 +234,13 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import "./filter-list.component.scss";
-import { EventBus } from "@/eventBus";
-import SearchListComponent from "../search-list/search-list.component.vue";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import './filter-list.component.scss';
+import { EventBus } from '@/eventBus';
+import SearchListComponent from '../search-list/search-list.component.vue';
 
 @Component({
-  components: { SearchListComponent }
+  components: { SearchListComponent },
 })
 export default class FilterListComponent extends Vue {}
 </script>

@@ -1,6 +1,6 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-Vue.use(Router)
+import Vue from 'vue';
+import Router from 'vue-router';
+Vue.use(Router);
 
 // const HotelComponent = () => import('@/component/hotel/hotel.component.vue')
 
@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'hotel',
-      component: () => import('./components/hotel/hotel.component.vue')
-    }
-  ]
-})
+      component: () => import('./components/hotel/hotel.component.vue'),
+    },
+  ],
+});

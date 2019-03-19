@@ -147,13 +147,13 @@
 
             <div class="result-hotel__price__room-rate">
               <p v-if="item.PriceDetail">{{item.PriceDetail.PriceViewText}}</p>
-              <div
-                class="old-price"
-                v-if="item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice"
-              >{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</div>
+              <div class="old-price"
+                v-if="item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice">
+                <span>{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</span>
+              </div>
+
               <div class="new-price" v-if="item.PricePopupViewModel.formattedRoomPerNightAmount">
-                {{item.PricePopupViewModel.formattedRoomPerNightAmount}}
-                ₫
+               <span> {{item.PricePopupViewModel.formattedRoomPerNightAmount}}</span>₫
               </div>
             </div>
 
@@ -168,19 +168,19 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
-import "./result-hotel.component.scss";
-import axios from "axios";
-import { EventBus } from "@/eventBus";
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
+import './result-hotel.component.scss';
+import axios from 'axios';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class ResultHotelComponent extends Vue {
   // public dataAll: any[] = [];
   // public dataDisplay: any[] = [];
-  tabName: string = "";
-  @Prop({ type: Array }) dataDisplay: any;
+  public tabName: string = '';
+  @Prop({ type: Array }) public dataDisplay: any;
 
-  created() {
+  public created() {
     // this.getData();
     // EventBus.$on("currentTab", (currentTab: any) => {
     //   this.dataDisplay = this.getDataTab(currentTab);
@@ -249,7 +249,7 @@ export default class ResultHotelComponent extends Vue {
   // }
 
   public getStars(item: any) {
-    let html = "";
+    let html = '';
     for (let j = 0; j < Math.floor(item.StarRating); j++) {
       html += `<i class="fa fa-star" aria-hidden="true"></i>`;
     }

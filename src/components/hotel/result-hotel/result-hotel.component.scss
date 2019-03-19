@@ -222,7 +222,7 @@
 
       span:last-child {
         color: $red-light;
-        font-size: 13px;
+        font-size: $font-medium-small;
       }
 
       &-badge {
@@ -271,6 +271,7 @@
     width: calc(52% - 249px);
     text-align: right;
     padding: 20px 10px 20px 0;
+    // position: relative;
 
     &__review {
       display: flex;
@@ -306,7 +307,7 @@
         span {
           color: $white;
           font-weight: $font-weight-bold;
-          font-size: 20px;
+          font-size: $font-big-mediun;
           position: absolute;
           top: 50%;
           transform: translateY(-50%) translateX(-30%);
@@ -355,6 +356,9 @@
 
     &__room-rate {
       margin-top: 10px;
+      // position: absolute;
+      // bottom: 10px;
+      // right: 20px;
 
       p {
         font-size: $font-tiny;
@@ -364,26 +368,29 @@
 
       .old-price {
         color: $gray-background;
-        font-size: 22px;
+        font-size: $font-big;
         line-height: 22px;
         font-weight: $font-weight-bold;
-        position: relative;
         margin-bottom: 5px;
 
-        &:after {
-          content: "";
-          position: absolute;
-          right: 0;
-          top: 50%;
-          width: 50%;
-          transform: rotate(-10deg);
-          border-top: 1px solid $gray-background;
+        span {
+          position: relative;
+
+          &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 100%;
+            transform: rotate(-10deg);
+            border-top: 1px solid $gray-background;
+          }
         }
       }
 
       .new-price {
         color: $dark;
-        font-size: 22px;
+        font-size: $font-big;
         line-height: 22px;
         font-weight: $font-weight-bold;
         color: $red-light;
@@ -392,13 +399,13 @@
       .no-room {
         color: $pink-dark;
         text-align: right;
-        font-size: 13px;
+        font-size: $font-medium-small;
       }
     }
 
     &__benefit {
       color: $green-dark;
-      font-size: 11px;
+      font-size: $font-small;
       font-weight: $font-weight-bold;
     }
   }

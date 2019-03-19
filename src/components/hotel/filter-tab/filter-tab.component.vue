@@ -36,14 +36,14 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
-import "./filter-tab.component.scss";
-import { EventBus } from "@/eventBus";
+import { Component, Vue } from 'vue-property-decorator';
+import './filter-tab.component.scss';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class FilterTabComponent extends Vue {
   public clickTab(currentTab: string) {
-    EventBus.$emit("currentTab", currentTab);
+    EventBus.$emit('currentTab', currentTab);
   }
 }
 </script>

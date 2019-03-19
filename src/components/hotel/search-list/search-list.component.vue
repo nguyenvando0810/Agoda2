@@ -12,15 +12,15 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue } from "vue-property-decorator";
-import "./search-list.component.scss";
-import { EventBus } from "@/eventBus";
+import { Component, Vue } from 'vue-property-decorator';
+import './search-list.component.scss';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class SearchListComponent extends Vue {
-  searchValue: any = "";
-  sendData() {
-    EventBus.$emit("searchValue", this.searchValue);
+  public searchValue: any = '';
+  public sendData() {
+    EventBus.$emit('searchValue', this.searchValue);
   }
 }
 </script>

@@ -34,8 +34,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import "./footer.component.scss";
+import { Component, Vue } from 'vue-property-decorator';
+import './footer.component.scss';
 
 @Component
 export default class Footer extends Vue {}
