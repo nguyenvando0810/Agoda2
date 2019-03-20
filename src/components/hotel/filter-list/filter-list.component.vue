@@ -12,19 +12,19 @@
               </template>
               <h4 class="filter-list__heading">Chọn lọc phổ biến ở Hà Nội</h4>
               <div class="filter-list__item">
-                <input type="checkbox" id="phoco">
+                <input type="checkbox" id="phoco" value="481521" v-model="conditionArea">
                 <label for="phoco">
                   <span></span>Khu phố cổ
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="hoankiem">
+                <input type="checkbox" id="hoankiem" value="62215" v-model="conditionArea">
                 <label for="hoankiem">
                   <span></span>Khu Quận Hoàn Kiếm
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="pay">
+                <input type="checkbox" id="pay" v-model="conditionIsPay">
                 <label for="pay">
                   <span></span>Thanh toán tại nơi ở
                 </label>
@@ -188,31 +188,31 @@
               </template>
               <h4 class="filter-list__heading">Đánh giá của khách</h4>
               <div class="filter-list__item">
-                <input type="checkbox" id="do1">
+                <input type="radio" id="do1" name="do" onclick="this.checked=!this.checked">
                 <label for="do1">
                   <span></span>Vị trí thuận tiện (1)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="do2">
+                <input type="radio" id="do2" name="do">
                 <label for="do2">
                   <span></span>hồ bơi (196)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="do3">
+                <input type="radio" id="do3" name="do">
                 <label for="do3">
                   <span></span>phù hợp cho gia đình/trẻ em (105)
                 </label>
               </div>
-              <div class="filter-list__item">
-                <input type="checkbox" id="do4">
+              <div class="filter-list__item" name="do">
+                <input type="radio" id="do4">
                 <label for="do4">
                   <span></span>cho phép vật nuôi (10)
                 </label>
               </div>
-              <div class="filter-list__item">
-                <input type="checkbox" id="do5">
+              <div class="filter-list__item" name="do">
+                <input type="radio" id="do5">
                 <label for="do5">
                   <span></span>Biệt thự nghỉ dưỡng (2)
                 </label>
@@ -244,7 +244,8 @@ export default class FilterListComponent extends Vue {
   price2: object = { min: 920000, max: 1800000 };
   price3: object = { min: 1800000, max: 2700000 };
   price4: object = { min: 2700000, max: 3700000 };
-  price5: object = { min: 3700000 };
+  price5: object = { min: 3700000, max: 24220430 };
+  public conditionIsPay: boolean = false;
 
   @Watch("conditionStar")
   checkChangeStar() {
@@ -269,6 +270,11 @@ export default class FilterListComponent extends Vue {
   @Watch("conditionPrice")
   checkPrice() {
     EventBus.$emit("conditionPrice", this.conditionPrice);
+  }
+
+  @Watch("conditionIsPay")
+  checkIsPay() {
+    EventBus.$emit("conditionIsPay", this.conditionIsPay);
   }
 }
 </script>

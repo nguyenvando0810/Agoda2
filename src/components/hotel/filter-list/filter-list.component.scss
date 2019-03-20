@@ -19,8 +19,8 @@
         outline: none;
         border: none;
 
-        &:focus:active:not(:disabled) {
-          background-color: #f8f7f9;
+        &.btn-secondary:focus {
+          background-color: $gray-disable;
           color: $blue;
           box-shadow: none;
           outline: none;
@@ -28,13 +28,17 @@
         }
 
         &:hover {
-          background-color: #f8f7f9;
+          background-color: $gray-disable;
           color: $blue;
         }
 
         &:after {
           margin-left: 10px;
           vertical-align: middle;
+        }
+
+        i {
+          font-size: $font-medium-big;
         }
       }
 
@@ -43,7 +47,18 @@
         padding: 24px;
         border-radius: 5px;
         background: $white;
+        margin-top: 0;
         box-shadow: 0 2px 10px 2px rgba(0, 0, 0, .15);
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 100%;
+          left: 30px;
+          border: 8px;
+          border-style: solid;
+          border-color: transparent transparent $white transparent;
+        }
       }
     }
   }

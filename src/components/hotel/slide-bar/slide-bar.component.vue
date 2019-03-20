@@ -68,8 +68,9 @@ import { EventBus } from "@/eventBus";
 @Component
 export default class SlidebarComponent extends Vue {
   public conditionBreakfast: boolean = false;
+
   @Watch("conditionBreakfast")
-  public checkChanBreakfast() {
+  checkChanBreakfast() {
     EventBus.$emit("conditionBreakfast", this.conditionBreakfast);
   }
 }

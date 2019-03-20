@@ -80,6 +80,12 @@ export default class HotelComponent extends Vue {
       Object.assign(this.conditionFilter, { conditionPrice: conditionPrice });
       this.filterData(this.conditionFilter);
     });
+
+    EventBus.$on("conditionIsPay", (conditionIsPay: any) => {
+      Object.assign(this.conditionFilter, { conditionIsPay: conditionIsPay });
+      console.log(this.conditionFilter);
+      this.filterData(this.conditionFilter);
+    });
   }
 
   filterData(condition: any) {
@@ -87,11 +93,10 @@ export default class HotelComponent extends Vue {
       return (
         this.filterStar(condition.conditionStar, field.StarRating) &&
         this.filterArea(condition.conditionArea, field.AreaId) &&
-        this.filterBreakfast(
-          condition.conditionBreakfast,
-          field.IsBreakfastIncluded
-        ) &&
-        this.filterSearch(condition.conditionSearch, field.HotelDisplayName)
+        this.filterBreakfast(condition.conditionBreakfast, field.IsBreakfastIncluded) &&
+        this.filterSearch(condition.conditionSearch, field.HotelDisplayName) &&
+        this.filterPrice(condition.conditionPrice, field.DisplayPrice) &&
+        this.filterIsPay(condition.conditionIsPay,field.IsBNPLDuringYourStay)
       );
     }
 
@@ -139,6 +144,17 @@ export default class HotelComponent extends Vue {
 
   public filterPrice(conditionPrice: Array<any>, price: number) {
     if (!conditionPrice || !conditionPrice.length) return true;
+
+    for (let i = 0; i < conditionPrice.length; i++) {
+      if (price >= conditionPrice[i].min && price <= conditionPrice[i].max)
+        return true;
+    }
+  }
+
+  public filterIsPay(conditionIsPay: boolean, isPay:boolean) {
+   if(!conditionIsPay) return true;
+
+   if(conditionIsPay === isPay) return true;
   }
   public getDataTab(currentTab: any) {
     if (currentTab === "tabAll") return this.allData.ResultList;
@@ -156,10 +172,7 @@ export default class HotelComponent extends Vue {
   public sortData(currentSort: any) {
     if (currentSort === "priceLow") {
       this.dataDisplay.sort((a, b) => {
-        return (
-          a.PricePopupViewModel.roomPricePerNightAmount -
-          b.PricePopupViewModel.roomPricePerNightAmount
-        );
+        return a.DisplayPrice - b.DisplayPrice;
       });
     } else if (currentSort === "recomment") {
       this.dataDisplay.sort((a, b) => {
