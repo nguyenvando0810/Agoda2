@@ -19,7 +19,7 @@
         <i class="fa fa-coffee" aria-hidden="true"></i>
       </div>
       <label class="slide-bar__breakfast-text" for="breakfast">Xem nơi ở có bữa sáng miễn phí</label>
-      <input type="checkbox" v-model="isBreakfast" id="breakfast">
+      <input type="checkbox" v-model="conditionBreakfast" id="breakfast">
       <label for="breakfast"></label>
     </div>
 
@@ -61,16 +61,16 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from 'vue-property-decorator';
-import './slide-bar.component.scss';
-import { EventBus } from '@/eventBus';
+import { Component, Vue, Watch } from "vue-property-decorator";
+import "./slide-bar.component.scss";
+import { EventBus } from "@/eventBus";
 
 @Component
 export default class SlidebarComponent extends Vue {
-  public isBreakfast: boolean = false;
-  @Watch('isBreakfast')
+  public conditionBreakfast: boolean = false;
+  @Watch("conditionBreakfast")
   public checkChanBreakfast() {
-    EventBus.$emit('isBreakfast', this.isBreakfast);
+    EventBus.$emit("conditionBreakfast", this.conditionBreakfast);
   }
 }
 </script>

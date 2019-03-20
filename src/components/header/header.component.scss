@@ -1,13 +1,13 @@
 .header {
   &__navbar {
-    padding: 10px 16px;
+    padding: 6px 16px;
 
     .navbar-brand {
       margin-right: 40px;
 
       .agoda-logo {
-        width: 98px;
-        height: 40px;
+        width: 89px;
+        height: 37px;
       }
     }
 
@@ -17,10 +17,10 @@
       .nav-item {
         .nav-link {
           color: $gray-dark;
-          margin: 0 10px;
+          margin: 0 5px;
           font-family: 'Montserrat', sans-serif;
-          font-weight: 700;
-          font-size: 14px;
+          font-weight: $font-weight-bold;
+          font-size: $font-medium-small;
           padding-right: 0;
 
           &:hover {
@@ -35,12 +35,16 @@
             &::after {
               content: none;
             }
+
+            .fa-ellipsis-h {
+              font-size: $font-icon;
+            }
           }
         }
 
         & .header__currency {
-          font-weight: 400;
-          font-size: 13px;
+          font-weight: $font-weight-medium;
+          font-size: $font-medium-small;
           color: $gray-dark;
           border-right: 1px solid $gray-light;
           padding-right: 25px;
@@ -53,7 +57,7 @@
         & .header__login {
           text-transform: uppercase;
           color: $blue-light;
-          font-size: 16px;
+          font-size: $font-medium;
         }
       }
 
@@ -64,9 +68,9 @@
         position: relative;
         z-index: 0;
         border-color: $blue-light;
-        font-size: 16px;
-        font-weight: 700;
-        padding: 10px;
+        font-size: $font-medium;
+        font-weight: $font-weight-bold;
+        padding: 9px 10px;
         border-radius: 3px;
         overflow: hidden;
 
@@ -119,30 +123,35 @@
         margin-right: 15px
       }
 
+      &-detail {
+        width: 70%;
+      }
+
       &-title {
-        font-size: 20px;
-        font-weight: 700;
+        font-size: $font-icon;
+        font-weight: $font-weight-bold;
         line-height: 1.2;
         color: $white;
       }
 
       &-description {
         color: $white;
-        font-size: 16px;
+        font-size: $font-medium-big;
       }
 
       &-login {
-        width: 34%;
+        width: calc(30% - 50px);
         text-align: right;
 
         button {
           padding: 10px 20px;
           background-color: $white;
           color: $dark;
-          font-size: 14px;
+          font-size: $font-medium;
           border: 1px solid $dark;
-          font-weight: 600;
-          padding: 8px 85px;
+          font-weight: $font-weight-bold;
+          padding: 8px 15px;
+          min-width: 250px;
 
           &:hover {
             color: $white;

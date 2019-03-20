@@ -54,7 +54,7 @@
                     <i class="fa fa-star-half" aria-hidden="true"></i>
                   </span>
                 </span>
-
+                
                 <span v-if="item.LocationFullText" class="result-hotel__detail__stars-location">
                   <i class="fa fa-street-view" aria-hidden="true"></i>
                   {{item.LocationFullText}}
@@ -147,37 +147,40 @@
 
             <div class="result-hotel__price__room-rate">
               <p v-if="item.PriceDetail">{{item.PriceDetail.PriceViewText}}</p>
-              <div class="old-price"
-                v-if="item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice">
-                <span>{{item.PricePopupViewModel.FormattedPropertyCrossoutRatePrice}}</span>
+              <div class="old-price" v-if="item.FormattedCrossedOutPrice && item.FormattedCrossedOutPrice !=='0'">
+                <span>{{item.FormattedCrossedOutPrice}}</span>
               </div>
 
-              <div class="new-price" v-if="item.PricePopupViewModel.formattedRoomPerNightAmount">
-               <span> {{item.PricePopupViewModel.formattedRoomPerNightAmount}}</span>₫
+              <div class="new-price" v-if="item.FormattedDisplayPrice">
+                <span>{{item.FormattedDisplayPrice}}</span>₫
               </div>
 
-              <div class="benefit" v-if="item.IsFreeCancellation">Hủy miễn phí !
-              </div>
+              <div class="benefit" v-if="item.IsFreeCancellation">Hủy miễn phí !</div>
             </div>
           </div>
         </div>
       </a>
     </div>
+
+    <div class="no-result" v-if="dataDisplay.length ===0">
+      <img src="../../../assets/not-found.jpg" alt>
+      <p>Sorry, we coundn't find any result matching. Please try again.</p>
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
-import './result-hotel.component.scss';
-import axios from 'axios';
-import { EventBus } from '@/eventBus';
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import "./result-hotel.component.scss";
+import axios from "axios";
+import { EventBus } from "@/eventBus";
 
 @Component
 export default class ResultHotelComponent extends Vue {
   @Prop({ type: Array }) public dataDisplay: any;
 
   public getStars(item: any) {
-    let html = '';
+    let html = "";
     for (let j = 0; j < Math.floor(item.StarRating); j++) {
       html += `<i class="fa fa-star" aria-hidden="true"></i>`;
     }

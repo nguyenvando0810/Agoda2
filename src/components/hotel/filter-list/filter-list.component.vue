@@ -45,31 +45,31 @@
               </template>
               <h4 class="filter-list__heading">Giá phòng (1 đêm)</h4>
               <div class="filter-list__item">
-                <input type="checkbox" id="price1">
+                <input type="checkbox" id="price1" :value="price1" v-model="conditionPrice">
                 <label for="price1">
                   <span></span>0 ₫ - 920.000 ₫ (17)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="price2">
+                <input type="checkbox" id="price2" :value="price2" v-model="conditionPrice">
                 <label for="price2">
                   <span></span>920.000 ₫ - 1.800.000 ₫ (77)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="price3">
+                <input type="checkbox" id="price3" :value="price3" v-model="conditionPrice">
                 <label for="price3">
                   <span></span>1.800.000 ₫ - 2.700.000 ₫ (31)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="price4">
+                <input type="checkbox" id="price4" :value="price4" v-model="conditionPrice">
                 <label for="price4">
                   <span></span>2.700.000 ₫ - 3.700.000 ₫ (10)
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="price5">
+                <input type="checkbox" id="price5" :value="price5" v-model="conditionPrice">
                 <label for="price5">
                   <span></span>3.700.000 ₫ + (5)
                 </label>
@@ -173,6 +173,12 @@
                   <span></span>Quận Đống Đa (20)
                 </label>
               </div>
+              <div class="filter-list__item">
+                <input type="checkbox" id="area8" value="tuliem" v-model="conditionArea">
+                <label for="area8">
+                  <span></span>Quận Bắc Từ Liêm (0)
+                </label>
+              </div>
             </b-dropdown>
 
             <!-- filter Đô Đô -->
@@ -233,6 +239,12 @@ import SearchListComponent from "../search-list/search-list.component.vue";
 export default class FilterListComponent extends Vue {
   conditionStar: Array<any> = [];
   conditionArea: Array<any> = [];
+  conditionPrice: Array<any> = [];
+  price1: object = { min: 0, max: 920000 };
+  price2: object = { min: 920000, max: 1800000 };
+  price3: object = { min: 1800000, max: 2700000 };
+  price4: object = { min: 2700000, max: 3700000 };
+  price5: object = { min: 3700000 };
 
   @Watch("conditionStar")
   checkChangeStar() {
@@ -252,6 +264,11 @@ export default class FilterListComponent extends Vue {
     });
 
     EventBus.$emit("conditionArea", convertConditionArea);
+  }
+
+  @Watch("conditionPrice")
+  checkPrice() {
+    EventBus.$emit("conditionPrice", this.conditionPrice);
   }
 }
 </script>

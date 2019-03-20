@@ -411,6 +411,14 @@
     }
   }
 
+  .no-result {
+    padding: 15px 0;
+    border-top: 1px solid $gray-border-color;
+    border-bottom: 1px solid $gray-border-color;
+    text-align: center;
+    font-size: $font-medium-big;
+  }
+
   @media (min-width: 992px) and (max-width:1200px) {
     &__detail {
       width: 38%;

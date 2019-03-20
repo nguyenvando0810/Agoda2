@@ -8,9 +8,9 @@
     &-button {
       margin-left: 10px;
 
-      button.dropdown-toggle {
-        color: $white;
-        background-color: $blue-btn;
+      button.btn-secondary.dropdown-toggle {
+        color: $gray-dark;
+        background-color: $secondary-border;
         border-radius: 18px;
         font-weight: $font-weight-bold;
         padding: 6px 16px;
@@ -19,13 +19,17 @@
         outline: none;
         border: none;
 
-        &:focus {
+        &:focus:active:not(:disabled) {
+          background-color: #f8f7f9;
+          color: $blue;
           box-shadow: none;
+          outline: none;
+          border-color: initial;
         }
 
         &:hover {
-          color: $white;
-          background-color: $blue-hover;
+          background-color: #f8f7f9;
+          color: $blue;
         }
 
         &:after {

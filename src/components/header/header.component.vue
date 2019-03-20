@@ -1,9 +1,6 @@
 <template>
   <div class="header">
-    <nav
-      class="navbar navbar-expand-sm header__navbar"
-      style="background-color: #FFFFFF;"
-    >
+    <nav class="navbar navbar-expand-sm header__navbar" style="background-color: #FFFFFF;">
       <a class="navbar-brand" href="#">
         <img src="../../assets/agoda-logo.svg" alt="agoda-logo" class="agoda-logo">
       </a>
@@ -72,13 +69,11 @@
       </div>
     </nav>
 
-
-
     <div class="header-funnel">
       <div class="container">
         <div class="header-funnel__content">
           <img src="../../assets/Agoda-Cash-Icon@2x.png" alt>
-          <div class>
+          <div class="header-funnel__content-detail">
             <div
               class="header-funnel__content-title"
             >Chỉ cần đăng nhập ngay, đừng bỏ lỡ ưu đãi tiết kiệm đơn giản này!</div>
@@ -94,11 +89,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import './header.component.scss';
+import { Component, Vue } from "vue-property-decorator";
+import "./header.component.scss";
 
 @Component({
-  components: {},
+  components: {}
 })
 @Component
 export default class HeaderComponent extends Vue {}

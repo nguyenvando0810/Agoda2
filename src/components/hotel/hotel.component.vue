@@ -46,14 +46,6 @@ export default class HotelComponent extends Vue {
   public created() {
     this.getData();
 
-    EventBus.$on("searchValue", (searchValue: any) => {
-      this.dataDisplay = this.getDataSearch(searchValue);
-    });
-
-    EventBus.$on("isBreakfast", (isBreakfast: any) => {
-      this.dataDisplay = this.getDataBreakfast(isBreakfast);
-    });
-
     EventBus.$on("currentTab", (currentTab: any) => {
       this.dataDisplay = this.getDataTab(currentTab);
     });
@@ -62,23 +54,51 @@ export default class HotelComponent extends Vue {
       this.sortData(sortCondition);
     });
 
-    EventBus.$on("conditionStar", this.filterData);
+    EventBus.$on("conditionStar", (conditionStar: Array<any>) => {
+      Object.assign(this.conditionFilter, { conditionStar: conditionStar });
+      this.filterData(this.conditionFilter);
+    });
 
-    EventBus.$on("conditionArea", this.filterData);
+    EventBus.$on("conditionArea", (conditionArea: Array<any>) => {
+      Object.assign(this.conditionFilter, { conditionArea: conditionArea });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("conditionBreakfast", (conditionBreakfast: boolean) => {
+      Object.assign(this.conditionFilter, {
+        conditionBreakfast: conditionBreakfast
+      });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("conditionSearch", (conditionSearch: any) => {
+      Object.assign(this.conditionFilter, { conditionSearch: conditionSearch });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("conditionPrice", (conditionPrice: Array<any>) => {
+      Object.assign(this.conditionFilter, { conditionPrice: conditionPrice });
+      this.filterData(this.conditionFilter);
+    });
   }
 
   filterData(condition: any) {
-    function checkFilter(this: any, elment: any) {
+    function checkFilter(this: any, field: any) {
       return (
-        this.filterStar(condition, elment.StarRating) &&
-        this.filterArea(condition, elment.AreaId)
+        this.filterStar(condition.conditionStar, field.StarRating) &&
+        this.filterArea(condition.conditionArea, field.AreaId) &&
+        this.filterBreakfast(
+          condition.conditionBreakfast,
+          field.IsBreakfastIncluded
+        ) &&
+        this.filterSearch(condition.conditionSearch, field.HotelDisplayName)
       );
     }
 
     this.dataDisplay = this.allData.ResultList.filter(checkFilter.bind(this));
   }
 
-  filterStar(conditionStar: any, star: any) {
+  public filterStar(conditionStar: Array<any>, star: any) {
     if (!conditionStar || !conditionStar.length) {
       return true;
     }
@@ -88,12 +108,10 @@ export default class HotelComponent extends Vue {
         return true;
       }
     }
-    return false;
+    // return false;
   }
 
-  filterArea(conditionArea: any, areaId: number) {
-    console.log(conditionArea, areaId);
-
+  public filterArea(conditionArea: Array<any>, areaId: number) {
     if (!conditionArea || !conditionArea.length) {
       return true;
     }
@@ -103,21 +121,25 @@ export default class HotelComponent extends Vue {
         return true;
       }
     }
-    return false;
+    // return false;
   }
 
-  public getDataSearch(valueSearch: any) {
-    return this.allData.ResultList.filter((data: any) => {
-      if (valueSearch) {
-        return data.HotelDisplayName.toLowerCase().includes(
-          valueSearch.toLowerCase()
-        );
-      } else {
-        return this.allData.ResultList;
-      }
-    });
+  public filterBreakfast(conditionBreakfast: boolean, breakfast: boolean) {
+    if (!conditionBreakfast) return true;
+
+    if (conditionBreakfast === breakfast) return true;
   }
 
+  public filterSearch(conditionSearch: string, nameHotel: string) {
+    if (!conditionSearch) return true;
+
+    if (nameHotel.toLowerCase().includes(conditionSearch.toLowerCase()))
+      return true;
+  }
+
+  public filterPrice(conditionPrice: Array<any>, price: number) {
+    if (!conditionPrice || !conditionPrice.length) return true;
+  }
   public getDataTab(currentTab: any) {
     if (currentTab === "tabAll") return this.allData.ResultList;
 
@@ -127,16 +149,6 @@ export default class HotelComponent extends Vue {
       }
       if (currentTab === "tabAgoda") {
         return item.AgodaHomesText === "Agoda Homes";
-      }
-    });
-  }
-
-  public getDataBreakfast(isBreakfast: any) {
-    return this.allData.ResultList.filter((breakfast: any) => {
-      if (isBreakfast === true) {
-        return breakfast.IsBreakfastIncluded === true;
-      } else {
-        return this.allData.ResultList;
       }
     });
   }
