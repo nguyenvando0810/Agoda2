@@ -63,6 +63,16 @@
     }
   }
 
+  &__title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    a {
+      font-size: 14px;
+    }
+  }
+
   &__heading {
     color: $gray-heading;
     font-size: $font-medium;
@@ -110,6 +120,15 @@
       color: $yellow;
       font-size: $font-medium;
       margin-right: 5px;
+    }
+  }
+
+  &__more {
+    padding: 15px 0;
+    border-bottom: 1px solid #bec2c9;
+
+    &:first-child {
+      border-top: 1px solid #bec2c9;
     }
   }
 }

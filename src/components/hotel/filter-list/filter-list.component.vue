@@ -10,7 +10,15 @@
                 <i class="fa fa-snowflake-o" aria-hidden="true"></i> &nbsp;
                 <span>Phổ biến</span>
               </template>
-              <h4 class="filter-list__heading">Chọn lọc phổ biến ở Hà Nội</h4>
+              <div class="filter-list__title">
+                <h4 class="filter-list__heading">Chọn lọc phổ biến ở Hà Nội</h4>
+                <a
+                  href="javascript:void(0)"
+                  class="alert-link"
+                  v-if="conditionArea.length > 0 || conditionIsPay"
+                  @click.stop="clearPopular()"
+                >Xóa</a>
+              </div>
               <div class="filter-list__item">
                 <input type="checkbox" id="phoco" value="481521" v-model="conditionArea">
                 <label for="phoco">
@@ -43,7 +51,10 @@
                 <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;
                 <span>Giá</span>
               </template>
-              <h4 class="filter-list__heading">Giá phòng (1 đêm)</h4>
+              <div class="filter-list__title">
+                <h4 class="filter-list__heading">Giá phòng (1 đêm)</h4>
+                <a href="javascript:void(0)" class="alert-link" v-if="conditionPrice.length > 0" @click.stop="clearPrice()">Xóa</a>
+              </div>
               <div class="filter-list__item">
                 <input type="checkbox" id="price1" :value="price1" v-model="conditionPrice">
                 <label for="price1">
@@ -186,36 +197,38 @@
               <template slot="button-content">
                 <span>Thêm</span>
               </template>
-              <h4 class="filter-list__heading">Đánh giá của khách</h4>
-              <div class="filter-list__item">
-                <input type="radio" id="do1" name="do" onclick="this.checked=!this.checked">
-                <label for="do1">
-                  <span></span>Vị trí thuận tiện (1)
-                </label>
+              <div class="filter-list__more">
+                <h4 class="filter-list__heading">Ưu đãi & Giảm giá</h4>
+                <div class="filter-list__item">
+                  <input type="checkbox" id="deal" v-model="conditionDeal">
+                  <label for="deal">
+                    <span></span>Giảm từ 50% trở lên
+                  </label>
+                </div>
+
+                <div class="filter-list__item">
+                  <input type="checkbox" id="deal2">
+                  <label for="deal2">
+                    <span></span>Ưu đãi bí mật
+                  </label>
+                </div>
               </div>
-              <div class="filter-list__item">
-                <input type="radio" id="do2" name="do">
-                <label for="do2">
-                  <span></span>hồ bơi (196)
-                </label>
-              </div>
-              <div class="filter-list__item">
-                <input type="radio" id="do3" name="do">
-                <label for="do3">
-                  <span></span>phù hợp cho gia đình/trẻ em (105)
-                </label>
-              </div>
-              <div class="filter-list__item" name="do">
-                <input type="radio" id="do4">
-                <label for="do4">
-                  <span></span>cho phép vật nuôi (10)
-                </label>
-              </div>
-              <div class="filter-list__item" name="do">
-                <input type="radio" id="do5">
-                <label for="do5">
-                  <span></span>Biệt thự nghỉ dưỡng (2)
-                </label>
+
+              <div class="filter-list__more">
+                <h4 class="filter-list__heading">Lựa chọn thanh toán</h4>
+                <div class="filter-list__item">
+                  <input type="checkbox" id="paymentcancel" v-model="conditionIsCancel">
+                  <label for="paymentcancel">
+                    <span></span>Hủy miễn phí
+                  </label>
+                </div>
+
+                <div class="filter-list__item">
+                  <input type="checkbox" id="paymentcard" v-model="conditionIsCard">
+                  <label for="paymentcard">
+                    <span></span>Đặt không cần thẻ tín dụng
+                  </label>
+                </div>
               </div>
             </b-dropdown>
           </div>
@@ -245,7 +258,10 @@ export default class FilterListComponent extends Vue {
   price3: object = { min: 1800000, max: 2700000 };
   price4: object = { min: 2700000, max: 3700000 };
   price5: object = { min: 3700000, max: 24220430 };
-  public conditionIsPay: boolean = false;
+  conditionIsPay: boolean = false;
+  conditionDeal: boolean = false;
+  conditionIsCancel: boolean = false;
+  conditionIsCard: boolean = false;
 
   @Watch("conditionStar")
   checkChangeStar() {
@@ -275,6 +291,33 @@ export default class FilterListComponent extends Vue {
   @Watch("conditionIsPay")
   checkIsPay() {
     EventBus.$emit("conditionIsPay", this.conditionIsPay);
+  }
+
+  @Watch("conditionDeal")
+  checkIsDeal() {
+    EventBus.$emit("conditionDeal", this.conditionDeal);
+  }
+
+  @Watch("conditionIsCancel")
+  checkIsCancel() {
+    EventBus.$emit("conditionIsCancel", this.conditionIsCancel);
+    console.log(this.conditionIsCancel);
+  }
+
+  @Watch("conditionIsCard")
+  checkIsCard() {
+    EventBus.$emit("conditionIsCard", this.conditionIsCard);
+    console.log(this.conditionIsCard);
+  }
+
+  //Clear condition filter
+  clearPopular() {
+    this.conditionIsPay = false;
+    this.conditionArea.splice(0, this.conditionArea.length);
+  }
+
+  clearPrice() {
+    this.conditionPrice = [];
   }
 }
 </script>

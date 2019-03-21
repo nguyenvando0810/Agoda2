@@ -15,7 +15,8 @@
     "vue-axios": "^2.1.4",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.2",
+    "vue-sticky-directive": "0.0.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

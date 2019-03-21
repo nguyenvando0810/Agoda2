@@ -14,7 +14,7 @@
           class="nav-link filter-tab__default-link"
           id="hotel-tab"
           data-toggle="tab"
-          @click="clickTab('tabHotel')"
+          @click="clickTab('Khách sạn')"
         >Khách sạn</a>
       </li>
       <li class="nav-item filter-tab__default-item">
@@ -22,7 +22,7 @@
           class="nav-link filter-tab__default-link"
           id="agoda-tab"
           data-toggle="tab"
-          @click="clickTab('tabAgoda')"
+          @click="clickTab('Agoda Homes')"
         >
           <i aria-hidden="true" class="fa fa-modx"></i>
           agoda home

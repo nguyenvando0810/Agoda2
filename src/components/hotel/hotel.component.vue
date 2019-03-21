@@ -1,6 +1,6 @@
 <template>
-  <div class="hotel">
-    <FilterListComponent></FilterListComponent>
+  <div class="hotel" sticky-container>
+    <FilterListComponent v-sticky sticky-offset="offset" sticky-side="top"></FilterListComponent>
     <div class="container">
       <FilterTabComponent></FilterTabComponent>
       <div class="hotel-wrapper">
@@ -28,6 +28,9 @@ import "./hotel.component.scss";
 import axios from "axios";
 import { EventBus } from "@/eventBus";
 
+import Sticky from "vue-sticky-directive";
+Vue.use(Sticky);
+
 @Component({
   components: {
     ResultHotelComponent,
@@ -45,14 +48,6 @@ export default class HotelComponent extends Vue {
 
   public created() {
     this.getData();
-
-    EventBus.$on("currentTab", (currentTab: any) => {
-      this.dataDisplay = this.getDataTab(currentTab);
-    });
-
-    EventBus.$on("sortCondition", (sortCondition: any) => {
-      this.sortData(sortCondition);
-    });
 
     EventBus.$on("conditionStar", (conditionStar: Array<any>) => {
       Object.assign(this.conditionFilter, { conditionStar: conditionStar });
@@ -81,10 +76,35 @@ export default class HotelComponent extends Vue {
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionIsPay", (conditionIsPay: any) => {
+    EventBus.$on("conditionIsPay", (conditionIsPay: boolean) => {
       Object.assign(this.conditionFilter, { conditionIsPay: conditionIsPay });
-      console.log(this.conditionFilter);
       this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("conditionDeal", (conditionDeal: boolean) => {
+      Object.assign(this.conditionFilter, { conditionDeal: conditionDeal });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("conditionIsCancel", (conditionIsCancel: boolean) => {
+      Object.assign(this.conditionFilter, {
+        conditionIsCancel: conditionIsCancel
+      });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("conditionIsCard", (conditionIsCard: boolean) => {
+      Object.assign(this.conditionFilter, { conditionIsCard: conditionIsCard });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("currentTab", (currentTab: string) => {
+      Object.assign(this.conditionFilter, { currentTab: currentTab });
+      this.filterData(this.conditionFilter);
+    });
+
+    EventBus.$on("sortCondition", (sortCondition: any) => {
+      this.sortData(sortCondition);
     });
   }
 
@@ -93,10 +113,33 @@ export default class HotelComponent extends Vue {
       return (
         this.filterStar(condition.conditionStar, field.StarRating) &&
         this.filterArea(condition.conditionArea, field.AreaId) &&
-        this.filterBreakfast(condition.conditionBreakfast, field.IsBreakfastIncluded) &&
+        this.filterBreakfast(
+          condition.conditionBreakfast,
+          field.IsBreakfastIncluded
+        ) &&
         this.filterSearch(condition.conditionSearch, field.HotelDisplayName) &&
         this.filterPrice(condition.conditionPrice, field.DisplayPrice) &&
-        this.filterIsPay(condition.conditionIsPay,field.IsBNPLDuringYourStay)
+        this.filterIsPay(
+          condition.conditionIsPay,
+          field.IsBNPLDuringYourStay
+        ) &&
+        this.filterIsDeal(
+          condition.conditionDeal,
+          field.FormattedDiscountValue
+        ) &&
+        this.filterIsCancel(
+          condition.conditionIsCancel,
+          field.IsFreeCancellation
+        ) &&
+        this.filterIsCard(
+          condition.conditionIsCard,
+          field.IsNoCreditCardRequired
+        ) &&
+        this.filterTab(
+          condition.currentTab,
+          field.AccommodationType,
+          field.AgodaHomesText
+        )
       );
     }
 
@@ -151,22 +194,38 @@ export default class HotelComponent extends Vue {
     }
   }
 
-  public filterIsPay(conditionIsPay: boolean, isPay:boolean) {
-   if(!conditionIsPay) return true;
+  public filterIsPay(conditionIsPay: boolean, isPay: boolean) {
+    if (!conditionIsPay) return true;
 
-   if(conditionIsPay === isPay) return true;
+    if (conditionIsPay === isPay) return true;
   }
-  public getDataTab(currentTab: any) {
-    if (currentTab === "tabAll") return this.allData.ResultList;
 
-    return this.allData.ResultList.filter((item: any) => {
-      if (currentTab === "tabHotel") {
-        return item.AccommodationType === "Khách sạn";
+  public filterIsDeal(conditionDeal: boolean, deal: string) {
+    if (!conditionDeal) return true;
+    else {
+      if (deal && parseInt(deal) > 50) {
+        return true;
       }
-      if (currentTab === "tabAgoda") {
-        return item.AgodaHomesText === "Agoda Homes";
-      }
-    });
+    }
+  }
+
+  public filterIsCancel(conditionCancel: boolean, isCancel: boolean) {
+    if (!conditionCancel) return true;
+
+    if (conditionCancel === isCancel) return true;
+  }
+
+  public filterIsCard(conditionIsCard: boolean, isCard: boolean) {
+    if (!conditionIsCard) return true;
+
+    if (conditionIsCard === isCard) return true;
+  }
+
+  public filterTab(conditionTab: string, hotel: string, agoda: string) {
+    if (!conditionTab) return true;
+    if (conditionTab === hotel) return true;
+    if (conditionTab === agoda) return true;
+    if (conditionTab === "tabAll") return true;
   }
 
   public sortData(currentSort: any) {
@@ -178,7 +237,7 @@ export default class HotelComponent extends Vue {
       this.dataDisplay.sort((a, b) => {
         return b.ReviewScore - a.ReviewScore;
       });
-    } else return true;
+    } else return this.dataDisplay;
   }
 
   public async getData() {
