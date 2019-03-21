@@ -109,6 +109,8 @@ export default class HotelComponent extends Vue {
   }
 
   filterData(condition: any) {
+    console.log(this.conditionFilter);
+
     function checkFilter(this: any, field: any) {
       return (
         this.filterStar(condition.conditionStar, field.StarRating) &&
@@ -156,7 +158,6 @@ export default class HotelComponent extends Vue {
         return true;
       }
     }
-    // return false;
   }
 
   public filterArea(conditionArea: Array<any>, areaId: number) {
@@ -169,7 +170,6 @@ export default class HotelComponent extends Vue {
         return true;
       }
     }
-    // return false;
   }
 
   public filterBreakfast(conditionBreakfast: boolean, breakfast: boolean) {

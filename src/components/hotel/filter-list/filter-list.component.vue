@@ -53,7 +53,12 @@
               </template>
               <div class="filter-list__title">
                 <h4 class="filter-list__heading">Giá phòng (1 đêm)</h4>
-                <a href="javascript:void(0)" class="alert-link" v-if="conditionPrice.length > 0" @click.stop="clearPrice()">Xóa</a>
+                <a
+                  href="javascript:void(0)"
+                  class="alert-link"
+                  v-if="conditionPrice.length > 0"
+                  @click.stop="clearPrice()"
+                >Xóa</a>
               </div>
               <div class="filter-list__item">
                 <input type="checkbox" id="price1" :value="price1" v-model="conditionPrice">
@@ -93,7 +98,15 @@
                 <i class="fa fa-star" aria-hidden="true"></i> &nbsp;
                 <span>Xếp hạng sao</span>
               </template>
-              <h4 class="filter-list__heading">Xếp hạng sao</h4>
+              <div class="filter-list__title">
+                <h4 class="filter-list__heading">Xếp hạng sao</h4>
+                <a
+                  href="javascript:void(0)"
+                  class="alert-link"
+                  v-if="conditionStar.length > 0"
+                  @click.stop="clearStar()"
+                >Xóa</a>
+              </div>
               <div class="filter-list__item">
                 <input type="checkbox" id="start5" value="5" v-model="conditionStar">
                 <label for="start5">
@@ -147,7 +160,15 @@
                 <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
                 <span>Khu vực</span>
               </template>
-              <h4 class="filter-list__heading">Khu vực</h4>
+              <div class="filter-list__title">
+                <h4 class="filter-list__heading">Khu vực</h4>
+                <a
+                  href="javascript:void(0)"
+                  class="alert-link"
+                  v-if="conditionArea.length > 0"
+                  @click.stop="clearArea()"
+                >Xóa</a>
+              </div>
               <div class="filter-list__item">
                 <input type="checkbox" id="area1" value="481521" v-model="conditionArea">
                 <label for="area1">
@@ -198,7 +219,15 @@
                 <span>Thêm</span>
               </template>
               <div class="filter-list__more">
-                <h4 class="filter-list__heading">Ưu đãi & Giảm giá</h4>
+                <div class="filter-list__title">
+                  <h4 class="filter-list__heading">Xếp hạng sao</h4>
+                  <a
+                    href="javascript:void(0)"
+                    class="alert-link"
+                    v-if="conditionDeal || conditionIsCancel || conditionIsCard"
+                    @click.stop="clearMore()"
+                  >Xóa</a>
+                </div>
                 <div class="filter-list__item">
                   <input type="checkbox" id="deal" v-model="conditionDeal">
                   <label for="deal">
@@ -318,6 +347,20 @@ export default class FilterListComponent extends Vue {
 
   clearPrice() {
     this.conditionPrice = [];
+  }
+
+  clearStar() {
+    this.conditionStar = [];
+  }
+
+  clearArea() {
+    this.conditionArea = [];
+  }
+
+  clearMore() {
+    this.conditionIsCancel = false;
+    this.conditionIsCard = false;
+    this.conditionDeal = false;
   }
 }
 </script>
