@@ -1,7 +1,7 @@
 .filter-list {
   padding: 16px 0;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .15);
-  background: #fff;
+  background: $white;
 
   &__content {
 
@@ -18,6 +18,8 @@
         cursor: pointer;
         outline: none;
         border: none;
+        position: relative;
+        transition: none;
 
         &.btn-secondary:focus {
           background-color: $gray-disable;
@@ -60,6 +62,24 @@
           border-color: transparent transparent $white transparent;
         }
       }
+
+      &.highlight-button .btn-secondary.dropdown-toggle {
+        background-color: $blue;
+        color: $white;
+
+        &:hover {
+          background-color: $blue;
+          color: $white;
+        }
+
+        .icon--close {
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 10px;
+        }
+      }
     }
   }
 
@@ -81,7 +101,7 @@
   }
 
   &__item {
-
+    //input type=checkbox
     input[type="checkbox"] {
       display: none;
     }
@@ -116,6 +136,35 @@
       }
     }
 
+    //input type=radio
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]+label span {
+      position: relative;
+      margin-right: 10px;
+      cursor: pointer;
+      line-height: 20px;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 1px solid $secondary-border;
+      border-radius: 100%;
+      vertical-align: top;
+    }
+
+    input[type="radio"]:checked+label span:after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: #F87DA9;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      border-radius: 100%;
+    }
+
     .fa-star {
       color: $yellow;
       font-size: $font-medium;
@@ -125,10 +174,10 @@
 
   &__more {
     padding: 15px 0;
-    border-bottom: 1px solid #bec2c9;
+    border-bottom: 1px solid $gray-border-color;
 
     &:first-child {
-      border-top: 1px solid #bec2c9;
+      border-top: 1px solid $gray-border-color;
     }
   }
 }

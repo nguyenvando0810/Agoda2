@@ -1,11 +1,10 @@
 .sort-list {
-  height: 50px;
-  border: 1px solid $gray-border-color;
   margin-bottom: 10px;
   margin-top: 30px;
 
   &__default {
-    border-bottom: none;
+    height: 50px;
+    border: 1px solid $gray-border-color;
 
     &-item {
       cursor: pointer;
@@ -15,12 +14,12 @@
       &:first-child {
         background-color: $gray-disable;
         padding: 15px 10px;
-        border: none;
         font-size: $font-small;
         color: $gray-background;
         font-weight: $font-weight-bold;
         text-transform: uppercase;
         border-right: 1px solid $gray-border-color;
+        border-bottom: 1px solid $gray-border-color;
         cursor: default;
       }
 
@@ -38,6 +37,7 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       text-transform: uppercase;
+      position: relative;
 
       &:hover {
         border: none;
@@ -53,6 +53,30 @@
       &:hover {
         color: $white !important;
       }
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 44%;
+        top: 30px;
+        border: 10px;
+        border-style: solid;
+        border-color: transparent transparent $white transparent;
+      }
+    }
+  }
+
+  &__description {
+    border: 1px solid $secondary-border;
+    border-left: 5px solid $blue;
+    padding: 15px;
+    font-weight: $font-weight-bold;
+    color: $gray-background;
+    font-size: 13px;
+
+    .fa-users {
+      font-size: 18px;
+      margin-right: 10px;
     }
   }
 }

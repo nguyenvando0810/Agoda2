@@ -27,7 +27,7 @@
     height: 40px;
     float: left;
     margin-right: 1px;
-    margin-bottom: 1px;
+    margin-top: 1px;
 
     &:nth-child(5) {
       margin-right: 0;
@@ -56,11 +56,11 @@
 
   &__image {
     width: 249px;
+    margin-bottom: -1px;
 
     img {
       height: 182px;
       width: 100%;
-      margin-bottom: 1px;
     }
   }
 
@@ -361,7 +361,7 @@
     &__room-rate {
       margin-top: 10px;
       position: absolute;
-      bottom: 10px;
+      bottom: 5px;
       right: 20px;
 
       p {

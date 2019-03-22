@@ -25,7 +25,7 @@
           @click="clickTab('Agoda Homes')"
         >
           <i aria-hidden="true" class="fa fa-modx"></i>
-          agoda home
+          Agoda home
         </a>
       </li>
       <li class="nav-item filter-tab__default-item">

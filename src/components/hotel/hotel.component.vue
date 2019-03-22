@@ -103,14 +103,17 @@ export default class HotelComponent extends Vue {
       this.filterData(this.conditionFilter);
     });
 
+    EventBus.$on("conditionReview", (conditionReview: any) => {
+      Object.assign(this.conditionFilter, { conditionReview: conditionReview });
+      this.filterData(this.conditionFilter);
+    });
+
     EventBus.$on("sortCondition", (sortCondition: any) => {
       this.sortData(sortCondition);
     });
   }
 
-  filterData(condition: any) {
-    console.log(this.conditionFilter);
-
+  public filterData(condition: any) {
     function checkFilter(this: any, field: any) {
       return (
         this.filterStar(condition.conditionStar, field.StarRating) &&
@@ -141,7 +144,8 @@ export default class HotelComponent extends Vue {
           condition.currentTab,
           field.AccommodationType,
           field.AgodaHomesText
-        )
+        ) &&
+        this.filterReview(condition.conditionReview, field.ReviewScore)
       );
     }
 
@@ -154,7 +158,7 @@ export default class HotelComponent extends Vue {
     }
 
     for (let i = 0; i < conditionStar.length; i++) {
-      if (conditionStar[i] === Math.round(star)) {
+      if (conditionStar[i] === Math.floor(star)) {
         return true;
       }
     }
@@ -226,6 +230,14 @@ export default class HotelComponent extends Vue {
     if (conditionTab === hotel) return true;
     if (conditionTab === agoda) return true;
     if (conditionTab === "tabAll") return true;
+  }
+
+  public filterReview(conditionReview: number, reviewScore: number) {
+    if (!conditionReview) return true;
+
+    if (reviewScore >= conditionReview) {
+      return true;
+    }
   }
 
   public sortData(currentSort: any) {

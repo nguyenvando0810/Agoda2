@@ -147,7 +147,10 @@
 
             <div class="result-hotel__price__room-rate">
               <p v-if="item.PriceDetail">{{item.PriceDetail.PriceViewText}}</p>
-              <div class="old-price" v-if="item.FormattedCrossedOutPrice && item.FormattedCrossedOutPrice !=='0'">
+              <div
+                class="old-price"
+                v-if="item.FormattedCrossedOutPrice && item.FormattedCrossedOutPrice !=='0'"
+              >
                 <span>{{item.FormattedCrossedOutPrice}}</span>
               </div>
 
