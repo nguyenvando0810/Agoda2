@@ -44,6 +44,13 @@
         }
       }
 
+      &.show>.btn-secondary {
+        &.dropdown-toggle {
+          background-color: $gray-disable;
+          color: $blue;
+        }
+      }
+
       .dropdown-menu {
         min-width: 340px;
         padding: 24px;
@@ -101,6 +108,7 @@
   }
 
   &__item {
+
     //input type=checkbox
     input[type="checkbox"] {
       display: none;

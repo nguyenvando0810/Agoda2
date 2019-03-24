@@ -18,4 +18,20 @@
       background: cover;
     }
   }
+
+  .no-result {
+    padding: 15px 0;
+    border-top: 1px solid $gray-border-color;
+    border-bottom: 1px solid $gray-border-color;
+    text-align: center;
+    font-size: $font-medium-big;
+  }
+
+  .hide {
+    visibility: hidden;
+  }
+
+  .show {
+    visibility: visible;
+  }
 }

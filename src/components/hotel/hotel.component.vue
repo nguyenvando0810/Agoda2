@@ -10,7 +10,20 @@
         <div class="hotel-content">
           <div class="hotel-content__banner"></div>
           <SortListComponent></SortListComponent>
-          <ResultHotelComponent :dataDisplay="dataDisplay"></ResultHotelComponent>
+
+          <div
+            v-for="(item,index) in dataDisplay"
+            :key="index"
+            class="lazy-loading"
+            :class="[index < 2 ? 'show'  : 'hide']"
+          >
+            <ResultHotelComponent :item="item"></ResultHotelComponent>
+          </div>
+
+          <div class="no-result" v-if="dataDisplay.length === 0">
+            <img src="../../assets/not-found.jpg" alt>
+            <p>Sorry, we coundn't find any result matching. Please try again.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -108,11 +121,42 @@ export default class HotelComponent extends Vue {
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("sortCondition", (sortCondition: any) => {
-      this.sortData(sortCondition);
+    EventBus.$on("conditionSort", (conditionSort: any) => {
+      Object.assign(this.conditionFilter, { conditionSort: conditionSort });
+      this.filterData(this.conditionFilter);
     });
   }
 
+  mounted() {
+    setTimeout(() => {
+      let lazyloadContent = document.querySelectorAll(".lazy-loading");
+      let lazyloadThrottleTimeout: any;
+
+      function lazyload() {
+        if (lazyloadThrottleTimeout) {
+          clearTimeout(lazyloadThrottleTimeout);
+        }
+
+        lazyloadThrottleTimeout = setTimeout(function() {
+          var scrollTop = window.pageYOffset;
+
+          lazyloadContent.forEach(function(element: any) {
+            if (element.offsetTop < window.innerHeight + scrollTop) {
+              element.classList.remove("hide");
+            }
+          });
+          if (lazyloadContent.length == 0) {
+            document.removeEventListener("scroll", lazyload);
+            window.removeEventListener("resize", lazyload);
+            window.removeEventListener("orientationChange", lazyload);
+          }
+        }, 30);
+      }
+      document.addEventListener("scroll", lazyload);
+      window.addEventListener("resize", lazyload);
+      window.addEventListener("orientationChange", lazyload);
+    }, 1000);
+  }
   public filterData(condition: any) {
     function checkFilter(this: any, field: any) {
       return (
@@ -150,6 +194,7 @@ export default class HotelComponent extends Vue {
     }
 
     this.dataDisplay = this.allData.ResultList.filter(checkFilter.bind(this));
+    this.sortTab(condition.conditionSort, this.dataDisplay);
   }
 
   public filterStar(conditionStar: Array<any>, star: any) {
@@ -206,11 +251,8 @@ export default class HotelComponent extends Vue {
 
   public filterIsDeal(conditionDeal: boolean, deal: string) {
     if (!conditionDeal) return true;
-    else {
-      if (deal && parseInt(deal) > 50) {
-        return true;
-      }
-    }
+
+    if (deal && parseInt(deal) > 50) return true;
   }
 
   public filterIsCancel(conditionCancel: boolean, isCancel: boolean) {
@@ -240,16 +282,17 @@ export default class HotelComponent extends Vue {
     }
   }
 
-  public sortData(currentSort: any) {
-    if (currentSort === "priceLow") {
-      this.dataDisplay.sort((a, b) => {
+  public sortTab(conditionSort: any, data: any) {
+    if (conditionSort === "priceLow") {
+      data = data.sort((a: any, b: any) => {
         return a.DisplayPrice - b.DisplayPrice;
       });
-    } else if (currentSort === "recomment") {
-      this.dataDisplay.sort((a, b) => {
+    }
+    if (conditionSort === "recomment") {
+      data = data.sort((a: any, b: any) => {
         return b.ReviewScore - a.ReviewScore;
       });
-    } else return this.dataDisplay;
+    } else return data;
   }
 
   public async getData() {
