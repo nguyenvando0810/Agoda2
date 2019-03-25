@@ -11,12 +11,8 @@
           <div class="hotel-content__banner"></div>
           <SortListComponent></SortListComponent>
 
-          <div
-            v-for="(item,index) in dataDisplay"
-            :key="index"
-            class="lazy-loading"
-            :class="[index < 2 ? 'show'  : 'hide']"
-          >
+          <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading">
+          <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
             <ResultHotelComponent :item="item"></ResultHotelComponent>
           </div>
 
@@ -30,18 +26,18 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import SortListComponent from "./sort-list/sort-list.component.vue";
-import ResultHotelComponent from "./result-hotel/result-hotel.component.vue";
-import FilterTabComponent from "./filter-tab/filter-tab.component.vue";
-import FilterListComponent from "./filter-list/filter-list.component.vue";
-import SlidebarComponent from "./slide-bar/slide-bar.component.vue";
-import "./hotel.component.scss";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import SortListComponent from './sort-list/sort-list.component.vue';
+import ResultHotelComponent from './result-hotel/result-hotel.component.vue';
+import FilterTabComponent from './filter-tab/filter-tab.component.vue';
+import FilterListComponent from './filter-list/filter-list.component.vue';
+import SlidebarComponent from './slide-bar/slide-bar.component.vue';
+import './hotel.component.scss';
 
-import axios from "axios";
-import { EventBus } from "@/eventBus";
+import axios from 'axios';
+import { EventBus } from '@/eventBus';
 
-import Sticky from "vue-sticky-directive";
+import Sticky from 'vue-sticky-directive';
 Vue.use(Sticky);
 
 @Component({
@@ -50,145 +46,123 @@ Vue.use(Sticky);
     SortListComponent,
     FilterTabComponent,
     FilterListComponent,
-    SlidebarComponent
-  }
+    SlidebarComponent,
+  },
 })
 export default class HotelComponent extends Vue {
   public allData: any = {};
   public dataDisplay: any[] = [];
-  public dataSort: Array<any> = [];
+  public dataSort: any[] = [];
   public conditionFilter: object = {};
 
   public created() {
     this.getData();
 
-    EventBus.$on("conditionStar", (conditionStar: Array<any>) => {
-      Object.assign(this.conditionFilter, { conditionStar: conditionStar });
+    EventBus.$on('conditionStar', (conditionStar: any[]) => {
+      Object.assign(this.conditionFilter, { conditionStar });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionArea", (conditionArea: Array<any>) => {
-      Object.assign(this.conditionFilter, { conditionArea: conditionArea });
+    EventBus.$on('conditionArea', (conditionArea: any[]) => {
+      Object.assign(this.conditionFilter, { conditionArea });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionBreakfast", (conditionBreakfast: boolean) => {
+    EventBus.$on('conditionBreakfast', (conditionBreakfast: boolean) => {
       Object.assign(this.conditionFilter, {
-        conditionBreakfast: conditionBreakfast
+        conditionBreakfast,
       });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionSearch", (conditionSearch: any) => {
-      Object.assign(this.conditionFilter, { conditionSearch: conditionSearch });
+    EventBus.$on('conditionSearch', (conditionSearch: any) => {
+      Object.assign(this.conditionFilter, { conditionSearch });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionPrice", (conditionPrice: Array<any>) => {
-      Object.assign(this.conditionFilter, { conditionPrice: conditionPrice });
+    EventBus.$on('conditionPrice', (conditionPrice: any[]) => {
+      Object.assign(this.conditionFilter, { conditionPrice });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionIsPay", (conditionIsPay: boolean) => {
-      Object.assign(this.conditionFilter, { conditionIsPay: conditionIsPay });
+    EventBus.$on('conditionIsPay', (conditionIsPay: boolean) => {
+      Object.assign(this.conditionFilter, { conditionIsPay });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionDeal", (conditionDeal: boolean) => {
-      Object.assign(this.conditionFilter, { conditionDeal: conditionDeal });
+    EventBus.$on('conditionDeal', (conditionDeal: boolean) => {
+      Object.assign(this.conditionFilter, { conditionDeal });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionIsCancel", (conditionIsCancel: boolean) => {
+    EventBus.$on('conditionIsCancel', (conditionIsCancel: boolean) => {
       Object.assign(this.conditionFilter, {
-        conditionIsCancel: conditionIsCancel
+        conditionIsCancel,
       });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionIsCard", (conditionIsCard: boolean) => {
-      Object.assign(this.conditionFilter, { conditionIsCard: conditionIsCard });
+    EventBus.$on('conditionIsCard', (conditionIsCard: boolean) => {
+      Object.assign(this.conditionFilter, { conditionIsCard });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("currentTab", (currentTab: string) => {
-      Object.assign(this.conditionFilter, { currentTab: currentTab });
+    EventBus.$on('currentTab', (currentTab: string) => {
+      Object.assign(this.conditionFilter, { currentTab });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionReview", (conditionReview: any) => {
-      Object.assign(this.conditionFilter, { conditionReview: conditionReview });
+    EventBus.$on('conditionReview', (conditionReview: any) => {
+      Object.assign(this.conditionFilter, { conditionReview });
       this.filterData(this.conditionFilter);
     });
 
-    EventBus.$on("conditionSort", (conditionSort: any) => {
-      Object.assign(this.conditionFilter, { conditionSort: conditionSort });
+    EventBus.$on('conditionSort', (conditionSort: any) => {
+      Object.assign(this.conditionFilter, { conditionSort });
       this.filterData(this.conditionFilter);
     });
   }
 
-  mounted() {
-    setTimeout(() => {
-      let lazyloadContent = document.querySelectorAll(".lazy-loading");
-      let lazyloadThrottleTimeout: any;
+  // public mounted() {
+  //   const lazyloadContent = document.querySelectorAll('.lazy-loading');
+  //   let lazyloadThrottleTimeout: any;
 
-      function lazyload() {
-        if (lazyloadThrottleTimeout) {
-          clearTimeout(lazyloadThrottleTimeout);
-        }
+  //   function lazyload() {
+  //     if (lazyloadThrottleTimeout) {
+  //       clearTimeout(lazyloadThrottleTimeout);
+  //     }
 
-        lazyloadThrottleTimeout = setTimeout(function() {
-          var scrollTop = window.pageYOffset;
+  //     lazyloadThrottleTimeout = setTimeout(function() {
+  //       lazyloadContent.forEach(function(element: any) {
+  //         if (element.offsetTop < window.innerHeight + window.pageYOffset) {
+  //           element.classList.remove('hidden');
+  //         }
+  //       });
+  //       if (lazyloadContent.length == 0) {
+  //         document.removeEventListener('scroll', lazyload);
+  //         window.removeEventListener('resize', lazyload);
+  //         window.removeEventListener('orientationChange', lazyload);
+  //       }
+  //     }, 20);
+  //   }
+  //   document.addEventListener('scroll', lazyload);
+  //   window.addEventListener('resize', lazyload);
+  //   window.addEventListener('orientationChange', lazyload);
+  // }
 
-          lazyloadContent.forEach(function(element: any) {
-            if (element.offsetTop < window.innerHeight + scrollTop) {
-              element.classList.remove("hide");
-            }
-          });
-          if (lazyloadContent.length == 0) {
-            document.removeEventListener("scroll", lazyload);
-            window.removeEventListener("resize", lazyload);
-            window.removeEventListener("orientationChange", lazyload);
-          }
-        }, 30);
-      }
-      document.addEventListener("scroll", lazyload);
-      window.addEventListener("resize", lazyload);
-      window.addEventListener("orientationChange", lazyload);
-    }, 1000);
-  }
   public filterData(condition: any) {
     function checkFilter(this: any, field: any) {
       return (
         this.filterStar(condition.conditionStar, field.StarRating) &&
         this.filterArea(condition.conditionArea, field.AreaId) &&
-        this.filterBreakfast(
-          condition.conditionBreakfast,
-          field.IsBreakfastIncluded
-        ) &&
+        this.filterBreakfast(condition.conditionBreakfast, field.IsBreakfastIncluded) &&
         this.filterSearch(condition.conditionSearch, field.HotelDisplayName) &&
         this.filterPrice(condition.conditionPrice, field.DisplayPrice) &&
-        this.filterIsPay(
-          condition.conditionIsPay,
-          field.IsBNPLDuringYourStay
-        ) &&
-        this.filterIsDeal(
-          condition.conditionDeal,
-          field.FormattedDiscountValue
-        ) &&
-        this.filterIsCancel(
-          condition.conditionIsCancel,
-          field.IsFreeCancellation
-        ) &&
-        this.filterIsCard(
-          condition.conditionIsCard,
-          field.IsNoCreditCardRequired
-        ) &&
-        this.filterTab(
-          condition.currentTab,
-          field.AccommodationType,
-          field.AgodaHomesText
-        ) &&
+        this.filterIsPay(condition.conditionIsPay, field.IsBNPLDuringYourStay) &&
+        this.filterIsDeal(condition.conditionDeal, field.FormattedDiscountValue) &&
+        this.filterIsCancel(condition.conditionIsCancel, field.IsFreeCancellation) &&
+        this.filterIsCard(condition.conditionIsCard, field.IsNoCreditCardRequired) &&
+        this.filterTab(condition.currentTab, field.AccommodationType, field.AgodaHomesText) &&
         this.filterReview(condition.conditionReview, field.ReviewScore)
       );
     }
@@ -197,7 +171,7 @@ export default class HotelComponent extends Vue {
     this.sortTab(condition.conditionSort, this.dataDisplay);
   }
 
-  public filterStar(conditionStar: Array<any>, star: any) {
+  public filterStar(conditionStar: any[], star: any) {
     if (!conditionStar || !conditionStar.length) {
       return true;
     }
@@ -209,7 +183,7 @@ export default class HotelComponent extends Vue {
     }
   }
 
-  public filterArea(conditionArea: Array<any>, areaId: number) {
+  public filterArea(conditionArea: any[], areaId: number) {
     if (!conditionArea || !conditionArea.length) {
       return true;
     }
@@ -222,60 +196,62 @@ export default class HotelComponent extends Vue {
   }
 
   public filterBreakfast(conditionBreakfast: boolean, breakfast: boolean) {
-    if (!conditionBreakfast) return true;
+    if (!conditionBreakfast) { return true; }
 
-    if (conditionBreakfast === breakfast) return true;
+    if (conditionBreakfast === breakfast) { return true; }
   }
 
   public filterSearch(conditionSearch: string, nameHotel: string) {
-    if (!conditionSearch) return true;
+    if (!conditionSearch) { return true; }
 
-    if (nameHotel.toLowerCase().includes(conditionSearch.toLowerCase()))
+    if (nameHotel.toLowerCase().includes(conditionSearch.toLowerCase())) {
       return true;
+    }
   }
 
-  public filterPrice(conditionPrice: Array<any>, price: number) {
-    if (!conditionPrice || !conditionPrice.length) return true;
+  public filterPrice(conditionPrice: any[], price: number) {
+    if (!conditionPrice || !conditionPrice.length) { return true; }
 
     for (let i = 0; i < conditionPrice.length; i++) {
-      if (price >= conditionPrice[i].min && price <= conditionPrice[i].max)
+      if (price >= conditionPrice[i].min && price <= conditionPrice[i].max) {
         return true;
+      }
     }
   }
 
   public filterIsPay(conditionIsPay: boolean, isPay: boolean) {
-    if (!conditionIsPay) return true;
+    if (!conditionIsPay) { return true; }
 
-    if (conditionIsPay === isPay) return true;
+    if (conditionIsPay === isPay) { return true; }
   }
 
   public filterIsDeal(conditionDeal: boolean, deal: string) {
-    if (!conditionDeal) return true;
+    if (!conditionDeal) { return true; }
 
-    if (deal && parseInt(deal) > 50) return true;
+    if (deal && parseInt(deal) > 50) { return true; }
   }
 
   public filterIsCancel(conditionCancel: boolean, isCancel: boolean) {
-    if (!conditionCancel) return true;
+    if (!conditionCancel) { return true; }
 
-    if (conditionCancel === isCancel) return true;
+    if (conditionCancel === isCancel) { return true; }
   }
 
   public filterIsCard(conditionIsCard: boolean, isCard: boolean) {
-    if (!conditionIsCard) return true;
+    if (!conditionIsCard) { return true; }
 
-    if (conditionIsCard === isCard) return true;
+    if (conditionIsCard === isCard) { return true; }
   }
 
   public filterTab(conditionTab: string, hotel: string, agoda: string) {
-    if (!conditionTab) return true;
-    if (conditionTab === hotel) return true;
-    if (conditionTab === agoda) return true;
-    if (conditionTab === "tabAll") return true;
+    if (!conditionTab) { return true; }
+    if (conditionTab === hotel) { return true; }
+    if (conditionTab === agoda) { return true; }
+    if (conditionTab === 'tabAll') { return true; }
   }
 
   public filterReview(conditionReview: number, reviewScore: number) {
-    if (!conditionReview) return true;
+    if (!conditionReview) { return true; }
 
     if (reviewScore >= conditionReview) {
       return true;
@@ -283,20 +259,20 @@ export default class HotelComponent extends Vue {
   }
 
   public sortTab(conditionSort: any, data: any) {
-    if (conditionSort === "priceLow") {
+    if (conditionSort === 'priceLow') {
       data = data.sort((a: any, b: any) => {
         return a.DisplayPrice - b.DisplayPrice;
       });
     }
-    if (conditionSort === "recomment") {
+    if (conditionSort === 'recomment') {
       data = data.sort((a: any, b: any) => {
         return b.ReviewScore - a.ReviewScore;
       });
-    } else return data;
+    }
   }
 
   public async getData() {
-    const response = await axios.get("https://demo0535107.mockable.io/agoda");
+    const response = await axios.get('https://demo0535107.mockable.io/agoda');
     this.allData = response.data;
     this.dataDisplay = this.allData.ResultList;
   }

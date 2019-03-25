@@ -61,17 +61,17 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import "./slide-bar.component.scss";
-import { EventBus } from "@/eventBus";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import './slide-bar.component.scss';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class SlidebarComponent extends Vue {
   public conditionBreakfast: boolean = false;
 
-  @Watch("conditionBreakfast")
-  checkChanBreakfast() {
-    EventBus.$emit("conditionBreakfast", this.conditionBreakfast);
+  @Watch('conditionBreakfast')
+  public checkChanBreakfast() {
+    EventBus.$emit('conditionBreakfast', this.conditionBreakfast);
   }
 }
 </script>

@@ -136,21 +136,21 @@
 </template>
 
 <script lang='ts'>
-  import {Component, Vue, Prop} from "vue-property-decorator";
-  import "./result-hotel.component.scss";
-  import axios from "axios";
-  import {EventBus} from "@/eventBus";
+import {Component, Vue, Prop} from 'vue-property-decorator';
+import './result-hotel.component.scss';
+import axios from 'axios';
+import {EventBus} from '@/eventBus';
 
-  @Component
-  export default class ResultHotelComponent extends Vue {
-    @Prop({type: Object}) public item: any;
+@Component
+export default class ResultHotelComponent extends Vue {
+  @Prop({type: Object}) public item: any;
 
-    public getStars(item: any) {
-      let html = "";
-      for (let j = 0; j < Math.floor(item.StarRating); j++) {
-        html += `<i class="fa fa-star" aria-hidden="true"></i>`;
-      }
-      return html;
+  public getStars(item: any) {
+    let html = '';
+    for (let j = 0; j < Math.floor(item.StarRating); j++) {
+      html += `<i class="fa fa-star" aria-hidden="true"></i>`;
     }
+    return html;
   }
+}
 </script>

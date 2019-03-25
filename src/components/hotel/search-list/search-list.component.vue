@@ -11,16 +11,16 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import "./search-list.component.scss";
-import { EventBus } from "@/eventBus";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import './search-list.component.scss';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class SearchListComponent extends Vue {
-  public conditionSearch: any = "";
-  @Watch("conditionSearch")
-  checkConditionSearch() {
-    EventBus.$emit("conditionSearch", this.conditionSearch);
+  public conditionSearch: any = '';
+  @Watch('conditionSearch')
+  public checkConditionSearch() {
+    EventBus.$emit('conditionSearch', this.conditionSearch);
   }
 }
 </script>

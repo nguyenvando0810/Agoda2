@@ -361,103 +361,103 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import "./filter-list.component.scss";
-import { EventBus } from "@/eventBus";
-import SearchListComponent from "../search-list/search-list.component.vue";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import './filter-list.component.scss';
+import { EventBus } from '@/eventBus';
+import SearchListComponent from '../search-list/search-list.component.vue';
 
 @Component({
-  components: { SearchListComponent }
+  components: { SearchListComponent },
 })
 export default class FilterListComponent extends Vue {
-  conditionStar: Array<any> = [];
-  conditionArea: Array<any> = [];
-  conditionPrice: Array<any> = [];
-  price1: object = { min: 0, max: 920000 };
-  price2: object = { min: 920000, max: 1800000 };
-  price3: object = { min: 1800000, max: 2700000 };
-  price4: object = { min: 2700000, max: 3700000 };
-  price5: object = { min: 3700000, max: 267718263790 };
-  conditionIsPay: boolean = false;
-  conditionDeal: boolean = false;
-  conditionIsCancel: boolean = false;
-  conditionIsCard: boolean = false;
-  conditionReview: string = "";
+  public conditionStar: any[] = [];
+  public conditionArea: any[] = [];
+  public conditionPrice: any[] = [];
+  public price1: object = { min: 0, max: 920000 };
+  public price2: object = { min: 920000, max: 1800000 };
+  public price3: object = { min: 1800000, max: 2700000 };
+  public price4: object = { min: 2700000, max: 3700000 };
+  public price5: object = { min: 3700000, max: 267718263790 };
+  public conditionIsPay: boolean = false;
+  public conditionDeal: boolean = false;
+  public conditionIsCancel: boolean = false;
+  public conditionIsCard: boolean = false;
+  public conditionReview: string = '';
 
-  @Watch("conditionStar")
-  checkChangeStar() {
-    const converConditiontStar: Array<any> = [];
+  @Watch('conditionStar')
+  public checkChangeStar() {
+    const converConditiontStar: any[] = [];
     for (let i = 0; i < this.conditionStar.length; i++) {
       converConditiontStar.push(parseInt(this.conditionStar[i]));
     }
 
-    EventBus.$emit("conditionStar", converConditiontStar);
+    EventBus.$emit('conditionStar', converConditiontStar);
   }
 
-  @Watch("conditionArea")
-  checkArea() {
-    const convertConditionArea: Array<any> = [];
+  @Watch('conditionArea')
+  public checkArea() {
+    const convertConditionArea: any[] = [];
     this.conditionArea.forEach((item: any) => {
       convertConditionArea.push(parseInt(item));
     });
 
-    EventBus.$emit("conditionArea", convertConditionArea);
+    EventBus.$emit('conditionArea', convertConditionArea);
   }
 
-  @Watch("conditionPrice")
-  checkPrice() {
-    EventBus.$emit("conditionPrice", this.conditionPrice);
+  @Watch('conditionPrice')
+  public checkPrice() {
+    EventBus.$emit('conditionPrice', this.conditionPrice);
   }
 
-  @Watch("conditionIsPay")
-  checkIsPay() {
-    EventBus.$emit("conditionIsPay", this.conditionIsPay);
+  @Watch('conditionIsPay')
+  public checkIsPay() {
+    EventBus.$emit('conditionIsPay', this.conditionIsPay);
   }
 
-  @Watch("conditionDeal")
-  checkIsDeal() {
-    EventBus.$emit("conditionDeal", this.conditionDeal);
+  @Watch('conditionDeal')
+  public checkIsDeal() {
+    EventBus.$emit('conditionDeal', this.conditionDeal);
   }
 
-  @Watch("conditionIsCancel")
-  checkIsCancel() {
-    EventBus.$emit("conditionIsCancel", this.conditionIsCancel);
+  @Watch('conditionIsCancel')
+  public checkIsCancel() {
+    EventBus.$emit('conditionIsCancel', this.conditionIsCancel);
   }
 
-  @Watch("conditionIsCard")
-  checkIsCard() {
-    EventBus.$emit("conditionIsCard", this.conditionIsCard);
+  @Watch('conditionIsCard')
+  public checkIsCard() {
+    EventBus.$emit('conditionIsCard', this.conditionIsCard);
   }
 
-  @Watch("conditionReview")
-  checkReview() {
+  @Watch('conditionReview')
+  public checkReview() {
     console.log(this.conditionReview);
-    EventBus.$emit("conditionReview", parseInt(this.conditionReview));
+    EventBus.$emit('conditionReview', parseInt(this.conditionReview));
   }
 
-  //Clear condition filter
-  clearPopular() {
+  // Clear condition filter
+  public clearPopular() {
     this.conditionIsPay = false;
     this.conditionArea.splice(0, this.conditionArea.length);
   }
 
-  clearPrice() {
+  public clearPrice() {
     this.conditionPrice = [];
   }
 
-  clearStar() {
+  public clearStar() {
     this.conditionStar = [];
   }
 
-  clearArea() {
+  public clearArea() {
     this.conditionArea = [];
   }
 
-  clearMore() {
+  public clearMore() {
     this.conditionIsCancel = false;
     this.conditionIsCard = false;
     this.conditionDeal = false;
-    this.conditionReview = "";
+    this.conditionReview = '';
   }
 }
 </script>
