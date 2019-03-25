@@ -16,10 +16,7 @@
             <ResultHotelComponent :item="item"></ResultHotelComponent>
           </div>
 
-          <div class="no-result" v-if="dataDisplay.length === 0">
-            <img src="../../assets/not-found.jpg" alt>
-            <p>Sorry, we coundn't find any result matching. Please try again.</p>
-          </div>
+          <NoResult v-if="dataDisplay.length === 0"></NoResult>
         </div>
       </div>
     </div>
@@ -32,6 +29,7 @@ import ResultHotelComponent from './result-hotel/result-hotel.component.vue';
 import FilterTabComponent from './filter-tab/filter-tab.component.vue';
 import FilterListComponent from './filter-list/filter-list.component.vue';
 import SlidebarComponent from './slide-bar/slide-bar.component.vue';
+import NoResult from './no-result/no-result.component.vue';
 import './hotel.component.scss';
 
 import axios from 'axios';
@@ -47,6 +45,7 @@ Vue.use(Sticky);
     FilterTabComponent,
     FilterListComponent,
     SlidebarComponent,
+    NoResult
   },
 })
 export default class HotelComponent extends Vue {
@@ -172,90 +171,76 @@ export default class HotelComponent extends Vue {
   }
 
   public filterStar(conditionStar: any[], star: any) {
-    if (!conditionStar || !conditionStar.length) {
-      return true;
-    }
+    if (!conditionStar || !conditionStar.length) return true;
 
     for (let i = 0; i < conditionStar.length; i++) {
-      if (conditionStar[i] === Math.floor(star)) {
-        return true;
-      }
+      if (conditionStar[i] === Math.floor(star)) return true;
     }
   }
 
   public filterArea(conditionArea: any[], areaId: number) {
-    if (!conditionArea || !conditionArea.length) {
-      return true;
-    }
+    if (!conditionArea || !conditionArea.length) return true;
 
     for (let i = 0; i < conditionArea.length; i++) {
-      if (conditionArea[i] === areaId) {
-        return true;
-      }
+      if (conditionArea[i] === areaId) return true;
     }
   }
 
   public filterBreakfast(conditionBreakfast: boolean, breakfast: boolean) {
-    if (!conditionBreakfast) { return true; }
+    if (!conditionBreakfast) return true;
 
-    if (conditionBreakfast === breakfast) { return true; }
+    if (conditionBreakfast === breakfast) return true;
   }
 
   public filterSearch(conditionSearch: string, nameHotel: string) {
-    if (!conditionSearch) { return true; }
+    if (!conditionSearch) return true;
 
-    if (nameHotel.toLowerCase().includes(conditionSearch.toLowerCase())) {
-      return true;
-    }
+    if (nameHotel.toLowerCase().includes(conditionSearch.toLowerCase())) return true;
   }
 
   public filterPrice(conditionPrice: any[], price: number) {
-    if (!conditionPrice || !conditionPrice.length) { return true; }
+    if (!conditionPrice || !conditionPrice.length) return true;
 
     for (let i = 0; i < conditionPrice.length; i++) {
-      if (price >= conditionPrice[i].min && price <= conditionPrice[i].max) {
-        return true;
-      }
+      if (price >= conditionPrice[i].min && price <= conditionPrice[i].max) return true;
     }
   }
 
   public filterIsPay(conditionIsPay: boolean, isPay: boolean) {
-    if (!conditionIsPay) { return true; }
+    if (!conditionIsPay) return true;
 
-    if (conditionIsPay === isPay) { return true; }
+    if (conditionIsPay === isPay) return true;
   }
 
   public filterIsDeal(conditionDeal: boolean, deal: string) {
-    if (!conditionDeal) { return true; }
+    if (!conditionDeal) return true;
 
-    if (deal && parseInt(deal) > 50) { return true; }
+    if (deal && parseInt(deal) > 50) return true;
   }
 
   public filterIsCancel(conditionCancel: boolean, isCancel: boolean) {
-    if (!conditionCancel) { return true; }
+    if (!conditionCancel) return true;
 
-    if (conditionCancel === isCancel) { return true; }
+    if (conditionCancel === isCancel) return true;
   }
 
   public filterIsCard(conditionIsCard: boolean, isCard: boolean) {
-    if (!conditionIsCard) { return true; }
+    if (!conditionIsCard) return true;
 
-    if (conditionIsCard === isCard) { return true; }
+    if (conditionIsCard === isCard) return true;
   }
 
   public filterTab(conditionTab: string, hotel: string, agoda: string) {
-    if (!conditionTab) { return true; }
-    if (conditionTab === hotel) { return true; }
-    if (conditionTab === agoda) { return true; }
-    if (conditionTab === 'tabAll') { return true; }
+    if (!conditionTab) return true;
+    if (conditionTab === hotel) return true;
+    if (conditionTab === agoda) return true;
+    if (conditionTab === 'tabAll') return true;
   }
 
   public filterReview(conditionReview: number, reviewScore: number) {
-    if (!conditionReview) { return true; }
+    if (!conditionReview) return true;
 
-    if (reviewScore >= conditionReview) {
-      return true;
-    }
+    if (reviewScore >= conditionReview) return true;
   }
 
   public sortTab(conditionSort: any, data: any) {

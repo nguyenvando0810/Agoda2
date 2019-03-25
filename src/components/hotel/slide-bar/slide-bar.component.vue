@@ -1,7 +1,7 @@
 <template>
   <div class="slide-bar">
     <div class="slide-bar__map">
-      <img src="../../../assets/img-map-pin-red.svg" class="slide-bar__map-icon" alt>
+      <img src="@/assets/img-map-pin-red.svg" class="slide-bar__map-icon" alt>
       <p class="slide-bar__map-caption">Trên Bản Đồ</p>
     </div>
 
@@ -29,28 +29,28 @@
       >Những khách tìm phòng ở Hà Nội cũng cân nhắc các thành phố sau</h4>
       <div class="slide-bar__recomment-list">
         <div class="slide-bar__recomment-item">
-          <img src="../../../assets/halong.jpg" alt>
+          <img src="@/assets/halong.jpg" alt>
           <div class="slide-bar__recomment-content">
             <h4>Hạ Long</h4>
             <p>1.077 nơi ở có phòng</p>
           </div>
         </div>
         <div class="slide-bar__recomment-item">
-          <img src="../../../assets/nhatrang.jpg" alt>
+          <img src="@/assets/nhatrang.jpg" alt>
           <div class="slide-bar__recomment-content">
             <h4>Nha Trang</h4>
             <p>1.962 nơi ở có phòng</p>
           </div>
         </div>
         <div class="slide-bar__recomment-item">
-          <img src="../../../assets/hoian.jpg" alt>
+          <img src="@/assets/hoian.jpg" alt>
           <div class="slide-bar__recomment-content">
             <h4>Hội An</h4>
             <p>1.047 nơi ở có phòng</p>
           </div>
         </div>
         <div class="slide-bar__recomment-item">
-          <img src="../../../assets/hcm.jpg" alt>
+          <img src="@/assets/hcm.jpg" alt>
           <div class="slide-bar__recomment-content">
             <h4>Hồ Chí Minh</h4>
             <p>4.788 nơi ở có phòng</p>

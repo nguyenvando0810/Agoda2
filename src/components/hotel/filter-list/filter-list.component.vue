@@ -13,7 +13,7 @@
                 <i class="fa fa-snowflake-o" aria-hidden="true"></i> &nbsp;
                 <span>Phổ biến</span>
                 <img
-                  src="../../../assets/icon-close.png"
+                  src="@/assets/icon-close.png"
                   alt="icon-close"
                   height="16"
                   width="16"
@@ -66,7 +66,7 @@
                 <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;
                 <span>Giá</span>
                 <img
-                  src="../../../assets/icon-close.png"
+                  src="@/assets/icon-close.png"
                   alt="icon-close"
                   height="16"
                   width="16"
@@ -125,7 +125,7 @@
                 <i class="fa fa-star" aria-hidden="true"></i> &nbsp;
                 <span>Xếp hạng sao</span>
                 <img
-                  src="../../../assets/icon-close.png"
+                  src="@/assets/icon-close.png"
                   alt="icon-close"
                   height="16"
                   width="16"
@@ -199,7 +199,7 @@
                 <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
                 <span>Khu vực</span>
                 <img
-                  src="../../../assets/icon-close.png"
+                  src="@/assets/icon-close.png"
                   alt="icon-close"
                   height="16"
                   width="16"
@@ -269,7 +269,7 @@
               <template slot="button-content">
                 <span>Thêm</span>
                 <img
-                  src="../../../assets/icon-close.png"
+                  src="@/assets/icon-close.png"
                   alt="icon-close"
                   height="16"
                   width="16"

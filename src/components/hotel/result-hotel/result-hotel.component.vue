@@ -8,10 +8,9 @@
             <img :src="item.MainPhotoUrl" class="img-fluid" alt="Hanoi Merci Hotel">
 
             <div class="result-hotel__thumnail-list">
-              <div class="result-hotel__thumnail-items" v-for="(img, index) in item.galleryContainerProps.mainImages"
-                :key="img.id">
-                <div class="item" :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"
-                  v-if="index<10"></div>
+              <div class="result-hotel__thumnail-items" v-for="(img, index) in item.galleryContainerProps.mainImages.slice(0,10)"
+                :key="index">
+                <div class="item" :style="{ 'background-image': 'url(' + img.imageItemProps.url + ')' }"></div>
               </div>
             </div>
           </div>
@@ -54,6 +53,14 @@
               <span v-if="item.IsBreakfastIncluded">Ăn sáng</span>
               <span v-if="item.IsFreeCancellation">Hủy miễn phí</span>
               <span v-if="item.IsBNPLDuringYourStay">Thanh toán tại nơi ở</span>
+            </div>
+
+            <div class="result-hotel__detail__highlights">
+               <span v-for="(item,index) in item.Highlights.slice(0,2)" :key="index">{{item.title}}</span>
+               <span v-if="item.Highlights.length > 2">{{item.Highlights.length - 2}}+</span>
+               <!-- <p class="tooltiptext">
+                  <span v-for="(item,index) in item.Highlights" :key="index">{{item.title}}</span>
+               </p> -->
             </div>
 
             <div class="result-hotel__detail__card" v-if="item.IsNoCreditCardRequired">

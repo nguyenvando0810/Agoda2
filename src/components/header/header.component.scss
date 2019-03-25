@@ -60,7 +60,7 @@
         }
       }
 
-      & .header__sinup {
+      & .header__signup {
         text-transform: uppercase;
         background-color: transparent;
         color: $blue-light;
@@ -87,13 +87,13 @@
           transition: transform 0.3s ease-out 0s, opacity 0.3s ease-out 0s;
         }
 
-        &:hover:before {
-          opacity: 1;
-          transform: translate(-50%, -50%) scale(32);
-        }
-
         &:hover {
           color: $white;
+
+          &:before {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(32);
+          }
         }
 
         span {

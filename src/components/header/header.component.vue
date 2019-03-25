@@ -2,7 +2,7 @@
   <div class="header">
     <nav class="navbar navbar-expand-sm header__navbar" style="background-color: #FFFFFF;">
       <a class="navbar-brand" href="#">
-        <img src="../../assets/agoda-logo.svg" alt="agoda-logo" class="agoda-logo">
+        <img src="@/assets/agoda-logo.svg" alt="agoda-logo" class="agoda-logo">
       </a>
       <button
         class="navbar-toggler d-lg-none"
@@ -53,7 +53,7 @@
         <ul class="navbar-nav my-2 my-lg-0 header__navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <img src="../../assets/flag-vn.png" alt>
+              <img src="@/assets/flag-vn.png" alt>
             </a>
           </li>
           <li class="nav-item">
@@ -62,7 +62,7 @@
           <li class="nav-item">
             <a class="nav-link header__login" href="#">Đăng nhập</a>
           </li>
-          <button class="btn my-2 my-sm-0 header__sinup" type="submit">
+          <button class="btn my-2 my-sm-0 header__signup" type="submit">
             <span>Tạo tài khoản</span>
           </button>
         </ul>
@@ -72,7 +72,7 @@
     <div class="header-funnel">
       <div class="container">
         <div class="header-funnel__content">
-          <img src="../../assets/Agoda-Cash-Icon@2x.png" alt>
+          <img src="@/assets/Agoda-Cash-Icon@2x.png" alt>
           <div class="header-funnel__content-detail">
             <div
               class="header-funnel__content-title"

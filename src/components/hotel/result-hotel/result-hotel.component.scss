@@ -56,7 +56,6 @@
 
   &__image {
     width: 249px;
-    margin-bottom: -1px;
 
     img {
       height: 182px;
@@ -66,7 +65,7 @@
 
   &__detail {
     width: 48%;
-    padding: 20px;
+    padding: 10px 15px;
     border-right: 1px solid $gray-border-color;
 
     &__top-money {
@@ -167,6 +166,29 @@
         font-weight: $font-weight-bold;
         margin-right: 5px;
         color: $green;
+      }
+    }
+
+    &__highlights {
+      margin-bottom: 5px;
+
+      span {
+        font-size: $font-small;
+        padding: 3px 7px;
+        border: 1px solid $green;
+        border-radius: 2px;
+        font-weight: $font-weight-bold;
+        margin-right: 5px;
+        color: $green;
+        display: inline-block;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
       }
     }
 
@@ -274,7 +296,7 @@
   &__price {
     width: calc(52% - 249px);
     text-align: right;
-    padding: 20px 10px 20px 0;
+    padding: 10px 10px 10px 0;
     position: relative;
 
     &__review {
