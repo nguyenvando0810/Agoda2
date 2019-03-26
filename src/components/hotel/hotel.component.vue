@@ -8,14 +8,16 @@
           <SlidebarComponent></SlidebarComponent>
         </div>
         <div class="hotel-content">
-          <div class="hotel-content__banner"></div>
+          <div class="hotel-content__banner">
+            <AvailabilityComponent></AvailabilityComponent>
+          </div>
           <SortListComponent></SortListComponent>
 
           <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading">
           <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
             <ResultHotelComponent :item="item"></ResultHotelComponent>
           </div>
-
+          <!-- <button class="btn btn-primary btn__load-more" v-if="listHotel.length >= 5" @click="loadMore()">Load More</button> -->
           <NoResult v-if="dataDisplay.length === 0"></NoResult>
         </div>
       </div>
@@ -29,6 +31,7 @@ import ResultHotelComponent from './result-hotel/result-hotel.component.vue';
 import FilterTabComponent from './filter-tab/filter-tab.component.vue';
 import FilterListComponent from './filter-list/filter-list.component.vue';
 import SlidebarComponent from './slide-bar/slide-bar.component.vue';
+import AvailabilityComponent from './availability/availability.component.vue';
 import NoResult from './no-result/no-result.component.vue';
 import './hotel.component.scss';
 
@@ -45,7 +48,8 @@ Vue.use(Sticky);
     FilterTabComponent,
     FilterListComponent,
     SlidebarComponent,
-    NoResult
+    NoResult,
+    AvailabilityComponent
   },
 })
 export default class HotelComponent extends Vue {
@@ -53,6 +57,8 @@ export default class HotelComponent extends Vue {
   public dataDisplay: any[] = [];
   public dataSort: any[] = [];
   public conditionFilter: object = {};
+  public maxHotel:number = 5;
+  public listHotel:any[] = [];
 
   public created() {
     this.getData();
@@ -122,31 +128,40 @@ export default class HotelComponent extends Vue {
     });
   }
 
-  // public mounted() {
-  //   const lazyloadContent = document.querySelectorAll('.lazy-loading');
-  //   let lazyloadThrottleTimeout: any;
+  /*public lazy() {
+    const lazyloadContent = document.querySelectorAll('.lazy-loading');
+    let lazyloadThrottleTimeout: any;
 
-  //   function lazyload() {
-  //     if (lazyloadThrottleTimeout) {
-  //       clearTimeout(lazyloadThrottleTimeout);
-  //     }
+    function lazyload() {
+      if (lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }
 
-  //     lazyloadThrottleTimeout = setTimeout(function() {
-  //       lazyloadContent.forEach(function(element: any) {
-  //         if (element.offsetTop < window.innerHeight + window.pageYOffset) {
-  //           element.classList.remove('hidden');
-  //         }
-  //       });
-  //       if (lazyloadContent.length == 0) {
-  //         document.removeEventListener('scroll', lazyload);
-  //         window.removeEventListener('resize', lazyload);
-  //         window.removeEventListener('orientationChange', lazyload);
-  //       }
-  //     }, 20);
-  //   }
-  //   document.addEventListener('scroll', lazyload);
-  //   window.addEventListener('resize', lazyload);
-  //   window.addEventListener('orientationChange', lazyload);
+      lazyloadThrottleTimeout = setTimeout(function() {
+        lazyloadContent.forEach(function(element: any) {
+          if (element.offsetTop < window.innerHeight + window.pageYOffset) {
+            element.classList.remove('hidden');
+          }
+        });
+        if (lazyloadContent.length == 0) {
+          document.removeEventListener('scroll', lazyload);
+          window.removeEventListener('resize', lazyload);
+          window.removeEventListener('orientationChange', lazyload);
+        }
+      }, 20);
+    }
+    document.addEventListener('scroll', lazyload);
+    window.addEventListener('resize', lazyload);
+    window.addEventListener('orientationChange', lazyload);
+  }*/
+
+  // public loadMore() {
+  //   this.maxHotel += 5;
+  // }
+
+  // @Watch('maxHotel')
+  //   checkDataDisplay() {
+  //   this.listHotel = this.dataDisplay.slice(0 ,this.maxHotel);
   // }
 
   public filterData(condition: any) {
@@ -167,6 +182,7 @@ export default class HotelComponent extends Vue {
     }
 
     this.dataDisplay = this.allData.ResultList.filter(checkFilter.bind(this));
+    // this.listHotel = this.dataDisplay.slice(0 ,this.maxHotel);
     this.sortTab(condition.conditionSort, this.dataDisplay);
   }
 
@@ -260,6 +276,7 @@ export default class HotelComponent extends Vue {
     const response = await axios.get('https://demo0535107.mockable.io/agoda');
     this.allData = response.data;
     this.dataDisplay = this.allData.ResultList;
+    // this.listHotel = this.dataDisplay.slice(0, this.maxHotel);
   }
 }
 </script>

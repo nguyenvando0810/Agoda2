@@ -1,4 +1,7 @@
 .slide-bar {
+  position: sticky;
+  top: 70px;
+
   &__map {
     height: 100px;
     background-image: url('../../../assets/bkg-map-entry.svg');

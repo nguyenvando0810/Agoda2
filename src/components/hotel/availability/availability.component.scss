@@ -1,0 +1,33 @@
+.availability {
+  padding: 15px 7px 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text {
+    &-heading {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #e12d2d;
+    }
+
+    &-description {
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333;
+    }
+  }
+
+  &__countdown {
+    &-title {
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+
+    .countdown {
+      display: flex;
+    }
+  }
+}
