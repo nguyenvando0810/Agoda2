@@ -122,7 +122,8 @@
               :class="{'highlight-button' :conditionStar.length > 0}"
             >
               <template slot="button-content">
-                <i class="fa fa-star" aria-hidden="true"></i> &nbsp;
+                <i class="fa fa-star" aria-hidden="true" v-if="conditionStar.length === 0"></i> &nbsp;
+                <span class="badge badge-dark" v-if="conditionStar.length > 0">{{conditionStar.length}}</span>
                 <span>Xếp hạng sao</span>
                 <img
                   src="@/assets/icon-close.png"
@@ -139,7 +140,7 @@
                 <a
                   href="javascript:void(0)"
                   class="alert-link"
-                  v-if="conditionStar.length > 0"
+                  v-show ="conditionStar.length > 0"
                   @click.stop="clearStar()"
                 >Xóa</a>
               </div>
@@ -325,28 +326,28 @@
                 <div class="filter-list__item">
                   <input type="radio" id="review" value="9" v-model="conditionReview">
                   <label for="review">
-                    <span></span>9+Trên cả tuyệt vời
+                    <span></span>9+ Trên cả tuyệt vời
                   </label>
                 </div>
 
                 <div class="filter-list__item">
                   <input type="radio" id="review1" value="8" v-model="conditionReview">
                   <label for="review1">
-                    <span></span>8+Xuất sắc
+                    <span></span>8+ Xuất sắc
                   </label>
                 </div>
 
                 <div class="filter-list__item">
                   <input type="radio" id="review2" value="7" v-model="conditionReview">
                   <label for="review2">
-                    <span></span>7+Rất tốt
+                    <span></span>7+ Rất tốt
                   </label>
                 </div>
 
                 <div class="filter-list__item">
                   <input type="radio" id="review3" value="6" v-model="conditionReview">
                   <label for="review3">
-                    <span></span>6+Hài lòng
+                    <span></span>6+ Hài lòng
                   </label>
                 </div>
               </div>

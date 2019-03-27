@@ -13,7 +13,7 @@
           </div>
           <SortListComponent></SortListComponent>
 
-          <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading">
+          <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading" :class="[index < 3 ? 'show'  :'', 'hidden']">
           <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
             <ResultHotelComponent :item="item"></ResultHotelComponent>
           </div>
@@ -101,9 +101,7 @@ export default class HotelComponent extends Vue {
     });
 
     EventBus.$on('conditionIsCancel', (conditionIsCancel: boolean) => {
-      Object.assign(this.conditionFilter, {
-        conditionIsCancel,
-      });
+      Object.assign(this.conditionFilter, { conditionIsCancel });
       this.filterData(this.conditionFilter);
     });
 
@@ -128,32 +126,34 @@ export default class HotelComponent extends Vue {
     });
   }
 
-  /*public lazy() {
-    const lazyloadContent = document.querySelectorAll('.lazy-loading');
-    let lazyloadThrottleTimeout: any;
+  public lazy() {
+    setTimeout(() => {
+      const lazyloadContent = document.querySelectorAll('.lazy-loading');
+      let lazyloadThrottleTimeout: any;
 
-    function lazyload() {
-      if (lazyloadThrottleTimeout) {
-        clearTimeout(lazyloadThrottleTimeout);
-      }
-
-      lazyloadThrottleTimeout = setTimeout(function() {
-        lazyloadContent.forEach(function(element: any) {
-          if (element.offsetTop < window.innerHeight + window.pageYOffset) {
-            element.classList.remove('hidden');
-          }
-        });
-        if (lazyloadContent.length == 0) {
-          document.removeEventListener('scroll', lazyload);
-          window.removeEventListener('resize', lazyload);
-          window.removeEventListener('orientationChange', lazyload);
+      function lazyload() {
+        if (lazyloadThrottleTimeout) {
+          clearTimeout(lazyloadThrottleTimeout);
         }
-      }, 20);
-    }
-    document.addEventListener('scroll', lazyload);
-    window.addEventListener('resize', lazyload);
-    window.addEventListener('orientationChange', lazyload);
-  }*/
+
+        lazyloadThrottleTimeout = setTimeout(function() {
+          lazyloadContent.forEach(function(element: any) {
+            if (element.offsetTop < window.innerHeight + window.pageYOffset) {
+              element.classList.remove('hidden');
+            }
+          });
+          if (lazyloadContent.length == 0) {
+            document.removeEventListener('scroll', lazyload);
+            window.removeEventListener('resize', lazyload);
+            window.removeEventListener('orientationChange', lazyload);
+          }
+        }, 20);
+      }
+      document.addEventListener('scroll', lazyload);
+      window.addEventListener('resize', lazyload);
+      window.addEventListener('orientationChange', lazyload);
+    }, 0);
+  }
 
   // public loadMore() {
   //   this.maxHotel += 5;
@@ -165,7 +165,7 @@ export default class HotelComponent extends Vue {
   // }
 
   public filterData(condition: any) {
-    function checkFilter(this: any, field: any) {
+    function applyFilter(this: any, field: any) {
       return (
         this.filterStar(condition.conditionStar, field.StarRating) &&
         this.filterArea(condition.conditionArea, field.AreaId) &&
@@ -181,9 +181,10 @@ export default class HotelComponent extends Vue {
       );
     }
 
-    this.dataDisplay = this.allData.ResultList.filter(checkFilter.bind(this));
+    this.dataDisplay = this.allData.ResultList.filter(applyFilter.bind(this));
     // this.listHotel = this.dataDisplay.slice(0 ,this.maxHotel);
     this.sortTab(condition.conditionSort, this.dataDisplay);
+    this.lazy();
   }
 
   public filterStar(conditionStar: any[], star: any) {
@@ -273,9 +274,18 @@ export default class HotelComponent extends Vue {
   }
 
   public async getData() {
-    const response = await axios.get('https://demo0535107.mockable.io/agoda');
-    this.allData = response.data;
-    this.dataDisplay = this.allData.ResultList;
+    axios.get('https://demo0535107.mockable.io/agoda')
+      .then((response:any)=>{
+        this.lazy();
+        this.allData = response.data;
+        this.dataDisplay = this.allData.ResultList;
+      })
+      .catch((err)=>{
+        console.warn(err);
+    })
+    // const response = await axios.get('https://demo0535107.mockable.io/agoda');
+    // this.allData = response.data;
+    // this.dataDisplay = this.allData.ResultList;
     // this.listHotel = this.dataDisplay.slice(0, this.maxHotel);
   }
 }
