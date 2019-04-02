@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <nav class="navbar navbar-expand-sm header__navbar" style="background-color: #FFFFFF;">
-      <a class="navbar-brand" href="#">
-        <img src="@/assets/agoda-logo.svg" alt="agoda-logo" class="agoda-logo">
+      <a class="navbar-brand" v-if="dataHeader.logo" :href="dataHeader.logo.logoLink">
+        <img :src="dataHeader.logo.logoImages" alt="agoda-logo" class="agoda-logo">
       </a>
       <button
         class="navbar-toggler d-lg-none"
@@ -10,50 +10,21 @@
         data-toggle="collapse"
         data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
       ></button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 header__navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Chỗ ở</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Chuyến bay</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Taxi sân bay</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Ưu đãi cho hôm nay</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-modx" aria-hidden="true"></i> Agoda homes
+          <li class="nav-item" v-for="(item,index) in dataHeader.linkItem" :key="index">
+            <a class="nav-link" :href="item.link">
+              <i class="fa fa-modx" aria-hidden="true" v-if="item.icon"></i>
+              {{item.text}}
             </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle nav-link__customs"
-              href="#"
-              id="dropdownId"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownId">
-              <a class="dropdown-item" href="#">Thuê xe</a>
-              <a class="dropdown-item" href="#">Làm gì đi đâu</a>
-            </div>
           </li>
         </ul>
+
         <ul class="navbar-nav my-2 my-lg-0 header__navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <img src="@/assets/flag-vn.png" alt>
+              <img src="@/assets/images/flag-vn.png" alt>
             </a>
           </li>
           <li class="nav-item">
@@ -72,7 +43,7 @@
     <div class="header-funnel">
       <div class="container">
         <div class="header-funnel__content">
-          <img src="@/assets/Agoda-Cash-Icon@2x.png" alt>
+          <img src="@/assets/images/Agoda-Cash-Icon@2x.png" alt>
           <div class="header-funnel__content-detail">
             <div
               class="header-funnel__content-title"
@@ -89,14 +60,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import './header.component.scss';
+import { Component, Vue } from "vue-property-decorator";
+import "./header.component.scss";
+import axios from "axios";
 
 @Component({
-  components: {},
+  components: {}
 })
 @Component
-export default class HeaderComponent extends Vue {}
+export default class HeaderComponent extends Vue {
+  dataHeader: any = {};
+
+  created() {
+    this.getDataHeader();
+  }
+
+  async getDataHeader() {
+    const response = await axios.get("http://demo0535107.mockable.io/header");
+    this.dataHeader = response.data;
+    return this.dataHeader;
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

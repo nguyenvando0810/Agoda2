@@ -1,0 +1,34 @@
+{
+    "logo": {
+      "logoImages": "https://cdn6.agoda.net/images/MVC/default/agoda-logo.svg",
+      "logoLink": "/",
+      "tag": "a"
+    },
+    "linkItem": [{
+        "text": "Chỗ ở",
+        "link": "/",
+        "tag": "a"
+      },
+      {
+        "text": "Chuyến bay",
+        "link": "/",
+        "tag": "a"
+      },
+      {
+        "text": "Taxi sân bay",
+        "link": "/",
+        "tag": "a"
+      },
+      {
+        "text": "Ưu đãi cho gia đình",
+        "link": "/",
+        "tag": "a"
+      },
+      {
+        "text": "agoda Homes",
+        "link": "/",
+        "tag": "a",
+        "icon": true
+      }
+    ]
+}

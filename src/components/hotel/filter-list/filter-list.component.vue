@@ -5,32 +5,22 @@
         <div class="col-sm-9">
           <div class="filter-list__content">
             <span>Chọn lọc</span>
+
             <b-dropdown
               class="filter-list__content-button"
-              :class="{'highlight-button' :conditionArea.length > 0 || conditionIsPay}"
-            >
+              :class="{'highlight-button' :conditionArea.length > 0}" >
               <template slot="button-content">
                 <i class="fa fa-snowflake-o" aria-hidden="true"></i> &nbsp;
                 <span>Phổ biến</span>
-                <img
-                  src="@/assets/icon-close.png"
-                  alt="icon-close"
-                  height="16"
-                  width="16"
-                  class="icon--close"
-                  v-show="conditionArea.length > 0 || conditionIsPay"
-                  @click.stop="clearArea()"
-                >
+                <img src="@/assets/images/icon-close.png" alt="icon-close" class="icon--close"
+                v-show="conditionArea.length > 0" @click.stop="clearArea()">
               </template>
               <div class="filter-list__title">
                 <h4 class="filter-list__heading">Chọn lọc phổ biến ở Hà Nội</h4>
-                <a
-                  href="javascript:void(0)"
-                  class="alert-link`"
-                  v-if="conditionArea.length > 0 || conditionIsPay"
-                  @click.stop="clearPopular()"
-                >Xóa</a>
+                <a href="javascript:void(0)" class="alert-link" v-if="conditionArea.length > 0"
+                  @click.stop="clearPopular()">Xóa</a>
               </div>
+
               <div class="filter-list__item">
                 <input type="checkbox" id="phoco" value="481521" v-model="conditionArea">
                 <label for="phoco">
@@ -44,12 +34,6 @@
                 </label>
               </div>
               <div class="filter-list__item">
-                <input type="checkbox" id="pay" v-model="conditionIsPay">
-                <label for="pay">
-                  <span></span>Thanh toán tại nơi ở
-                </label>
-              </div>
-              <div class="filter-list__item">
                 <input type="checkbox" id="hotel">
                 <label for="hotel">
                   <span></span>Nhà khách / Nhà nghỉ B&B
@@ -60,16 +44,13 @@
             <!-- filter price -->
             <b-dropdown
               class="filter-list__content-button"
-              :class="{'highlight-button' :conditionPrice.length > 0}"
-            >
+              :class="{'highlight-button' :conditionPrice.length > 0}" >
               <template slot="button-content">
                 <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;
                 <span>Giá</span>
                 <img
-                  src="@/assets/icon-close.png"
+                  src="@/assets/images/icon-close.png"
                   alt="icon-close"
-                  height="16"
-                  width="16"
                   class="icon--close"
                   v-show="conditionPrice.length > 0"
                   @click.stop="clearPrice()"
@@ -119,17 +100,17 @@
             <!-- filter Star -->
             <b-dropdown
               class="filter-list__content-button"
-              :class="{'highlight-button' :conditionStar.length > 0}"
-            >
+              :class="{'highlight-button' :conditionStar.length > 0}">
               <template slot="button-content">
                 <i class="fa fa-star" aria-hidden="true" v-if="conditionStar.length === 0"></i> &nbsp;
-                <span class="badge badge-dark" v-if="conditionStar.length > 0">{{conditionStar.length}}</span>
+                <span
+                  class="badge badge-dark"
+                  v-if="conditionStar.length > 0"
+                >{{conditionStar.length}}</span>
                 <span>Xếp hạng sao</span>
                 <img
-                  src="@/assets/icon-close.png"
+                  src="@/assets/images/icon-close.png"
                   alt="icon-close"
-                  height="16"
-                  width="16"
                   class="icon--close"
                   v-show="conditionStar.length > 0"
                   @click.stop="clearStar()"
@@ -140,7 +121,7 @@
                 <a
                   href="javascript:void(0)"
                   class="alert-link"
-                  v-show ="conditionStar.length > 0"
+                  v-show="conditionStar.length > 0"
                   @click.stop="clearStar()"
                 >Xóa</a>
               </div>
@@ -194,16 +175,13 @@
             <!-- filter area -->
             <b-dropdown
               class="filter-list__content-button"
-              :class="{'highlight-button' :conditionArea.length > 0}"
-            >
+              :class="{'highlight-button' :conditionArea.length > 0}">
               <template slot="button-content">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
                 <span>Khu vực</span>
                 <img
-                  src="@/assets/icon-close.png"
+                  src="@/assets/images/icon-close.png"
                   alt="icon-close"
-                  height="16"
-                  width="16"
                   class="icon--close"
                   v-show="conditionArea.length > 0"
                   @click.stop="clearArea()"
@@ -265,17 +243,14 @@
             <!-- filter Đô Đô -->
             <b-dropdown
               class="filter-list__content-button"
-              :class="{'highlight-button' :conditionDeal|| conditionIsCancel|| conditionIsCard || conditionReview}"
-            >
+              :class="{'highlight-button' :conditionDeal|| conditionIsCancel|| conditionIsCard || conditionReview  || conditionIsPay }">
               <template slot="button-content">
                 <span>Thêm</span>
                 <img
-                  src="@/assets/icon-close.png"
+                  src="@/assets/images/icon-close.png"
                   alt="icon-close"
-                  height="16"
-                  width="16"
                   class="icon--close"
-                  v-show="conditionDeal|| conditionIsCancel|| conditionIsCard || conditionReview"
+                  v-show="conditionDeal|| conditionIsCancel|| conditionIsCard || conditionReview || conditionIsPay"
                   @click.stop="clearMore()"
                 >
               </template>
@@ -312,6 +287,13 @@
                     <span></span>Hủy miễn phí
                   </label>
                 </div>
+
+              <div class="filter-list__item">
+                <input type="checkbox" id="pay" v-model="conditionIsPay">
+                <label for="pay">
+                  <span></span>Thanh toán tại nơi ở
+                </label>
+              </div>
 
                 <div class="filter-list__item">
                   <input type="checkbox" id="paymentcard" v-model="conditionIsCard">
@@ -362,15 +344,18 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from 'vue-property-decorator';
-import './filter-list.component.scss';
-import { EventBus } from '@/eventBus';
-import SearchListComponent from '../search-list/search-list.component.vue';
+import { Component, Vue, Watch } from "vue-property-decorator";
+import "./filter-list.component.scss";
+import { EventBus } from "@/eventBus";
+import SearchListComponent from "../search-list/search-list.component.vue";
+import Axios from "axios";
 
 @Component({
-  components: { SearchListComponent },
+  components: { SearchListComponent }
 })
 export default class FilterListComponent extends Vue {
+  dataFilter: any = {};
+
   public conditionStar: any[] = [];
   public conditionArea: any[] = [];
   public conditionPrice: any[] = [];
@@ -383,57 +368,68 @@ export default class FilterListComponent extends Vue {
   public conditionDeal: boolean = false;
   public conditionIsCancel: boolean = false;
   public conditionIsCard: boolean = false;
-  public conditionReview: string = '';
+  public conditionReview: string = "";
 
-  @Watch('conditionStar')
+  created() {
+    this.getDataFilter();
+  }
+
+  getDataFilter() {
+    Axios.get("http://demo0535107.mockable.io/filter").then(respon => {
+      this.dataFilter = respon.data;
+      return this.dataFilter;
+    });
+  }
+
+  @Watch("conditionStar")
   public checkChangeStar() {
     const converConditiontStar: any[] = [];
     for (let i = 0; i < this.conditionStar.length; i++) {
       converConditiontStar.push(parseInt(this.conditionStar[i]));
     }
 
-    EventBus.$emit('conditionStar', converConditiontStar);
+    EventBus.$emit("conditionStar", converConditiontStar);
   }
 
-  @Watch('conditionArea')
+  @Watch("conditionArea")
   public checkArea() {
     const convertConditionArea: any[] = [];
     this.conditionArea.forEach((item: any) => {
       convertConditionArea.push(parseInt(item));
     });
 
-    EventBus.$emit('conditionArea', convertConditionArea);
+    EventBus.$emit("conditionArea", convertConditionArea);
   }
 
-  @Watch('conditionPrice')
+  @Watch("conditionPrice")
   public checkPrice() {
-    EventBus.$emit('conditionPrice', this.conditionPrice);
+    EventBus.$emit("conditionPrice", this.conditionPrice);
   }
 
-  @Watch('conditionIsPay')
+  @Watch("conditionIsPay")
   public checkIsPay() {
-    EventBus.$emit('conditionIsPay', this.conditionIsPay);
+    EventBus.$emit("conditionIsPay", this.conditionIsPay);
   }
 
-  @Watch('conditionDeal')
+  @Watch("conditionDeal")
   public checkIsDeal() {
-    EventBus.$emit('conditionDeal', this.conditionDeal);
+    EventBus.$emit("conditionDeal", this.conditionDeal);
   }
 
-  @Watch('conditionIsCancel')
+  @Watch("conditionIsCancel")
   public checkIsCancel() {
-    EventBus.$emit('conditionIsCancel', this.conditionIsCancel);
+    EventBus.$emit("conditionIsCancel", this.conditionIsCancel);
   }
 
-  @Watch('conditionIsCard')
+  @Watch("conditionIsCard")
   public checkIsCard() {
-    EventBus.$emit('conditionIsCard', this.conditionIsCard);
+    EventBus.$emit("conditionIsCard", this.conditionIsCard);
   }
 
-  @Watch('conditionReview')
+  @Watch("conditionReview")
   public checkReview() {
     console.log(this.conditionReview);
-    EventBus.$emit('conditionReview', parseInt(this.conditionReview));
+    EventBus.$emit("conditionReview", parseInt(this.conditionReview));
   }
 
   // Clear condition filter
@@ -458,7 +454,7 @@ export default class FilterListComponent extends Vue {
     this.conditionIsCancel = false;
     this.conditionIsCard = false;
     this.conditionDeal = false;
-    this.conditionReview = '';
+    this.conditionReview = "";
   }
 }
 </script>

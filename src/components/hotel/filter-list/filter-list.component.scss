@@ -88,12 +88,18 @@
         }
       }
     }
+
     .badge-dark {
       border-radius: 50%;
       padding: 5px 8px;
       left: -10px;
       font-size: 9px;
       background-color: #0a4867;
+    }
+
+    .icon--close {
+      height: 16px;
+      width: 16px;
     }
   }
 
@@ -134,7 +140,7 @@
     }
 
     input[type="checkbox"]:checked+label span {
-      background: url('../../../assets/tick.png') top no-repeat;
+      background: url('../../../assets/images/tick.png') top no-repeat;
       background-size: cover;
     }
 

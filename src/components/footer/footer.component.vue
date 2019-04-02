@@ -7,22 +7,22 @@
       </div>
       <div class="footer-brands">
         <div class="footer-brands__items">
-          <img src="@/assets/agoda.png" alt>
+          <img src="@/assets/images/agoda.png" alt>
         </div>
         <div class="footer-brands__items">
-          <img src="@/assets/priceline.png" alt>
+          <img src="@/assets/images/priceline.png" alt>
         </div>
         <div class="footer-brands__items">
-          <img src="@/assets/booking.png" alt>
+          <img src="@/assets/images/booking.png" alt>
         </div>
         <div class="footer-brands__items">
-          <img src="@/assets/kayak.png" alt>
+          <img src="@/assets/images/kayak.png" alt>
         </div>
         <div class="footer-brands__items">
-          <img src="@/assets/rentalcar.png" alt>
+          <img src="@/assets/images/rentalcar.png" alt>
         </div>
         <div class="footer-brands__items">
-          <img src="@/assets/opentable.png" alt>
+          <img src="@/assets/images/opentable.png" alt>
         </div>
       </div>
 

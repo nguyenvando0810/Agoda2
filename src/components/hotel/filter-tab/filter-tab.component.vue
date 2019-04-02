@@ -29,7 +29,7 @@
         </a>
       </li>
       <li class="nav-item filter-tab__default-item">
-        <img src="@/assets/guarantee.png" alt>
+        <img src="@/assets/images/guarantee.png" alt>
         <span>Agoda Đảm Bảo Giá</span>
       </li>
     </ul>

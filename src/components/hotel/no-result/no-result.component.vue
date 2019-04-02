@@ -1,6 +1,6 @@
 <template>
   <div class="no-result">
-    <img src="@/assets/not-found.jpg" alt>
+    <img src="@/assets/images/not-found.jpg" alt>
     <p>Sorry, we coundn't find any result matching. Please try again.</p>
     <!-- Test router-->
     <!-- <router-link to="./availabilyti/do" class="btn btn-primary">Go To Availabilyti</router-link> -->

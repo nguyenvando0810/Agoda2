@@ -4,7 +4,7 @@
 
   &__map {
     height: 100px;
-    background-image: url('../../../assets/bkg-map-entry.svg');
+    background-image: url('../../../assets/images/bkg-map-entry.svg');
     background-size: cover;
     position: relative;
     border: 1px solid $gray-map;
@@ -121,7 +121,7 @@
     }
 
     input[type="checkbox"]:checked+label {
-      background: url('../../../assets/tick.png') top no-repeat;
+      background: url('../../../assets/images/tick.png') top no-repeat;
       background-size: cover;
     }
   }
