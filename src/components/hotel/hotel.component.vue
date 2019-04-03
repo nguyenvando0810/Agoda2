@@ -37,7 +37,7 @@ import './hotel.component.scss';
 
 import axios from 'axios';
 import { EventBus } from '@/eventBus';
-
+import { APIAgoda } from '@/API';
 import Sticky from 'vue-sticky-directive';
 Vue.use(Sticky);
 
@@ -60,8 +60,15 @@ export default class HotelComponent extends Vue {
   public maxHotel:number = 5;
   public listHotel:any[] = [];
 
+  public conditionHotel: object = {};
+
   public created() {
     this.getData();
+
+    // EventBus.$on('conditionHotel', (conditionHotel: any)=>{
+    //   Object.assign(this.conditionHotel, { conditionHotel });
+    //   this.filterData(this.conditionHotel);
+    // })
 
     EventBus.$on('conditionStar', (conditionStar: any[]) => {
       Object.assign(this.conditionFilter, { conditionStar });
@@ -274,7 +281,7 @@ export default class HotelComponent extends Vue {
   }
 
   public async getData() {
-    axios.get('https://demo0535107.mockable.io/agoda')
+    axios.get(`${APIAgoda}`)
       .then((response:any)=>{
         this.lazy();
         this.allData = response.data;

@@ -62,6 +62,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import "./header.component.scss";
+import { APIHeader } from '@/API';
 import axios from "axios";
 
 @Component({
@@ -76,7 +77,7 @@ export default class HeaderComponent extends Vue {
   }
 
   async getDataHeader() {
-    const response = await axios.get("http://demo0535107.mockable.io/header");
+    const response = await axios.get(`${APIHeader}`);
     this.dataHeader = response.data;
     return this.dataHeader;
   }

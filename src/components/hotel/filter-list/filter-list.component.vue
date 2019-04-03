@@ -4,6 +4,7 @@
       <div class="col-sm-9">
         <div class="filter-list__content">
           <span>Chọn lọc</span>
+
           <b-dropdown class="filter-list__content-button">
             <template slot="button-content">
               <i class="fa fa-snowflake-o" aria-hidden="true"></i> &nbsp;
@@ -212,10 +213,12 @@ import "./filter-list.component.scss";
 import { EventBus } from "@/eventBus";
 import SearchListComponent from "../search-list/search-list.component.vue";
 import Axios from "axios";
+import { APIFilter } from '@/API';
 
 @Component({
   components: { SearchListComponent }
 })
+
 export default class FilterListComponent extends Vue {
   dataFilter: any = {};
 
@@ -242,7 +245,7 @@ export default class FilterListComponent extends Vue {
   }
 
   getDataFilter() {
-    Axios.get("http://demo0535107.mockable.io/filter").then(respon => {
+    Axios.get(`${APIFilter}`).then(respon => {
       this.dataFilter = respon.data.filter;
       return this.dataFilter;
     });
@@ -258,11 +261,9 @@ export default class FilterListComponent extends Vue {
 
   @Watch("conditionArea")
   public checkArea() {
-    const convertConditionArea: any[] = [];
-    this.conditionArea.forEach((item: any) => {
-      convertConditionArea.push(parseInt(item));
-    });
-
+    const convertConditionArea= this.conditionArea.map((item:any) =>{
+      return parseInt(item);
+    })
     EventBus.$emit("conditionArea", convertConditionArea);
   }
 
@@ -278,7 +279,6 @@ export default class FilterListComponent extends Vue {
 
   @Watch("conditionIsPay")
   public checkIsPay() {
-    console.log("this.conditionIsPay", this.conditionIsPay)
     EventBus.$emit("conditionIsPay", this.conditionIsPay);
   }
 
@@ -310,15 +310,15 @@ export default class FilterListComponent extends Vue {
     this.conditionArea = [];
   }
 
+  public clearReview() {
+    this.conditionReview = "";
+  }
+
   public clearMore() {
     this.conditionIsCancel = false;
     this.conditionIsCard = false;
     this.conditionDeal = false;
     this.conditionIsPay = false;
   }
-
-   public clearReview() {
-    this.conditionReview = "";
-   }
 }
 </script>
