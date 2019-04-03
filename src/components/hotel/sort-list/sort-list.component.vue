@@ -6,12 +6,10 @@
         <a class="nav-link sort-list__default-link active" data-toggle="tab" @click="clickSort('suggestions')">Gợi ý</a>
       </li>
       <li class="nav-item sort-list__default-item">
-        <a class="nav-link sort-list__default-link" data-toggle="tab" @click="clickSort('priceLow')">Giá thấp nhất
-          trước</a>
+        <a class="nav-link sort-list__default-link" data-toggle="tab" @click="clickSort('priceLow')">Giá thấp nhất trước</a>
       </li>
       <li class="nav-item sort-list__default-item">
-        <a class="nav-link sort-list__default-link" data-toggle="tab" @click="clickSort('recomment')">Các nhận xét hàng
-          đầu</a>
+        <a class="nav-link sort-list__default-link" data-toggle="tab" @click="clickSort('recomment')">Các nhận xét hàng đầu</a>
       </li>
     </ul>
     <div class="sort-list__description">
@@ -21,19 +19,15 @@
   </div>
 </template>
 <script lang='ts'>
-import {
-  Component,
-  Vue,
-} from 'vue-property-decorator';
+import { Component, Vue} from 'vue-property-decorator';
 import './sort-list.component.scss';
-import {
-  EventBus,
-} from '@/eventBus';
+import {EventBus} from '@/eventBus';
 
 @Component
 export default class SortListComponent extends Vue {
   public clickSort(conditionSort: any) {
-    EventBus.$emit('conditionSort', conditionSort);
+    const sort = {conditionSort : conditionSort}
+    EventBus.$emit('conditionFilter', sort);
   }
 
   // public created() {

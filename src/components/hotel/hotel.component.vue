@@ -60,77 +60,13 @@ export default class HotelComponent extends Vue {
   public maxHotel:number = 5;
   public listHotel:any[] = [];
 
-  public conditionHotel: object = {};
-
   public created() {
     this.getData();
 
-    // EventBus.$on('conditionHotel', (conditionHotel: any)=>{
-    //   Object.assign(this.conditionHotel, { conditionHotel });
-    //   this.filterData(this.conditionHotel);
-    // })
-
-    EventBus.$on('conditionStar', (conditionStar: any[]) => {
-      Object.assign(this.conditionFilter, { conditionStar });
+    EventBus.$on('conditionFilter', (condition: any)=>{
+      Object.assign(this.conditionFilter, condition);
       this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionArea', (conditionArea: any[]) => {
-      Object.assign(this.conditionFilter, { conditionArea });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionBreakfast', (conditionBreakfast: boolean) => {
-      Object.assign(this.conditionFilter, {
-        conditionBreakfast,
-      });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionSearch', (conditionSearch: any) => {
-      Object.assign(this.conditionFilter, { conditionSearch });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionPrice', (conditionPrice: any[]) => {
-      Object.assign(this.conditionFilter, { conditionPrice });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionIsPay', (conditionIsPay: boolean) => {
-      Object.assign(this.conditionFilter, { conditionIsPay });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionDeal', (conditionDeal: boolean) => {
-      Object.assign(this.conditionFilter, { conditionDeal });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionIsCancel', (conditionIsCancel: boolean) => {
-      Object.assign(this.conditionFilter, { conditionIsCancel });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionIsCard', (conditionIsCard: boolean) => {
-      Object.assign(this.conditionFilter, { conditionIsCard });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('currentTab', (currentTab: string) => {
-      Object.assign(this.conditionFilter, { currentTab });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionReview', (conditionReview: any) => {
-      Object.assign(this.conditionFilter, { conditionReview });
-      this.filterData(this.conditionFilter);
-    });
-
-    EventBus.$on('conditionSort', (conditionSort: any) => {
-      Object.assign(this.conditionFilter, { conditionSort });
-      this.filterData(this.conditionFilter);
-    });
+    })
   }
 
   public lazy() {
@@ -154,7 +90,7 @@ export default class HotelComponent extends Vue {
             window.removeEventListener('resize', lazyload);
             window.removeEventListener('orientationChange', lazyload);
           }
-        }, 20);
+        }, 15);
       }
       document.addEventListener('scroll', lazyload);
       window.addEventListener('resize', lazyload);

@@ -20,7 +20,8 @@ export default class SearchListComponent extends Vue {
   public conditionSearch: any = '';
   @Watch('conditionSearch')
   public checkConditionSearch() {
-    EventBus.$emit('conditionSearch', this.conditionSearch);
+    const search = {conditionSearch : this.conditionSearch}
+    EventBus.$emit('conditionFilter', search);
   }
 }
 </script>
