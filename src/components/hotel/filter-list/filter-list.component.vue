@@ -28,8 +28,7 @@
           </b-dropdown>
 
           <!-- filter price -->
-          <b-dropdown class="filter-list__content-button"
-            :class="{'highlight-button' :conditionPrice.length > 0}" >
+          <b-dropdown class="filter-list__content-button" :class="{'highlight-button' :conditionPrice.length > 0}" >
             <template slot="button-content">
               <i class="fa fa-tag" aria-hidden="true"></i>&nbsp;
               <span>Giá</span>
@@ -154,6 +153,30 @@
             </div>
           </b-dropdown>
 
+          <!-- filter price range -->
+          <b-dropdown class="filter-list__content-button">
+            <template slot="button-content">
+              <i class="fa fa-user-o" aria-hidden="true"></i> &nbsp;
+              <!-- <span class="badge badge-dark" v-show ="conditionReview">1</span> -->
+              <span>Price Slider</span>
+              <!-- <img src="@/assets/images/icon-close.png" alt="icon-close" class="icon--close"> -->
+            </template>
+
+            <div class="filter-list__title">
+              <h4 class="filter-list__heading">Giá phòng 1 đêm</h4>
+              <a href="javascript:void(0)" class="alert-link">Xóa</a>
+            </div>
+            <div class="filter-list__wrapper">
+              <div class="filter-list__item">
+                <vue-slider
+                v-model="valueprice"
+                :min = "0"
+                :max = "20000000"
+                :tooltip-formatter="'{value} đ'"
+                ></vue-slider>
+              </div>
+            </div>
+          </b-dropdown>
           <!-- filter Đô Đô -->
           <b-dropdown
             class="filter-list__content-button"
@@ -206,7 +229,7 @@
         </div>
       </div>
       <div class="col-sm-3">
-        <SearchListComponent></SearchListComponent>
+        <SearchListComponent/>
       </div>
     </div>
   </div>
@@ -219,13 +242,21 @@ import SearchListComponent from "../search-list/search-list.component.vue";
 import Axios from "axios";
 import { APIFilter } from '@/API';
 
+// import slide vue
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
+
+
 @Component({
-  components: { SearchListComponent }
+  components: {
+    SearchListComponent,
+    VueSlider
+   }
 })
 
 export default class FilterListComponent extends Vue {
   dataFilter: any = {};
-
+  public valueprice:any[]=[0, 20000000];
   public conditionPopular:any[]=[];
 
   public conditionStar: any[] = [];
@@ -253,6 +284,12 @@ export default class FilterListComponent extends Vue {
       this.dataFilter = respon.data.filter;
       return this.dataFilter;
     });
+  }
+
+  @Watch("valueprice")
+  public checkChangePrice() {
+    const price={conditionPriceSlider : this.valueprice};
+    EventBus.$emit('conditionFilter',price);
   }
 
   @Watch("conditionStar")

@@ -16,6 +16,7 @@
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.2",
+    "vue-slider-component": "^3.0.25",
     "vue-sticky-directive": "0.0.8"
   },
   "devDependencies": {

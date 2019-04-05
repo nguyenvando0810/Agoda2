@@ -1,24 +1,27 @@
 <template>
   <div class="hotel" sticky-container>
-    <FilterListComponent v-sticky sticky-offset="offset" sticky-side="top"></FilterListComponent>
+    <FilterListComponent v-sticky sticky-offset="offset" sticky-side="top"/>
     <div class="container">
-      <FilterTabComponent></FilterTabComponent>
+      <FilterTabComponent/>
       <div class="hotel-wrapper">
         <div class="hotel-slidebar">
-          <SlidebarComponent></SlidebarComponent>
+          <SlidebarComponent/>
         </div>
         <div class="hotel-content">
           <div class="hotel-content__banner">
-            <AvailabilityComponent></AvailabilityComponent>
+            <AvailabilityComponent/>
           </div>
-          <SortListComponent></SortListComponent>
+          <SortListComponent/>
+
+          <div v-for="(item, index) in 29" :key="'a' + index">
+            <PlResultHotel v-if="isShowPlh"/>
+          </div>
 
           <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading" :class="[index < 3 ? 'show'  :'', 'hidden']">
-          <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
-            <ResultHotelComponent :item="item"></ResultHotelComponent>
+            <ResultHotelComponent :item="item"/>
           </div>
           <!-- <button class="btn btn-primary btn__load-more" v-if="listHotel.length >= 5" @click="loadMore()">Load More</button> -->
-          <NoResult v-if="dataDisplay.length === 0"></NoResult>
+          <NoResult v-if="dataDisplay.length === 0"/>
         </div>
       </div>
     </div>
@@ -33,6 +36,7 @@ import FilterListComponent from './filter-list/filter-list.component.vue';
 import SlidebarComponent from './slide-bar/slide-bar.component.vue';
 import AvailabilityComponent from './availability/availability.component.vue';
 import NoResult from './no-result/no-result.component.vue';
+import PlResultHotel from './pl-result-hotel/pl-result-hotel.component.vue';
 import './hotel.component.scss';
 
 import axios from 'axios';
@@ -49,7 +53,8 @@ Vue.use(Sticky);
     FilterListComponent,
     SlidebarComponent,
     NoResult,
-    AvailabilityComponent
+    AvailabilityComponent,
+    PlResultHotel
   },
 })
 export default class HotelComponent extends Vue {
@@ -57,8 +62,9 @@ export default class HotelComponent extends Vue {
   public dataDisplay: any[] = [];
   public dataSort: any[] = [];
   public conditionFilter: object = {};
-  public maxHotel:number = 5;
+  // public maxHotel:number = 5;
   public listHotel:any[] = [];
+  public isShowPlh:boolean = true;
 
   public created() {
     this.getData();
@@ -115,6 +121,7 @@ export default class HotelComponent extends Vue {
         this.filterBreakfast(condition.conditionBreakfast, field.IsBreakfastIncluded) &&
         this.filterSearch(condition.conditionSearch, field.HotelDisplayName) &&
         this.filterPrice(condition.conditionPrice, field.DisplayPrice) &&
+        this.filterPriceSlider(condition.conditionPriceSlider,field.DisplayPrice) &&
         this.filterIsPay(condition.conditionIsPay, field.IsBNPLDuringYourStay) &&
         this.filterIsDeal(condition.conditionDeal, field.FormattedDiscountValue) &&
         this.filterIsCancel(condition.conditionIsCancel, field.IsFreeCancellation) &&
@@ -166,6 +173,10 @@ export default class HotelComponent extends Vue {
     }
   }
 
+  public filterPriceSlider(conditionPriceSlider:any[], price:number) {
+    if(!conditionPriceSlider) return true;
+    if(price >= Math.min(...conditionPriceSlider) && price <= Math.max(...conditionPriceSlider)) return true;
+  }
   public filterIsPay(conditionIsPay: boolean, isPay: boolean) {
     if (!conditionIsPay) return true;
 
@@ -222,6 +233,7 @@ export default class HotelComponent extends Vue {
         this.lazy();
         this.allData = response.data;
         this.dataDisplay = this.allData.ResultList;
+        this.isShowPlh = false;
       })
       .catch((err)=>{
         console.warn(err);
