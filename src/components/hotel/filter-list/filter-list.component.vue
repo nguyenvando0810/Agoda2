@@ -79,8 +79,8 @@
             <template slot="button-content">
               <i class="fa fa-star" aria-hidden="true"></i> &nbsp;
               <span v-show ="conditionStar.length > 0">
-                <span v-if="conditionStar.length === 1">{{Math.max(...conditionStar)}}</span>
-                 <span v-else>{{Math.min(...conditionStar)}}-{{Math.max(...conditionStar)}}</span>
+                <!-- <span v-if="conditionStar.length === 1">{{Math.max(...conditionStar)}}</span>
+                 <span v-else>{{Math.min(...conditionStar)}}-{{Math.max(...conditionStar)}}</span> -->
               </span>
               <span> Xếp hạng sao</span>
               <img src="@/assets/images/icon-close.png" alt="icon-close" class="icon--close"
@@ -154,34 +154,49 @@
           </b-dropdown>
 
           <!-- filter price range -->
-          <b-dropdown class="filter-list__content-button">
+          <b-dropdown class="filter-list__content-button" :class="{'highlight-button' :Math.min(...valueprice) !== 0 || Math.max(...valueprice) !== 20000000 }">
             <template slot="button-content">
-              <i class="fa fa-user-o" aria-hidden="true"></i> &nbsp;
-              <!-- <span class="badge badge-dark" v-show ="conditionReview">1</span> -->
-              <span>Price Slider</span>
-              <!-- <img src="@/assets/images/icon-close.png" alt="icon-close" class="icon--close"> -->
+              <i class="fa fa-pied-piper" aria-hidden="true"></i> &nbsp;
+              <span v-show="Math.min(...valueprice) !== 0 || Math.max(...valueprice) !== 20000000">
+                {{Math.min(...valueprice)}} - {{Math.max(...valueprice)}}
+              </span>
+              <span v-show="Math.min(...valueprice) == 0 && Math.max(...valueprice) == 20000000">Price Slider</span>
+              <img src="@/assets/images/icon-close.png" alt="icon-close" class="icon--close"
+                @click.stop="clearPriceSlider()"
+                v-show="Math.min(...valueprice) !== 0 || Math.max(...valueprice) !== 20000000">
             </template>
 
             <div class="filter-list__title">
               <h4 class="filter-list__heading">Giá phòng 1 đêm</h4>
-              <a href="javascript:void(0)" class="alert-link">Xóa</a>
+              <a href="javascript:void(0)" class="alert-link" v-show="isChangePrice" @click.stop="clearPriceSlider()">Xóa</a>
             </div>
+
             <div class="filter-list__wrapper">
-              <div class="filter-list__item">
-                <vue-slider
-                v-model="valueprice"
-                :min = "0"
-                :max = "20000000"
-                :tooltip-formatter="'{value} đ'"
-                ></vue-slider>
+              <div class="filter-list__item price-slider">
+                <vue-slider v-model="valueprice" :min = "0" :max = "20000000" :tooltip="'always'" @change="handleValue()">
+                  <template #tooltip="{ index }">
+                    <div v-if="index === 1">🐰</div>
+                    <div v-else>🐢</div>
+                  </template>
+                </vue-slider>
+                <div class="price-wrapper">
+                  <div class="price-min">
+                    <p>Tối thiểu :</p>
+                    <input type="text" :value="Math.min(...valueprice)">
+                  </div>
+
+                  <div class="price-max">
+                    <p>Tối đa :</p>
+                    <input type="text" :value="Math.max(...valueprice)">
+                  </div>
+                </div>
               </div>
             </div>
           </b-dropdown>
           <!-- filter Đô Đô -->
-          <b-dropdown
-            class="filter-list__content-button"
-            :class="{'highlight-button' :conditionDeal|| conditionIsCancel || conditionIsCard || conditionIsPay }">
+          <b-dropdown class="filter-list__content-button" :class="{'highlight-button' :conditionDeal|| conditionIsCancel || conditionIsCard || conditionIsPay }">
             <template slot="button-content">
+              <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
               <span>Thêm</span>
               <img src="@/assets/images/icon-close.png" alt="icon-close" class="icon--close"
                 v-show ="conditionDeal|| conditionIsCancel || conditionIsCard || conditionIsPay"
@@ -234,31 +249,32 @@
     </div>
   </div>
 </template>
+
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import "./filter-list.component.scss";
-import { EventBus } from "@/eventBus";
-import SearchListComponent from "../search-list/search-list.component.vue";
-import Axios from "axios";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import './filter-list.component.scss';
+import { EventBus } from '@/eventBus';
+import SearchListComponent from '../search-list/search-list.component.vue';
+import Axios from 'axios';
 import { APIFilter } from '@/API';
 
 // import slide vue
-import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/default.css'
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
 
 
 @Component({
   components: {
     SearchListComponent,
-    VueSlider
-   }
+    VueSlider,
+   },
 })
 
 export default class FilterListComponent extends Vue {
-  dataFilter: any = {};
-  public valueprice:any[]=[0, 20000000];
-  public conditionPopular:any[]=[];
-
+  public dataFilter: any = {};
+  public valueprice: any[] = [0, 20000000];
+  public isChangePrice:boolean = false;
+  public conditionPopular: any[] = [];
   public conditionStar: any[] = [];
   public conditionArea: any[] = [];
   public conditionPrice: any[] = [];
@@ -273,77 +289,86 @@ export default class FilterListComponent extends Vue {
   public conditionDeal: boolean = false;
   public conditionIsCancel: boolean = false;
   public conditionIsCard: boolean = false;
-  public conditionReview: string = "";
+  public conditionReview: string = '';
 
-  created() {
+  public created() {
     this.getDataFilter();
   }
 
-  getDataFilter() {
-    Axios.get(`${APIFilter}`).then(respon => {
+  public getDataFilter() {
+    Axios.get(`${APIFilter}`).then((respon) => {
       this.dataFilter = respon.data.filter;
       return this.dataFilter;
     });
   }
 
-  @Watch("valueprice")
-  public checkChangePrice() {
-    const price={conditionPriceSlider : this.valueprice};
-    EventBus.$emit('conditionFilter',price);
+  public handleValue() {
+    this.isChangePrice = true;
   }
 
-  @Watch("conditionStar")
+  public clearPriceSlider() {
+    this.valueprice = [0, 20000000];
+  }
+
+  @Watch('valueprice')
+  public checkChangePrice() {
+    const price = {conditionPriceSlider : this.valueprice};
+    EventBus.$emit('conditionFilter', price);
+  }
+
+  @Watch('conditionStar')
   public checkChangeStar() {
-    const converConditiontStar = this.conditionStar.map((item: any)=>{
+    const converConditiontStar = this.conditionStar.map((item: any) => {
       return parseInt(item);
     });
-     const stars = { conditionStar : converConditiontStar};
-    EventBus.$emit("conditionFilter", stars);
+    console.log(this.conditionStar);
+    const stars = { conditionStar : converConditiontStar};
+    EventBus.$emit('conditionFilter', stars);
   }
 
-  @Watch("conditionArea")
+  @Watch('conditionArea')
   public checkArea() {
-    const convertConditionArea= this.conditionArea.map((item:any) =>{
+    const convertConditionArea = this.conditionArea.map((item: any) => {
       return parseInt(item);
-    })
-    const area = {conditionArea : convertConditionArea}
-    EventBus.$emit("conditionFilter", area);
+    });
+    const area = {conditionArea : convertConditionArea};
+    EventBus.$emit('conditionFilter', area);
   }
 
-  @Watch("conditionPrice")
+  @Watch('conditionPrice')
   public checkPrice() {
-    const price = {conditionPrice : this.conditionPrice}
-    EventBus.$emit("conditionFilter", price);
+    const price = {conditionPrice : this.conditionPrice};
+    EventBus.$emit('conditionFilter', price);
   }
 
-  @Watch("conditionReview")
+  @Watch('conditionReview')
   public checkReview() {
-    const review = {conditionReview : parseInt(this.conditionReview)}
-    EventBus.$emit("conditionFilter", review);
+    const review = {conditionReview : parseInt(this.conditionReview)};
+    EventBus.$emit('conditionFilter', review);
   }
 
-  @Watch("conditionIsPay")
+  @Watch('conditionIsPay')
   public checkIsPay() {
-    const isPay = {conditionIsPay : this.conditionIsPay}
-    EventBus.$emit("conditionFilter", isPay);
+    const isPay = {conditionIsPay : this.conditionIsPay};
+    EventBus.$emit('conditionFilter', isPay);
   }
 
-  @Watch("conditionDeal")
+  @Watch('conditionDeal')
   public checkIsDeal() {
-    const isDeal = {conditionIsPay : this.conditionDeal}
-    EventBus.$emit("conditionFilter", isDeal);
+    const isDeal = {conditionIsPay : this.conditionDeal};
+    EventBus.$emit('conditionFilter', isDeal);
   }
 
-  @Watch("conditionIsCancel")
+  @Watch('conditionIsCancel')
   public checkIsCancel() {
     const isCancel = {conditionDeal : this.conditionIsCancel};
-    EventBus.$emit("conditionFilter", isCancel);
+    EventBus.$emit('conditionFilter', isCancel);
   }
 
-  @Watch("conditionIsCard")
+  @Watch('conditionIsCard')
   public checkIsCard() {
     const isCard = {conditionIsCard : this.conditionIsCard};
-    EventBus.$emit("conditionFilter", isCard);
+    EventBus.$emit('conditionFilter', isCard);
   }
 
   // Clear condition filter
@@ -360,7 +385,7 @@ export default class FilterListComponent extends Vue {
   }
 
   public clearReview() {
-    this.conditionReview = "";
+    this.conditionReview = '';
   }
 
   public clearMore() {

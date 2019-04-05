@@ -191,6 +191,28 @@
       font-size: $font-medium;
       margin-right: 5px;
     }
+
+    .price-wrapper {
+      display: flex;
+      font-size: 12px;
+      justify-content: space-between;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      input {
+        max-width: 100px;
+      }
+    }
+
+    &.price-slider {
+      margin-top: 10px;
+    }
+
+    .vue-slider-dot-tooltip-top {
+      top: -5px;
+    }
   }
 
   &__more {

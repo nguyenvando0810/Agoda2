@@ -13,7 +13,7 @@
           </div>
           <SortListComponent/>
 
-          <div v-for="(item, index) in 29" :key="'a' + index">
+          <div v-for="(item, index) in 10" :key="'a' + index">
             <PlResultHotel v-if="isShowPlh"/>
           </div>
 
@@ -42,8 +42,6 @@ import './hotel.component.scss';
 import axios from 'axios';
 import { EventBus } from '@/eventBus';
 import { APIAgoda } from '@/API';
-import Sticky from 'vue-sticky-directive';
-Vue.use(Sticky);
 
 @Component({
   components: {
@@ -104,15 +102,6 @@ export default class HotelComponent extends Vue {
     }, 0);
   }
 
-  // public loadMore() {
-  //   this.maxHotel += 5;
-  // }
-
-  // @Watch('maxHotel')
-  //   checkDataDisplay() {
-  //   this.listHotel = this.dataDisplay.slice(0 ,this.maxHotel);
-  // }
-
   public filterData(condition: any) {
     function applyFilter(this: any, field: any) {
       return (
@@ -140,16 +129,16 @@ export default class HotelComponent extends Vue {
   public filterStar(conditionStar: any[], star: any) {
     if (!conditionStar || !conditionStar.length) return true;
 
-    for (let i = 0; i < conditionStar.length; i++) {
-      if (conditionStar[i] === Math.floor(star)) return true;
+    for (const item of conditionStar) {
+      if (item === Math.floor(star)) return true;
     }
   }
 
   public filterArea(conditionArea: any[], areaId: number) {
     if (!conditionArea || !conditionArea.length) return true;
 
-    for (let i = 0; i < conditionArea.length; i++) {
-      if (conditionArea[i] === areaId) return true;
+    for (const area of conditionArea) {
+      if (area === areaId) return true;
     }
   }
 
@@ -168,15 +157,17 @@ export default class HotelComponent extends Vue {
   public filterPrice(conditionPrice: any[], price: number) {
     if (!conditionPrice || !conditionPrice.length) return true;
 
-    for (let i = 0; i < conditionPrice.length; i++) {
-      if (price >= conditionPrice[i].min && price <= conditionPrice[i].max) return true;
+    for (const item of conditionPrice) {
+      if (price >= item.min && price <= item.max) return true;
     }
   }
 
   public filterPriceSlider(conditionPriceSlider:any[], price:number) {
     if(!conditionPriceSlider) return true;
+
     if(price >= Math.min(...conditionPriceSlider) && price <= Math.max(...conditionPriceSlider)) return true;
   }
+
   public filterIsPay(conditionIsPay: boolean, isPay: boolean) {
     if (!conditionIsPay) return true;
 
@@ -235,7 +226,7 @@ export default class HotelComponent extends Vue {
         this.dataDisplay = this.allData.ResultList;
         this.isShowPlh = false;
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.warn(err);
     })
     // const response = await axios.get('https://demo0535107.mockable.io/agoda');

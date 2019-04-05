@@ -26,7 +26,7 @@ import {EventBus} from '@/eventBus';
 @Component
 export default class SortListComponent extends Vue {
   public clickSort(conditionSort: any) {
-    const sort = {conditionSort : conditionSort}
+    const sort = {conditionSort};
     EventBus.$emit('conditionFilter', sort);
   }
 

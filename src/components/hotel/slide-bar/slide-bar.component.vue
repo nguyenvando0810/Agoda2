@@ -71,7 +71,7 @@ export default class SlidebarComponent extends Vue {
 
   @Watch('conditionBreakfast')
   public checkChanBreakfast() {
-    const breakfast = {conditionBreakfast : this.conditionBreakfast}
+    const breakfast = {conditionBreakfast : this.conditionBreakfast};
     EventBus.$emit('conditionFilter', breakfast);
   }
 }

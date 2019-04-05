@@ -11,12 +11,12 @@ export default new Router({
     {
       path: '/',
       name: 'hotel',
-      component: () => import('./components/hotel/hotel.component.vue')
+      component: () => import('./components/hotel/hotel.component.vue'),
     },
     {
-      path:'/availabilyti/:id',
-      name:'availabilyti',
-      component:()=> import('./components/hotel/availability/availability.component.vue')
-    }
+      path: '/availabilyti/:id',
+      name: 'availabilyti',
+      component: () => import('./components/hotel/availability/availability.component.vue'),
+    },
   ],
 });

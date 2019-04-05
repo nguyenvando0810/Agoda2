@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import "./pl-result-hotel.component.scss";
+import { Component, Vue } from 'vue-property-decorator';
+import './pl-result-hotel.component.scss';
 
 @Component
 export default class PlResultHotel extends Vue {}

@@ -31,22 +31,22 @@
   </div>
 </template>
 <script lang='ts'>
-import { Component, Vue, Watch } from "vue-property-decorator";
-import "./availability.component.scss";
-import { EventBus } from "@/eventBus";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import './availability.component.scss';
+import { EventBus } from '@/eventBus';
 
 @Component
 export default class AvailabilityComponent extends Vue {
-  now: number = Math.floor(new Date().getTime() / 1000);
+  public now: number = Math.floor(new Date().getTime() / 1000);
 
-  mounted() {
+  public mounted() {
     window.setInterval(() => {
       this.now = Math.floor(new Date().getTime() / 1000);
     }, 1000);
   }
 
   get distance() {
-    return Math.floor(new Date("2019-07-19 0:0:00").getTime() / 1000);
+    return Math.floor(new Date('2019-07-19 0:0:00').getTime() / 1000);
   }
 
   get days() {

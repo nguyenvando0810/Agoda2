@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
+import Sticky from 'vue-sticky-directive';
+Vue.use(Sticky);
 
-import '@/styles/global.scss';
 Vue.config.productionTip = false;
 
 new Vue({

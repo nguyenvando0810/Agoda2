@@ -29,7 +29,7 @@ import { EventBus } from '@/eventBus';
 @Component
 export default class FilterTabComponent extends Vue {
   public clickTab(currentTab: string) {
-    const tab = {currentTab : currentTab};
+    const tab = {currentTab};
     EventBus.$emit('conditionFilter', tab);
   }
 }

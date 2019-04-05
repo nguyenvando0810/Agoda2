@@ -60,23 +60,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import "./header.component.scss";
+import { Component, Vue } from 'vue-property-decorator';
+import './header.component.scss';
 import { APIHeader } from '@/API';
-import axios from "axios";
+import axios from 'axios';
 
 @Component({
-  components: {}
+  components: {},
 })
 @Component
 export default class HeaderComponent extends Vue {
-  dataHeader: any = {};
+  public dataHeader: any = {};
 
-  created() {
+  public created() {
     this.getDataHeader();
   }
 
-  async getDataHeader() {
+  public async getDataHeader() {
     const response = await axios.get(`${APIHeader}`);
     this.dataHeader = response.data;
     return this.dataHeader;
