@@ -17,10 +17,11 @@
             <PlResultHotel v-if="isShowPlh"/>
           </div>
 
-          <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading" :class="[index < 3 ? 'show'  :'', 'hidden']">
+          <div v-for="(item,index) in dataDisplay" :key="index" class="lazy-loading">
+            <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
             <ResultHotelComponent :item="item"/>
           </div>
-          <!-- <button class="btn btn-primary btn__load-more" v-if="listHotel.length >= 5" @click="loadMore()">Load More</button> -->
+          <button class="btn btn-primary btn__load-more" @click="loadMore()">Load More</button>
           <NoResult v-if="dataDisplay.length === 0"/>
         </div>
       </div>
@@ -60,9 +61,9 @@ export default class HotelComponent extends Vue {
   public dataDisplay: any[] = [];
   public dataSort: any[] = [];
   public conditionFilter: object = {};
-  // public maxHotel:number = 5;
-  public listHotel:any[] = [];
-  public isShowPlh:boolean = true;
+  public maxHotel: number = 10;
+  public listHotel: any[] = [];
+  public isShowPlh: boolean = true;
 
   public created() {
     this.getData();
@@ -73,6 +74,20 @@ export default class HotelComponent extends Vue {
     })
   }
 
+   public loadMore() {
+     this.maxHotel += 10;
+   }
+
+   seeMore(data:any,count:number) {
+     this.dataDisplay = data.slice(0, count);
+   }
+
+   @Watch('maxHotel')
+    checkMaxHotel(){
+      this.seeMore(this.allData.ResultList, this.maxHotel);
+    }
+
+  /*
   public lazy() {
     setTimeout(() => {
       const lazyloadContent = document.querySelectorAll('.lazy-loading');
@@ -101,6 +116,7 @@ export default class HotelComponent extends Vue {
       window.addEventListener('orientationChange', lazyload);
     }, 0);
   }
+  */
 
   public filterData(condition: any) {
     function applyFilter(this: any, field: any) {
@@ -121,9 +137,10 @@ export default class HotelComponent extends Vue {
     }
 
     this.dataDisplay = this.allData.ResultList.filter(applyFilter.bind(this));
-    // this.listHotel = this.dataDisplay.slice(0 ,this.maxHotel);
+    this.maxHotel = 10;
+    this.seeMore(this.dataDisplay, this.maxHotel);
     this.sortTab(condition.conditionSort, this.dataDisplay);
-    this.lazy();
+    // this.lazy();
   }
 
   public filterStar(conditionStar: any[], star: any) {
@@ -221,13 +238,14 @@ export default class HotelComponent extends Vue {
   public async getData() {
     axios.get(`${APIAgoda}`)
       .then((response:any)=>{
-        this.lazy();
         this.allData = response.data;
         this.dataDisplay = this.allData.ResultList;
+        this.seeMore(this.allData.ResultList, this.maxHotel);
+        // this.lazy();
         this.isShowPlh = false;
       })
       .catch((err) => {
-        console.warn(err);
+        // console.warn(err);
     })
     // const response = await axios.get('https://demo0535107.mockable.io/agoda');
     // this.allData = response.data;
