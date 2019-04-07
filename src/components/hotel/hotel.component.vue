@@ -21,7 +21,9 @@
             <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
             <ResultHotelComponent :item="item"/>
           </div>
-          <button class="btn btn-primary btn__load-more" @click="loadMore()">Load More</button>
+          <div class="text-right">
+            <b-button variant="outline-primary" v-show="dataDisplay.length >= 5" @click="loadMore()">View More</b-button>
+            </div>
           <NoResult v-if="dataDisplay.length === 0"/>
         </div>
       </div>
@@ -61,7 +63,7 @@ export default class HotelComponent extends Vue {
   public dataDisplay: any[] = [];
   public dataSort: any[] = [];
   public conditionFilter: object = {};
-  public maxHotel: number = 10;
+  public maxHotel: number = 5;
   public listHotel: any[] = [];
   public isShowPlh: boolean = true;
 
@@ -75,7 +77,7 @@ export default class HotelComponent extends Vue {
   }
 
    public loadMore() {
-     this.maxHotel += 10;
+     this.maxHotel += 5;
    }
 
    seeMore(data:any,count:number) {
@@ -84,6 +86,7 @@ export default class HotelComponent extends Vue {
 
    @Watch('maxHotel')
     checkMaxHotel(){
+      console.log(this.dataDisplay, "XXX");
       this.seeMore(this.allData.ResultList, this.maxHotel);
     }
 
@@ -137,7 +140,7 @@ export default class HotelComponent extends Vue {
     }
 
     this.dataDisplay = this.allData.ResultList.filter(applyFilter.bind(this));
-    this.maxHotel = 10;
+    this.maxHotel = 5;
     this.seeMore(this.dataDisplay, this.maxHotel);
     this.sortTab(condition.conditionSort, this.dataDisplay);
     // this.lazy();
