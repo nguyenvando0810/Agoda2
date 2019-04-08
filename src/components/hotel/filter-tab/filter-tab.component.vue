@@ -24,7 +24,7 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
 import './filter-tab.component.scss';
-import { EventBus } from '@/eventBus';
+import { EventBus } from '../../../eventBus';
 
 @Component
 export default class FilterTabComponent extends Vue {

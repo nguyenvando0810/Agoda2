@@ -21,10 +21,12 @@
             <!-- :class="[index < 3 ? 'show'  :'', 'hidden']" -->
             <ResultHotelComponent :item="item"/>
           </div>
-          <div class="text-right">
-            <b-button variant="outline-primary" v-show="dataDisplay.length >= 5" @click="loadMore()">View More</b-button>
-            </div>
-          <NoResult v-if="dataDisplay.length === 0"/>
+
+          <div class="text-center">
+            <b-button variant="outline-primary btn-seemore" v-show="dataDisplay.length >= maxHotel" @click="loadMore()">View More Hotel</b-button>
+            <p v-show="dataDisplay.length > 0">Displaying <strong>1 - {{ checkDetail }}</strong> out of <strong> {{ dataMediate.length }} </strong>Hotel</p>
+          </div>
+          <NoResult v-show="dataDisplay.length === 0"/>
         </div>
       </div>
     </div>
@@ -43,8 +45,8 @@ import PlResultHotel from './pl-result-hotel/pl-result-hotel.component.vue';
 import './hotel.component.scss';
 
 import axios from 'axios';
-import { EventBus } from '@/eventBus';
-import { APIAgoda } from '@/API';
+import { EventBus } from '../../eventBus';
+import { APIAgoda } from '../../API';
 
 @Component({
   components: {
@@ -63,9 +65,10 @@ export default class HotelComponent extends Vue {
   public dataDisplay: any[] = [];
   public dataSort: any[] = [];
   public conditionFilter: object = {};
-  public maxHotel: number = 5;
+  public maxHotel: number = 10;
   public listHotel: any[] = [];
   public isShowPlh: boolean = true;
+  public dataMediate: any[] = [];
 
   public created() {
     this.getData();
@@ -76,22 +79,24 @@ export default class HotelComponent extends Vue {
     })
   }
 
-   public loadMore() {
-     this.maxHotel += 5;
-   }
+  public get checkDetail () {
+    return this.maxHotel < this.dataMediate.length ? this.maxHotel : this.dataMediate.length;
+  }
 
-   seeMore(data:any,count:number) {
-     this.dataDisplay = data.slice(0, count);
-   }
+  public loadMore() {
+    this.maxHotel += 10;
+  }
 
-   @Watch('maxHotel')
-    checkMaxHotel(){
-      console.log(this.dataDisplay, "XXX");
-      this.seeMore(this.allData.ResultList, this.maxHotel);
-    }
+  public seeMore(data: any,count: number) {
+    this.dataDisplay = data.slice(0, count);
+  }
 
-  /*
-  public lazy() {
+  @Watch('maxHotel')
+  checkMaxHotel(){
+    this.seeMore(this.dataMediate, this.maxHotel);
+  }
+
+  /*public lazy() {
     setTimeout(() => {
       const lazyloadContent = document.querySelectorAll('.lazy-loading');
       let lazyloadThrottleTimeout: any;
@@ -118,8 +123,7 @@ export default class HotelComponent extends Vue {
       window.addEventListener('resize', lazyload);
       window.addEventListener('orientationChange', lazyload);
     }, 0);
-  }
-  */
+  }*/
 
   public filterData(condition: any) {
     function applyFilter(this: any, field: any) {
@@ -129,7 +133,7 @@ export default class HotelComponent extends Vue {
         this.filterBreakfast(condition.conditionBreakfast, field.IsBreakfastIncluded) &&
         this.filterSearch(condition.conditionSearch, field.HotelDisplayName) &&
         this.filterPrice(condition.conditionPrice, field.DisplayPrice) &&
-        this.filterPriceSlider(condition.conditionPriceSlider,field.DisplayPrice) &&
+        this.filterPriceSlider(condition.conditionPriceSlider, field.DisplayPrice) &&
         this.filterIsPay(condition.conditionIsPay, field.IsBNPLDuringYourStay) &&
         this.filterIsDeal(condition.conditionDeal, field.FormattedDiscountValue) &&
         this.filterIsCancel(condition.conditionIsCancel, field.IsFreeCancellation) &&
@@ -139,10 +143,10 @@ export default class HotelComponent extends Vue {
       );
     }
 
-    this.dataDisplay = this.allData.ResultList.filter(applyFilter.bind(this));
-    this.maxHotel = 5;
-    this.seeMore(this.dataDisplay, this.maxHotel);
-    this.sortTab(condition.conditionSort, this.dataDisplay);
+    this.dataMediate = this.allData.ResultList.filter(applyFilter.bind(this));
+    this.maxHotel = 10;
+    this.sortTab(condition.conditionSort, this.dataMediate);
+    this.seeMore(this.dataMediate, this.maxHotel);
     // this.lazy();
   }
 
@@ -240,16 +244,16 @@ export default class HotelComponent extends Vue {
 
   public async getData() {
     axios.get(`${APIAgoda}`)
-      .then((response:any)=>{
+      .then((response: any) => {
         this.allData = response.data;
-        this.dataDisplay = this.allData.ResultList;
-        this.seeMore(this.allData.ResultList, this.maxHotel);
+        this.dataMediate = this.allData.ResultList;
+        this.seeMore(this.dataMediate, this.maxHotel);
         // this.lazy();
         this.isShowPlh = false;
       })
       .catch((err) => {
         // console.warn(err);
-    })
+    });
     // const response = await axios.get('https://demo0535107.mockable.io/agoda');
     // this.allData = response.data;
     // this.dataDisplay = this.allData.ResultList;

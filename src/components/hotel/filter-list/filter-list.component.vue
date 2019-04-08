@@ -253,10 +253,10 @@
 <script lang='ts'>
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import './filter-list.component.scss';
-import { EventBus } from '@/eventBus';
+import { EventBus } from '../../../eventBus';
 import SearchListComponent from '../search-list/search-list.component.vue';
 import Axios from 'axios';
-import { APIFilter } from '@/API';
+import { APIFilter } from '../../../API';
 
 // import slide vue
 import VueSlider from 'vue-slider-component';
@@ -273,7 +273,7 @@ import 'vue-slider-component/theme/default.css';
 export default class FilterListComponent extends Vue {
   public dataFilter: any = {};
   public valueprice: any[] = [0, 20000000];
-  public isChangePrice:boolean = false;
+  public isChangePrice: boolean = false;
   public conditionPopular: any[] = [];
   public conditionStar: any[] = [];
   public conditionArea: any[] = [];
@@ -355,13 +355,13 @@ export default class FilterListComponent extends Vue {
 
   @Watch('conditionDeal')
   public checkIsDeal() {
-    const isDeal = {conditionIsPay : this.conditionDeal};
+    const isDeal = {conditionDeal : this.conditionDeal};
     EventBus.$emit('conditionFilter', isDeal);
   }
 
   @Watch('conditionIsCancel')
   public checkIsCancel() {
-    const isCancel = {conditionDeal : this.conditionIsCancel};
+    const isCancel = {conditionIsCancel : this.conditionIsCancel};
     EventBus.$emit('conditionFilter', isCancel);
   }
 

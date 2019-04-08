@@ -146,7 +146,6 @@
 import {Component, Vue, Prop} from 'vue-property-decorator';
 import './result-hotel.component.scss';
 import axios from 'axios';
-import {EventBus} from '@/eventBus';
 
 @Component
 export default class ResultHotelComponent extends Vue {

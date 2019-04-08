@@ -62,7 +62,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import './header.component.scss';
-import { APIHeader } from '@/API';
+import { APIHeader } from '../../API';
 import axios from 'axios';
 
 @Component({

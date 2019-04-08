@@ -1,6 +1,6 @@
 .pl-result {
   height: 265px;
-  border: 1px solid #d8d8d8;
+  border: 1px solid $secondary-animation;
   display: flex;
   margin-bottom: 20px;
 
@@ -132,7 +132,7 @@
 
 .animation {
   position: relative;
-  background: #d8d8d8;
+  background: $secondary-animation;
   overflow: hidden;
 
   &:after {
