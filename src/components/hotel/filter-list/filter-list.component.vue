@@ -321,7 +321,6 @@ export default class FilterListComponent extends Vue {
     const converConditiontStar = this.conditionStar.map((item: any) => {
       return parseInt(item);
     });
-    console.log(this.conditionStar);
     const stars = { conditionStar : converConditiontStar};
     EventBus.$emit('conditionFilter', stars);
   }

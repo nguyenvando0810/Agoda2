@@ -72,8 +72,7 @@ export default class HotelComponent extends Vue {
 
   public created() {
     this.getData();
-
-    EventBus.$on('conditionFilter', (condition: any)=>{
+    EventBus.$on('conditionFilter', (condition: any) => {
       Object.assign(this.conditionFilter, condition);
       this.filterData(this.conditionFilter);
     })
